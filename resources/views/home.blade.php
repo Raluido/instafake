@@ -1,5 +1,1 @@
-@extends('layouts.master')
-
-@section('home')
-
-@endsection
+@extends('layouts.auth')

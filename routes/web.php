@@ -19,15 +19,16 @@ use Illuminate\Support\Facades\Log;
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::middleware(['guest'])->group(function () {
 
-        Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
 
-        Route::post('/register', [RegisterController::class, 'register'])->name('register.store');
-    });
+    Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+    Route::post('/{$nick?}', [RegisterController::class, 'register'])->name('register.store');
+
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('/logout', [LoguinController::class, 'perform'])->name('logout');
+        Route::get('/logout', [LoginController::class, 'perform'])->name('logout');
+        // Route::get('/{$nick?}', [LoginController::class, 'show'])->name('home.logued');
     });
 });

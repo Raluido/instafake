@@ -38,6 +38,7 @@ class RegisterController extends Controller
             'user_id' => $id
         ]);
 
-        return redirect('/')->with('success', "La cuenta se ha registrado correctamente");
+        return view('user.userHome')
+            ->with('success', "La cuenta se ha registrado correctamente");
     }
 }

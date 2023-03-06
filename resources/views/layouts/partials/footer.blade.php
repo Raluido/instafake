@@ -15,8 +15,10 @@
     <div class="profileImg">
         @if(Auth::check()) :
         <a href="{{ route('logout') }}" class="">
-            <img src="{{ asset('storage/media/default/avatar.png') }}" alt="" class="">
+            <img src="{{ Storage::url('storage/media/. $id ./avatar.png') }}" alt="" class="">
         </a>
+        @else :
+        <img src="{{ Storage::url('storage/default/avatar.png') }}" alt="" class="">
         @endif
     </div>
 </nav>

@@ -12,9 +12,8 @@
 <body>
 
     @include('layouts.partials.navbar')
-
     <main class="">
-        @yield('home')
+        @yield('userHome')
     </main>
     @include('layouts.partials.footer')
 </body>

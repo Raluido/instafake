@@ -10,6 +10,11 @@ ol {
     padding: 0;
 }
 
+label,
+input {
+    display: block;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -25,3 +30,17 @@ header nav {
 header .innerNavR {
     display: flex;
 }
+
+/* Login */
+main .login {
+    padding: 5em;
+}
+
+main .login .innerLogin {
+    display: flex;
+    justify-content: space-around;
+}
+
+main .login .innerLogin div:nth-child(2) {}
+
+/* end */
