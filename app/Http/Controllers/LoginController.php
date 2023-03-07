@@ -11,8 +11,6 @@ class LoginController extends Controller
 {
     public function authenticate(Request $request): RedirectResponse
     {
-        log::info("aqui");
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -31,6 +29,6 @@ class LoginController extends Controller
 
     public function show()
     {
-        return view('home.logued');
+        return view('user.userHome');
     }
 }
