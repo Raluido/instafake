@@ -6,7 +6,7 @@
         @csrf
         <div class="">
             <label for="nick" class="">Nick</label>
-            <input type="text" name="nick">
+            <input type="text" id="nick" name="nick">
         </div>
         <div class="">
             <label for="email" class="">Email</label>
