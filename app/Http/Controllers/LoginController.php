@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
+use App\Models\User;
+
+
 use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
     public function authenticate(Request $request): RedirectResponse
     {
-        log::info("aqui");
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -21,7 +23,15 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('home.logued');
+            $id = auth()->id();
+            Session::push('user', [
+                'user_id' => $id
+            ]);
+
+            $nick = User::where('id', $id)
+                ->value('nick');
+
+            return redirect()->route('home.logued', $nick);
         }
 
         return back()->withErrors([
@@ -31,6 +41,24 @@ class LoginController extends Controller
 
     public function show()
     {
-        return view('home.logued');
+        return view('user.userHome');
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function perform(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+
+        return redirect('/');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Log;
 
 class RegisterController extends Controller
@@ -31,14 +32,20 @@ class RegisterController extends Controller
     {
         $user = User::create($request->validated());
 
-        auth()->login($user);
+        if (isset($user)) {
+            Auth::login($user);
 
-        $id = auth()->id();
-        Session::push('user', [
-            'user_id' => $id
-        ]);
+            $id = auth()->id();
+            Session::push('user', [
+                'user_id' => $id
+            ]);
 
-        return view('user.userHome')
-            ->with('success', "La cuenta se ha registrado correctamente");
+            $nick = User::where('id', $id)
+                ->value('nick');
+
+            return redirect()->route('home.logued', $nick);
+        }
+
+        return back()->with('error', 'Ha habido un error en el registro');
     }
 }

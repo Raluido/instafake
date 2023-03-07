@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class RedirectIfAuthenticated
 {
@@ -23,7 +24,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $id = auth()->id();
+                $nick = User::where('id', $id)
+                    ->value('nick');
+                return redirect()->route('home.logued', $nick);
             }
         }
 
