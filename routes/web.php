@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Log;
@@ -29,7 +30,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('/logout', [LoginController::class, 'perform'])->name('logout.perform');
+        Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
         Route::get('/{nick?}', [LoginController::class, 'show'])->name('home.logued');
     });
 });

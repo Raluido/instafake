@@ -21,9 +21,9 @@
                     <form action="{{ route('login.authenticate') }}" method="POST" class="">
                         @csrf
                         <label for="" class="">Email</label>
-                        <input type="text" class="">
+                        <input type="text" name="email" class="">
                         <label for="" class="">Password</label>
-                        <input type="password" class="">
+                        <input type="password" name="password" class="">
                         <input type="submit" value="Loguearse" class="">
                     </form>
                     <div class="">
