@@ -13,12 +13,18 @@
         </h5>
     </div>
     <div class="profileImg">
-        @if(Auth::check()) :
-        <a href="{{ route('logout.perform') }}" class="">
-            <img src="{{ Storage::url('storage/media/. $id ./avatar.png') }}" alt="" class="">
-        </a>
-        @else :
-        <img src="{{ Storage::url('storage/default/avatar.png') }}" alt="" class="">
+        @if(Storage::url('media/' . $id . '/avatar.png'))
+        <div class="">
+            <a href="{{ route('logout.perform') }}" class="">
+                <img src="{{ Storage::url('media/' . $id . '/avatar.png') }}" alt="" class="">
+            </a>
+        </div>
+        @else
+        <div class="">
+            <a href="{{ route('logout.perform') }}" class="">
+                <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+            </a>
+        </div>
         @endif
     </div>
 </nav>

@@ -10,12 +10,15 @@
 </head>
 
 <body>
-
-    @include('layouts.partials.navbar')
+    <header class="">
+        @include('layouts.partials.navbar')
+    </header>
     <main class="">
-        @yield('userHome')
+        @yield('main')
     </main>
-    @include('layouts.partials.footer')
+    <footer class="">
+        @include('layouts.partials.footer')
+    </footer>
 </body>
 
 </html>

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Log;
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::middleware([RedirectIfAuthenticated::class])->group(function () {
-        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/', [LoginController::class, 'show'])->name('login.show');
         Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
         Route::post('/register', [RegisterController::class, 'register'])->name('register.store');
         Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
@@ -31,6 +31,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
-        Route::get('/{nick?}', [LoginController::class, 'show'])->name('home.logued');
+        Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
     });
 });

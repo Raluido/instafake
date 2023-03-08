@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
+
+    public function show()
+    {
+        return view('auth.login');
+    }
+
+
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -31,16 +38,11 @@ class LoginController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            return redirect()->route('home.logued', $nick);
+            return redirect()->route('home', $nick);
         }
 
         return back()->withErrors([
             'email' => 'Tu email no coincide con el de la base de datos.',
         ])->onlyInput('email');
-    }
-
-    public function show()
-    {
-        return view('user.userHome');
     }
 }

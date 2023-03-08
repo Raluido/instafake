@@ -16,13 +16,12 @@ class LogoutController extends Controller
      */
     public function perform(Request $request)
     {
-        log::info('logout');
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route('login.show');
     }
 }

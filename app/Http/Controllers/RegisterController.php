@@ -43,7 +43,7 @@ class RegisterController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            return redirect()->route('home.logued', $nick);
+            return redirect()->route('home', $nick);
         }
 
         return back()->with('error', 'Ha habido un error en el registro');
