@@ -15,6 +15,10 @@ class HomeController extends Controller
 
         $images = User::find($id)->images;
 
+        if (empty($images)) {
+            $images = "No hay imagenes aún!!";
+        }
+
         return view('user.home', compact('images', 'id'));
     }
 

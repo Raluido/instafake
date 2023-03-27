@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('messages_sended', function (Blueprint $table) {
             $table->id();
-            $table->mediumText('content');
+            $table->message_id();
+            $table->user_id();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('messages_sended');
     }
 };

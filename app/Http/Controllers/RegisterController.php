@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Exists;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class RegisterController extends Controller
 {
@@ -47,9 +47,9 @@ class RegisterController extends Controller
 
             $path = public_path('storage') . '/storage/media/' . $id;
 
-            if (!Storage::isDirectory($path)) {
+            if (!File::isDirectory($path)) {
 
-                Storage::makeDirectory($path, 0777, true, true);
+                File::makeDirectory($path, 0777, true, true);
             }
 
             return redirect()->route('home', $nick);

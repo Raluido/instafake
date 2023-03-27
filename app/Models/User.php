@@ -51,9 +51,14 @@ class User extends Authenticatable
         return $this->hasMany(Image::class);
     }
 
-    public function messages()
+    public function messagesReceived()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(MessageReceived::class);
+    }
+
+    public function messagesSended()
+    {
+        return $this->hasMany(MessageSended::class);
     }
 
     /**
