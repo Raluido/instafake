@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages_sended', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->message_id();
-            $table->user_id();
+            $table->foreignId('image_id')->nullable()->index();
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages_sended');
+        Schema::dropIfExists('comments');
     }
 };

@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages_received', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->message_id();
-            $table->user_id();
+            $table->string('role')->nullable();
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('nick');
+            $table->string('email');
+            $table->string('password');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages_received');
+        Schema::dropIfExists('users');
     }
 };

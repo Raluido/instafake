@@ -52,7 +52,7 @@ class RegisterController extends Controller
                 File::makeDirectory($path, 0777, true, true);
             }
 
-            return redirect()->route('home', $nick);
+            return redirect()->route('home', 'nick', 'id');
         }
 
         return back()->with('error', 'Ha habido un error en el registro');

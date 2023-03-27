@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->constrained('users')->nullable();
-            $table->foreignId('receiver_id')->constrained('users')->nullable();
-            $table->mediumText('content');
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('imagePath');
+            $table->mediumText('description');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('images');
     }
 };
