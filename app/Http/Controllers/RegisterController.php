@@ -8,6 +8,8 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rules\Exists;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -42,6 +44,13 @@ class RegisterController extends Controller
 
             $nick = User::where('id', $id)
                 ->value('nick');
+
+            $path = public_path('storage') . '/storage/media/' . $id;
+
+            if (!Storage::isDirectory($path)) {
+
+                Storage::makeDirectory($path, 0777, true, true);
+            }
 
             return redirect()->route('home', $nick);
         }

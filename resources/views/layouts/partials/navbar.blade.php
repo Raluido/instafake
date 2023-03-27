@@ -7,7 +7,20 @@
         </div>
         <div class="innerNavR">
             <div class="">Mis likes</div>
-            <div class="">Mensajes</div>
+            <?php
+
+            use App\Models\User;
+            use Illuminate\Support\Facades\Session;
+
+            $id = auth()->id();
+            Session::push('user', [
+                'user_id' => $id
+            ]);
+
+            $nick = User::where('id', $id)
+                ->value('nick');
+            ?>
+            <div class=""><a href="{{ route('user.messages', $nick) }}" class="">Mensajes</a></div>
         </div>
     </nav>
 </header>

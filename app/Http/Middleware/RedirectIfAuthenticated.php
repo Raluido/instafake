@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
                 $id = auth()->id();
                 $nick = User::where('id', $id)
                     ->value('nick');
-                return redirect()->route('home.logued', $nick);
+                return redirect()->route('home', $nick);
             }
         }
 

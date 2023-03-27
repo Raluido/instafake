@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Log;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
-    Route::middleware([RedirectIfAuthenticated::class])->group(function () {
+    Route::middleware(['guest'])->group(function () {
         Route::get('/', [LoginController::class, 'show'])->name('login.show');
         Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
         Route::post('/register', [RegisterController::class, 'register'])->name('register.store');
@@ -32,5 +32,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
+        Route::group(['prefix' => '/{nick}'], function () {
+            Route::get('messages', [HomeController::class, 'showMessages'])->name('user.messages');
+        });
     });
 });

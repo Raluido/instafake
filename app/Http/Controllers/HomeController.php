@@ -13,9 +13,13 @@ class HomeController extends Controller
     {
         $id = auth()->id();
 
-        $images = User::where('id', $id)
-            ->get('image');
+        $images = User::find($id)->images;
 
         return view('user.home', compact('images', 'id'));
+    }
+
+    public function showMessages()
+    {
+        return view('user.messages');
     }
 }
