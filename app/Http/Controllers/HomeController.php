@@ -28,13 +28,26 @@ class HomeController extends Controller
     {
         $id = auth()->id();
 
-        $messagesSended = Db::table('messages')
-            ->join('replies', 'messages.id', '=', 'replies.message_id')
+        $messages = Db::table('messages')
             ->where('sender_id', $id)
+            ->orWhere('receiver_id', $id)
             ->get();
 
-        $messagesReceived = Db::table('messages')->where('receiver_id', $id)->get();
+        return view('user.messages', compact('nick', 'id', 'messages'));
+    }
 
-        return view('user.messages', compact('nick', 'id', 'messagesSended', 'messagesReceived'));
+    public function showMessage($nick, $id)
+    {
+        $messages = Db::table('messages')
+            ->where('id', $id)
+            ->get();
+
+        $replies = Db::table('messages')
+            ->select('messages.id', 'replies.content_reply', 'replies.sender_id_reply')
+            ->join('replies', 'messages.id', '=', 'replies.message_id')
+            ->where('messages.id', $id)
+            ->get();
+
+        return view('user.message', compact('nick', 'id', 'messages', 'replies'));
     }
 }

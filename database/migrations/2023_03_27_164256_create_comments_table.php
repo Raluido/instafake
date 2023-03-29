@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('image_id')->nullable()->index();
+            $table->foreignId('image_id')->index();
             $table->text('content');
             $table->timestamps();
         });

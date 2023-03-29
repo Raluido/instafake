@@ -1,4 +1,3 @@
-<header class="">
     <nav class="">
         <div class="">
             <div class="">
@@ -10,4 +9,3 @@
             <div class=""><a href="{{ route('user.messages', $nick) }}" class="">Mensajes</a></div>
         </div>
     </nav>
-</header>

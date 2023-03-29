@@ -1,7 +1,9 @@
 <nav class="">
     <div class="">
         <h5 class="">
-            home
+            <a href="{{ route('home') }}" class="">
+                home
+            </a>
         </h5>
     </div>
     <div class="">
