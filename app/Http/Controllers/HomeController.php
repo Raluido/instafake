@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class HomeController extends Controller
@@ -27,8 +28,13 @@ class HomeController extends Controller
     {
         $id = auth()->id();
 
-        $messages = Db::table('messages')->where('sender_id', $id)->get();
+        $messagesSended = Db::table('messages')
+            ->join('replies', 'messages.id', '=', 'replies.message_id')
+            ->where('sender_id', $id)
+            ->get();
 
-        return view('user.messages', compact('nick', 'id', 'messages'));
+        $messagesReceived = Db::table('messages')->where('receiver_id', $id)->get();
+
+        return view('user.messages', compact('nick', 'id', 'messagesSended', 'messagesReceived'));
     }
 }

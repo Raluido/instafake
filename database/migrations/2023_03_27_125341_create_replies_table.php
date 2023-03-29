@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->references('id')->on('users')->nullable()->index();
-            $table->foreignId('message_id')->nullable()->index();
-            $table->mediumText('content');
+            $table->foreignId('sender_id_reply')->references('id')->on('users')->index();
+            $table->foreignId('message_id')->index();
+            $table->mediumText('content_reply');
             $table->timestamps();
         });
     }

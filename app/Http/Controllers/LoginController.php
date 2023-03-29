@@ -43,7 +43,7 @@ class LoginController extends Controller
                 File::makeDirectory($path, 0777, true, true);
             }
 
-            return redirect()->route('home', 'nick', 'id');
+            return redirect()->route('home', compact('nick', 'id'));
         }
 
         return back()->withErrors([

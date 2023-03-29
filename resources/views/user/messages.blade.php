@@ -3,8 +3,10 @@
 @section('main')
 <h5>Mis mensajes</h5>
 
-@foreach($messages as $message)
-{{ $message->id }}
+@foreach($messagesSended as $index)
+{{ $index->content }}
+{{ $index->content_reply }}
+{{ $index->sender_id_reply }}
 @endforeach
 
 
