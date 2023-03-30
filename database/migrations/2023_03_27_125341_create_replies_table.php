@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('sender_id_reply')->references('id')->on('users');
             $table->foreignId('message_id')->constrained('messages');
             $table->mediumText('content_reply');
+            $table->boolean('read');
             $table->timestamps();
         });
     }
