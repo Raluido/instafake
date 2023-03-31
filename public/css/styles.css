@@ -56,7 +56,7 @@ header .navbarMaster .likesAndMsg {
 }
 
 .msgIcon {
-    display: red;
+    color: red;
 }
 
 header .navbarSlave {
@@ -93,6 +93,7 @@ main .stories .innerStories .story {
 
 main .stories .innerStories .story h5 {
     font-size: .6em;
+    text-align: center;
 }
 
 main .stories .innerStories .story img {

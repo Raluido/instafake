@@ -49,16 +49,14 @@ class HomeController extends Controller
             ->where('messages.id', $id)
             ->get();
 
-        if (empty($replies[0])) {
-            $message = Message::find($id);
-            $message->read = true;
-            $message->save();
-        } else {
-            Db::table('replies')
-                ->where('id', $id)
-                ->orderBy('updated_at', 'DESC')
-                ->update(['read' => true]);
-        }
+        $message = Message::find($id);
+        $message->read = true;
+        $message->save();
+
+        Db::table('replies')
+            ->where('message_id', $id)
+            ->update(['read' => true]);
+
 
         return view('user.message', compact('nick', 'id', 'messages', 'replies'));
     }
@@ -68,14 +66,27 @@ class HomeController extends Controller
         $id = auth()->id();
 
         $messages = Db::table('messages')
+            ->select('read')
             ->where('sender_id', $id)
             ->orWhere('receiver_id', $id)
             ->get();
 
+        foreach ($messages as $index) {
+            if ($index->read == 0) {
+                return $result = false;
+            }
+        }
+
         $replies = Db::table('messages')
-            ->select('messages.id', 'replies.content_reply', 'replies.sender_id_reply')
+            ->select('replies.read')
             ->join('replies', 'messages.id', '=', 'replies.message_id')
             ->where('messages.id', $id)
             ->get();
+
+        foreach ($replies as $index) {
+            if ($index->read == 0) {
+                return $result = false;
+            }
+        }
     }
 }

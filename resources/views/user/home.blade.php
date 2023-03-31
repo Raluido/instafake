@@ -51,8 +51,9 @@
         </div>
         @endforeach
     </div>
+    <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
 </section>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ asset('js/planeMessages.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/planeMessages.js') }}" defer></script>
 @endsection

@@ -33,9 +33,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
-            Route::get('/check', [HomeController::class, 'checkMessages'])->name('user.checkMessages');
             Route::get('/messages', [HomeController::class, 'showMessages'])->name('user.messages');
-            Route::get('/messages/{id?}', [HomeController::class, 'showMessage'])->name('user.showMessage');
+            Route::get('/check', [HomeController::class, 'checkMessages'])->name('user.checkMessages');
+            Route::get('/messages/{id}', [HomeController::class, 'showMessage'])->name('user.showMessage');
         });
     });
 });
