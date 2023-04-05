@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessageController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Log;
 
@@ -33,9 +34,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
-            Route::get('/messages', [HomeController::class, 'showMessages'])->name('user.messages');
-            Route::get('/check', [HomeController::class, 'checkMessages'])->name('user.checkMessages');
-            Route::get('/messages/{id}', [HomeController::class, 'showMessage'])->name('user.showMessage');
+            Route::get('/messages', [MessageController::class, 'showMessages'])->name('user.messages');
+            Route::get('/messages/{inputSearch}', [MessageController::class, 'searchUser'])->name('user.search');
+            Route::get('/check', [MessageController::class, 'checkMessages'])->name('user.checkMessages');
+            Route::get('/messages/{id}', [MessageController::class, 'showMessage'])->name('user.showMessage');
         });
     });
 });
