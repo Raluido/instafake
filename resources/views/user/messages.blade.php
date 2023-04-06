@@ -3,10 +3,11 @@
 @section('main')
 <section class="messages">
     <h5>Mis mensajes</h5>
-    <input type="hidden" id="inputNick" class="" value="{{ $nick }}">
+    <input type="hidden" id="nickId" class="" value="{{ $nick }}">
     <div class="">
         <label for="" class="">Buscar</label>
-        <input type="text" id="inputSearch" class="" oninput="searchUsers()">
+        <input type="text" id="searchId" class="" oninput="searchUsers()">
+        <div class="resultsClass d-none" id="resultsId"></div>
     </div>
     <div class="" style="margin-top: 6em;">
         @foreach($messages as $index)

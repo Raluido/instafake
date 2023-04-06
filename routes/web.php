@@ -35,7 +35,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
             Route::get('/messages', [MessageController::class, 'showMessages'])->name('user.messages');
-            Route::get('/messages/{inputSearch}', [MessageController::class, 'searchUser'])->name('user.search');
+            Route::get('/messages/{search}', [MessageController::class, 'searchUser'])->name('user.search');
             Route::get('/check', [MessageController::class, 'checkMessages'])->name('user.checkMessages');
             Route::get('/messages/{id}', [MessageController::class, 'showMessage'])->name('user.showMessage');
         });

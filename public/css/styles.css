@@ -20,6 +20,14 @@ a {
     color: black;
 }
 
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -146,8 +154,23 @@ main .login .innerLogin {
 
 /* message */
 
-main .messages {
-    padding: 0 1em;
+
+
+/* end */
+
+/* messages */
+
+#searchId {
+    position: relative;
 }
+
+.resultsClass {
+    position: absolute;
+    padding: 1em;
+    border: 1px solid gray;
+    background-color: aliceblue;
+}
+
+
 
 /* end */

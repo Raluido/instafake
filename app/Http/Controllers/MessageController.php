@@ -74,12 +74,13 @@ class MessageController extends Controller
         }
     }
 
-    public function searchUser($inputSearch)
+    public function searchUser($nick, $inputSearch)
     {
-        log::info($inputSearch);
         $users = Db::table('users')
             ->select('nick')
             ->where('nick', 'LIKE', '%' . $inputSearch . '%')
             ->get();
+
+        return $users;
     }
 }
