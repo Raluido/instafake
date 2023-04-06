@@ -9,8 +9,8 @@ class Message extends Model
 {
     use HasFactory;
 
-    public function replies()
+    public function user()
     {
-        return $this->hasMany(Reply::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -160,6 +160,10 @@ main .login .innerLogin {
 
 /* messages */
 
+.messages .innerMessages {
+    padding: 0 1em;
+}
+
 #searchId {
     position: relative;
 }
@@ -171,6 +175,15 @@ main .login .innerLogin {
     background-color: aliceblue;
 }
 
-
-
 /* end */
+
+
+@media (max-width: 767px) {
+    main .login .imageLogin {
+        display: none;
+    }
+
+    main .login .innerLogin {
+        display: block;
+    }
+}

@@ -18,6 +18,16 @@ class MessageController extends Controller
             ->orWhere('receiver_id', $id)
             ->get();
 
+        $testingGroups = Db::table('messages')
+            ->where('sender_id', $id)
+            ->orWhere('receiver_id', $id)
+            ->orderBy('sender_id')
+            ->orderBy('receiver_id')
+            ->get();
+
+        log::info($testingGroups);
+        die();
+
         return view('user.messages', compact('nick', 'id', 'messages'));
     }
 

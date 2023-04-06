@@ -51,6 +51,16 @@ class User extends Authenticatable
         return $this->hasMany(Image::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(Follower::class);
+    }
+
     /**
      * Always encrypt the password when it is updated.
      *

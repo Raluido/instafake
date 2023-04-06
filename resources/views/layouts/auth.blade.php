@@ -13,7 +13,7 @@
     <main class="">
         <section class="login">
             <div class="innerLogin">
-                <div class="">
+                <div class="imageLogin">
                     <img src="{{ Storage::url('media/baseImgs/homePrev.png') }}" alt="" class="">
                 </div>
                 <div class="">
