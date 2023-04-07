@@ -13,19 +13,9 @@ class MessageController extends Controller
     {
         $id = auth()->id();
 
-        $messages = Db::table('messages')
-            ->where('sender_id', $id)
-            ->orWhere('receiver_id', $id)
-            ->get();
+        $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender_id + receiver_id ORDER BY created_at) AS total FROM messages) t WHERE t.total = 1");
 
-        $testingGroups = Db::table('messages')
-            ->where('sender_id', $id)
-            ->orWhere('receiver_id', $id)
-            ->orderBy('sender_id')
-            ->orderBy('receiver_id')
-            ->get();
-
-        log::info($testingGroups);
+        log::info($messages);
         die();
 
         return view('user.messages', compact('nick', 'id', 'messages'));
