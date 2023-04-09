@@ -12,11 +12,19 @@
         </div>
         <div class="" style="margin-top: 6em;">
             @foreach($messages as $index)
-            <a href="{{ route('user.showMessage', [$nick,$index->id]) }}" class="">
+            @if($id != $index->sender)
+            <a href="{{ route('user.showMessage', [$nick,$index->sender]) }}" class="">
                 <div class="" style="margin:2em;">
                     <p class="" style="border:1px solid gray; background-color:lightseagreen; display:inline;">{{ $index->content }} -> Mensaje </p>
                 </div>
             </a>
+            @else
+            <a href="{{ route('user.showMessage', [$nick,$index->receiver]) }}" class="">
+                <div class="" style="margin:2em;">
+                    <p class="" style="border:1px solid gray; background-color:lightseagreen; display:inline;">{{ $index->content }} -> Mensaje </p>
+                </div>
+            </a>
+            @endif
             @endforeach
         </div>
     </div>

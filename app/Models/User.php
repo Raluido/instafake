@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany(Follower::class);
     }
 
+    public function stories()
+    {
+        return $this->hasMany(Story::class);
+    }
+
     /**
      * Always encrypt the password when it is updated.
      *

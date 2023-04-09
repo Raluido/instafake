@@ -37,7 +37,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/messages', [MessageController::class, 'showMessages'])->name('user.messages');
             Route::get('/messages/{search}', [MessageController::class, 'searchUser'])->name('user.search');
             Route::get('/check', [MessageController::class, 'checkMessages'])->name('user.checkMessages');
-            Route::get('/messages/{id}', [MessageController::class, 'showMessage'])->name('user.showMessage');
+            Route::get('/message/{receiver}', [MessageController::class, 'showMessage'])->name('user.showMessage');
+            Route::post('/message/send', [MessageController::class, 'sendMessage'])->name('user.sendMessage');
         });
     });
 });
