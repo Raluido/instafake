@@ -13,6 +13,7 @@ ol {
 label,
 input {
     display: block;
+    width: 100%;
 }
 
 a {
@@ -38,6 +39,7 @@ body {
 header,
 footer {
     position: fixed;
+    height: 3em;
 }
 
 header {
@@ -193,29 +195,6 @@ main .innerMessage .message .bottom .chat .replyInput {
 }
 
 /* growinput*/
-
-.input,
-.textarea {
-    border: 1px solid #ccc;
-    font-family: inherit;
-    font-size: inherit;
-    padding: 1px 6px;
-}
-
-.input-wrap {
-    position: relative;
-}
-
-.input-wrap .input {
-    position: absolute;
-    width: 100%;
-    left: 0;
-}
-
-.width-machine {
-    /*   Sort of a magic number to add extra space for number spinner */
-    padding: 0 1rem;
-}
 
 .textarea {
     display: block;

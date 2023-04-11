@@ -1,7 +1,7 @@
 const { forEach } = require("lodash");
 
-var nick = document.getElementById("nickId").value;
 function searchUsers() {
+    var nick = document.getElementById("nickId").value;
     var inputSearch = document.getElementById("searchId").value;
     $.ajax({
         type: 'GET',
@@ -22,7 +22,7 @@ function searchUsers() {
                     if (data[0].nick !== "") {
                         data.forEach(element => {
                             document.getElementById("resultsId").innerHTML +=
-                                "<a href='' style='display:block; margin-bottom:.5em'>" + element.nick + "</a>"
+                                "<a href='/" + nick + "/message/" + element.id + "' style='display:block; margin-bottom:.5em'>" + element.nick + "</a>"
                         });
                         document.getElementById("resultsId").classList.remove("d-none");
                         document.getElementById("resultsId").classList.add("d-block");

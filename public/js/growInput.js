@@ -1,15 +1,9 @@
-// Dealing with Input width
-let el = document.querySelector(".input-wrap .input");
-let widthMachine = document.querySelector(".input-wrap .width-machine");
-el.addEventListener("keyup", () => {
-    widthMachine.innerHTML = el.value;
-});
-
 // Dealing with Textarea Height
 function calcHeight(value) {
-    let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+    let numberOfLineBreaks = (value.match(/\n/g || [])).length;
     // min-height + lines x line-height + padding + border
     let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+    console.log(value);
     return newHeight;
 }
 

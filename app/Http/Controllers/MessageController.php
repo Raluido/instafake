@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Message;
+use Mockery\Undefined;
 
 class MessageController extends Controller
 {
@@ -45,6 +46,10 @@ class MessageController extends Controller
             ->orWhere('receiver', $id)
             ->get();
 
+        if ($messages) {
+            return $result = true;
+        }
+
         foreach ($messages as $index) {
             if ($index->read == 0) {
                 return $result = false;
@@ -57,7 +62,7 @@ class MessageController extends Controller
     public function searchUser($nick, $inputSearch)
     {
         $users = Db::table('users')
-            ->select('nick')
+            ->select('nick', 'id')
             ->where('nick', 'LIKE', '%' . $inputSearch . '%')
             ->get();
 

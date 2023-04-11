@@ -33,7 +33,7 @@
                 @csrf
                 <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
                 <p class=""><textarea name="content" class="replyInput textarea resize-ta"></textarea></p>
-                <input type="submit" class="">
+                <input type="submit" value="enviar" class="">
             </form>
         </div>
     </div>
