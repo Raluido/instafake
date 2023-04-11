@@ -32,7 +32,7 @@
             <form action="{{ route('user.sendMessage', $nick) }}" method=POST class="">
                 @csrf
                 <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
-                <p class=""><textarea name="content" id="textarea" class="replyInput textarea resize-ta"></textarea></p>
+                <textarea name="" id="textarea" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
                 <input type="submit" value="enviar" class="">
             </form>
         </div>

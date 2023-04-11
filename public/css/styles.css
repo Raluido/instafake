@@ -191,7 +191,7 @@ main .innerMessage .bottom .chat {
     flex-grow: 1;
 }
 
-main .message .innerMessage  .bottom .chat .userMessage {
+main .message .innerMessage .bottom .chat .userMessage {
     background-color: gray;
     padding: .1em;
     border-radius: 500px;
@@ -203,14 +203,8 @@ main .message .innerMessage  .bottom .chat .userMessage {
     display: block;
     width: 100%;
     overflow: hidden;
-    resize: both;
-    min-height: 40px;
-    line-height: 20px;
-}
-
-.textarea[contenteditable]:empty::before {
-    content: "Placeholder still possible";
-    color: gray;
+    margin: 1em 0;
+    max-height: 100px;
 }
 
 /* end */
