@@ -1,32 +1,57 @@
 @extends('layouts.slave')
 
 @section('main')
+<?php
+
+use App\Models\User;
+?>
 <section class="messages">
     <div class="innerMessages">
-        <h5>Mis mensajes</h5>
-        <input type="hidden" id="nickId" class="" value="{{ $nick }}">
-        <div class="">
-            <label for="" class="">Buscar</label>
-            <input type="text" id="searchId" class="" oninput="searchUsers()">
-            <div class="resultsClass d-none" id="resultsId"></div>
+        <div class="top">
+            <h5>Mis mensajes</h5>
+            <input type="hidden" id="nickId" class="" value="{{ $nick }}">
+            <div class="">
+                <label for="" class="">Buscar</label>
+                <input type="text" id="searchId" class="" oninput="searchUsers()">
+                <div class="resultsClass d-none" id="resultsId"></div>
+            </div>
         </div>
-        <div class="" style="margin-top: 6em;">
+        <div class="bottom" style="margin-top: 6em;">
             @foreach($messages as $index)
             @if($id != $index->sender)
             <a href="{{ route('user.showMessage', [$nick,$index->sender]) }}" class="">
-                <div class="" style="margin:2em;">
-                    <p class="" style="border:1px solid gray; background-color:lightseagreen; display:inline;">{{ $index->content }} -> Mensaje </p>
+                <div class="userMessage" style="margin:2em;">
+                    <?php
+                    $avatar = User::find($index->sender);
+                    ?>
+                    <div class="profile">
+                        <img src="{{ Storage::url($avatar->image) }}" alt="" class="">
+                    </div>
+                    <div class="content">
+                        <h5 class="">{{ $avatar->nick }}</h5>
+                        <p class="" style="display:inline;">{{ $index->content }}</p>
+                    </div>
                 </div>
             </a>
             @else
             <a href="{{ route('user.showMessage', [$nick,$index->receiver]) }}" class="">
-                <div class="" style="margin:2em;">
-                    <p class="" style="border:1px solid gray; background-color:lightseagreen; display:inline;">{{ $index->content }} -> Mensaje </p>
+                <div class="userMessage" style="margin:2em;">
+                    <?php
+                    $avatar = User::find($index->receiver);
+                    ?>
+                    <div class="profile">
+                        <img src="{{ Storage::url($avatar->image) }}" alt="" class="">
+                    </div>
+                    <div class="content">
+                        <h5 class="">{{ $avatar->nick }}</h5>
+                        <p class="" style="display:inline;">{{ $index->content }}</p>
+                    </div>
                 </div>
             </a>
             @endif
             @endforeach
         </div>
+    </div>
     </div>
 </section>
 @endsection

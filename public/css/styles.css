@@ -34,6 +34,8 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
+    color: white;
+    background-color: black;
 }
 
 header,
@@ -189,9 +191,10 @@ main .innerMessage .bottom .chat {
     flex-grow: 1;
 }
 
-main .innerMessage .message .bottom .chat .replyInput {
-    bottom: 0;
-    border: 2px solid black;
+main .message .innerMessage  .bottom .chat .userMessage {
+    background-color: gray;
+    padding: .1em;
+    border-radius: 500px;
 }
 
 /* growinput*/
@@ -228,6 +231,32 @@ main .innerMessage .message .bottom .chat .replyInput {
     border: 1px solid gray;
     background-color: aliceblue;
 }
+
+.messages .innerMessages .bottom .userMessage {
+    display: flex;
+    border: 1px solid black;
+    padding: .3em;
+}
+
+.messages .innerMessages .bottom .profile {
+    width: 3em;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 2em;
+}
+
+.messages .innerMessages .bottom .profile img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.messages .innerMessages .bottom .userMessage .content h5 {
+    margin-top: 0;
+}
+
+
 
 /* end */
 

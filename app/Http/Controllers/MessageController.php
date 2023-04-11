@@ -14,7 +14,7 @@ class MessageController extends Controller
     {
         $id = auth()->id();
 
-        $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender + receiver ORDER BY created_at) AS total FROM messages) t WHERE t.total = 1 AND (t.sender = $id OR t.receiver = $id)");
+        $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender + receiver ORDER BY created_at DESC) AS total FROM messages) t WHERE t.total = 1 AND (t.sender = $id OR t.receiver = $id)");
 
         return view('user.messages', compact('nick', 'messages', 'id'));
     }
