@@ -29,13 +29,22 @@ use App\Models\User;
                     </div>
                     <div class="content">
                         <h4 class="">{{ $avatar->nick }}</h4>
-                        <h5 class="">{{ $index->content }}</h5>
+                        <div class="innerContent">
+                            <h5 class="">{{ $index->content }}</h5>
+                            <h6 class="">
+                                <?php
+                                $pastTime = date_create($index->created_at);
+                                $interval = $pastTime->diff(new DateTime("now"));
+                                echo $interval->format("Hace %i minutos y %a días");
+                                ?>
+                            </h6>
+                        </div>
                     </div>
                 </div>
             </a>
             @else
             <a href="{{ route('user.showMessage', [$nick,$index->receiver]) }}" class="">
-                <div class="userMessage" style="margin:2em;">
+                <div class="userMessage">
                     <?php
                     $avatar = User::find($index->receiver);
                     ?>
@@ -44,7 +53,16 @@ use App\Models\User;
                     </div>
                     <div class="content">
                         <h4 class="">{{ $avatar->nick }}</h4>
-                        <h5 class="">{{ $index->content }}</h5>
+                        <div class="innerContent">
+                            <h5 class="">{{ $index->content }}</h5>
+                            <h6 class="">
+                                <?php
+                                $pastTime = date_create($index->created_at);
+                                $interval = $pastTime->diff(new DateTime("now"));
+                                echo $interval->format("Hace %i minutos y %a días");
+                                ?>
+                            </h6>
+                        </div>
                     </div>
                 </div>
             </a>

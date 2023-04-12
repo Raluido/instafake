@@ -52,4 +52,5 @@
 
 @section('js')
 <script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 @endsection
