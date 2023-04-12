@@ -18,7 +18,7 @@ input {
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .d-none {
@@ -191,10 +191,21 @@ main .innerMessage .bottom .chat {
     flex-grow: 1;
 }
 
-main .message .innerMessage .bottom .chat .userMessage {
-    background-color: gray;
+main .innerMessage .bottom .chat {
+    padding: .5em;
+}
+
+main .message .innerMessage .bottom .chat .innerUserMessage {
+    background-color: #3d3d29;
     padding: .1em;
     border-radius: 500px;
+    width: max-content;
+}
+
+main .message .innerMessage .bottom .chat .innerUserMessage p {
+    display: inline-block;
+    margin: 1em;
+    white-space: pre-wrap
 }
 
 /* growinput*/
@@ -224,30 +235,51 @@ main .message .innerMessage .bottom .chat .userMessage {
     padding: 1em;
     border: 1px solid gray;
     background-color: aliceblue;
+    z-index: 10;
+}
+
+.messages .innerMessages .bottom {
+    padding: .3em;
+    margin-top: 3em;
 }
 
 .messages .innerMessages .bottom .userMessage {
     display: flex;
     border: 1px solid black;
-    padding: .3em;
+
 }
 
 .messages .innerMessages .bottom .profile {
-    width: 3em;
-    height: auto;
+    position: relative;
+    width: 4em;
+    height: 4em;
+    overflow: hidden;
     display: flex;
     align-items: center;
     margin-right: 2em;
-}
-
-.messages .innerMessages .bottom .profile img {
-    width: 100%;
-    height: auto;
     border-radius: 50%;
 }
 
+.messages .innerMessages .bottom .profile img {
+    position: absolute;
+    width: 4em;
+    height: auto;
+}
+
+.messages .innerMessages .bottom .userMessage .content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.messages .innerMessages .bottom .userMessage .content h5,
+.messages .innerMessages .bottom .userMessage .content h4 {
+    margin: 0;
+}
+
 .messages .innerMessages .bottom .userMessage .content h5 {
-    margin-top: 0;
+    margin-top: .5em;
+    color: gray;
 }
 
 

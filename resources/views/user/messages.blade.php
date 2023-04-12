@@ -8,7 +8,7 @@ use App\Models\User;
 <section class="messages">
     <div class="innerMessages">
         <div class="top">
-            <h5>Mis mensajes</h5>
+            <h4>Mis mensajes</h4>
             <input type="hidden" id="nickId" class="" value="{{ $nick }}">
             <div class="">
                 <label for="" class="">Buscar</label>
@@ -16,11 +16,11 @@ use App\Models\User;
                 <div class="resultsClass d-none" id="resultsId"></div>
             </div>
         </div>
-        <div class="bottom" style="margin-top: 6em;">
+        <div class="bottom">
             @foreach($messages as $index)
             @if($id != $index->sender)
             <a href="{{ route('user.showMessage', [$nick,$index->sender]) }}" class="">
-                <div class="userMessage" style="margin:2em;">
+                <div class="userMessage">
                     <?php
                     $avatar = User::find($index->sender);
                     ?>
@@ -28,8 +28,8 @@ use App\Models\User;
                         <img src="{{ Storage::url($avatar->image) }}" alt="" class="">
                     </div>
                     <div class="content">
-                        <h5 class="">{{ $avatar->nick }}</h5>
-                        <p class="" style="display:inline;">{{ $index->content }}</p>
+                        <h4 class="">{{ $avatar->nick }}</h4>
+                        <h5 class="">{{ $index->content }}</h5>
                     </div>
                 </div>
             </a>
@@ -43,8 +43,8 @@ use App\Models\User;
                         <img src="{{ Storage::url($avatar->image) }}" alt="" class="">
                     </div>
                     <div class="content">
-                        <h5 class="">{{ $avatar->nick }}</h5>
-                        <p class="" style="display:inline;">{{ $index->content }}</p>
+                        <h4 class="">{{ $avatar->nick }}</h4>
+                        <h5 class="">{{ $index->content }}</h5>
                     </div>
                 </div>
             </a>

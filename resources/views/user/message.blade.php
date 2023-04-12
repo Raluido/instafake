@@ -12,28 +12,38 @@
                 <?php
                 $counter = 0;
                 foreach ($messages as $index) :
-                    $counter++;
-                    if ($id == $index->sender || $counter == 0) :
+                    if ($counter == 0 || $id == $index->sender) :
                 ?>
-                        <div class="userMessage" style="margin:2em;">
-                            <p class="">{{ $index->content }}</p>
+                        <div class="userMessage">
+                            <div class="innerUserMessage">
+                                <p class="">{{ $index->content }}</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <h5 class="">{{ $index->created_at }}</h5>
                         </div>
                     <?php
-                    elseif ($id == $index->receiver) :
+                    else :
                     ?>
-                        <div class="userMessage" style="margin:2em; display:flex; justify-content:end;">
-                            <p class="" style="display:inline-block">{{ $index->content }}</p>
+                        <div class="userMessage" style="display:flex; justify-content:end;">
+                            <div class="innerUserMessage">
+                                <p class="">{{ $index->content }}</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <h5 class="">{{ $index->created_at }}</h5>
                         </div>
                 <?php
                     endif;
+                    $counter++;
                 endforeach;
                 ?>
             </div>
             <form action="{{ route('user.sendMessage', $nick) }}" method=POST class="">
                 @csrf
                 <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
-                <textarea name="" id="textarea" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
-                <input type="submit" value="enviar" class="">
+                <textarea name="content" id="textarea" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
+                <input type="submit" id="sendMessageId" value="enviar" class="d-none">
             </form>
         </div>
     </div>
