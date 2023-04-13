@@ -117,6 +117,8 @@ main .stories .innerStories .story img {
 
 footer {
     position: fixed;
+    display: flex;
+    align-items: center;
     left: 0;
     right: 0;
     bottom: 0;
@@ -125,6 +127,7 @@ footer {
 footer nav {
     display: flex;
     justify-content: space-around;
+    width: 100%;
 }
 
 footer nav h5 {
@@ -183,7 +186,7 @@ main .message .innerMessage {
 main .message .innerMessage .bottom .chat {
     border: 1px solid gray;
     border-radius: 5px;
-    padding: 2em 0 3em 0;
+    padding: 2em 0 5em 0;
 }
 
 main .innerMessage,
@@ -209,9 +212,10 @@ main .message .innerMessage .bottom .chat .innerUserMessage {
     background-color: #3d3d29;
     padding: .1em;
     border-radius: 500px;
-    /*fix text doesnt hace a break line*/
-    max-width: 60%;
-    word-wrap: break-word;
+    width: fit-content;
+    /* fix text doesnt hace a break line */
+    /* max-width: 60%;
+    word-wrap: break-word; */
 }
 
 main .message .innerMessage .bottom .chat .innerUserMessage p {
@@ -300,7 +304,205 @@ main .message .innerMessage .bottom .chat .innerUserMessage p {
     color: gray;
 }
 
+/* end */
 
+/* upload editor images */
+
+.uploadForm {
+    width: 850px;
+    padding: 30px 35px 35px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.uploadForm.disable .editor-panel,
+.uploadForm.disable .controls .reset-filter,
+.uploadForm.disable .controls .save-img {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.uploadForm h2 {
+    margin-top: -8px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.uploadForm .wrapper {
+    display: flex;
+    margin: 20px 0;
+    min-height: 335px;
+}
+
+.uploadForm .wrapper .editor-panel {
+    padding: 15px 20px;
+    width: 280px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.uploadForm .editor-panel .title {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.uploadForm .editor-panel .options,
+.uploadForm .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.uploadForm .editor-panel button {
+    outline: none;
+    height: 40px;
+    font-size: 14px;
+    color: #6C757D;
+    background: #fff;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    border: 1px solid #aaa;
+}
+
+.uploadForm .editor-panel .filter button {
+    width: calc(100% / 2 - 4px);
+}
+
+.uploadForm .editor-panel button:hover {
+    background: #f5f5f5;
+}
+
+.uploadForm .filter button.active {
+    color: #fff;
+    border-color: #5372F0;
+    background: #5372F0;
+}
+
+.uploadForm .filter .slider {
+    margin-top: 12px;
+}
+
+.uploadForm .filter .slider .filter-info {
+    display: flex;
+    color: #464646;
+    font-size: 14px;
+    justify-content: space-between;
+}
+
+.uploadForm .filter .slider input {
+    width: 100%;
+    height: 5px;
+    accent-color: #5372F0;
+}
+
+.uploadForm .editor-panel .rotate {
+    margin-top: 17px;
+}
+
+.uploadForm .editor-panel .rotate button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 4 - 3px);
+}
+
+.uploadForm .rotate .options button:nth-child(3),
+.uploadForm .rotate .options button:nth-child(4) {
+    font-size: 18px;
+}
+
+.uploadForm .rotate .options button:active {
+    color: #fff;
+    background: #5372F0;
+    border-color: #5372F0;
+}
+
+.uploadForm .wrapper .preview-img {
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+    margin-left: 20px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadForm .preview-img img {
+    max-width: 490px;
+    max-height: 335px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.uploadForm .controls button {
+    padding: 11px 20px;
+    font-size: 14px;
+    border-radius: 3px;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.uploadForm .controls .reset-filter {
+    color: #6C757D;
+    border: 1px solid #6C757D;
+}
+
+.uploadForm .controls .reset-filter:hover {
+    color: #fff;
+    background: #6C757D;
+}
+
+.uploadForm .controls .choose-img {
+    background: #6C757D;
+    border: 1px solid #6C757D;
+}
+
+.uploadForm .controls .save-img {
+    margin-left: 5px;
+    background: #5372F0;
+    border: 1px solid #5372F0;
+}
+
+@media screen and (max-width: 760px) {
+    .uploadForm {
+        padding: 25px;
+        width: unset;
+    }
+
+    .uploadForm .wrapper {
+        flex-wrap: wrap-reverse;
+    }
+
+    .uploadForm .wrapper .editor-panel {
+        width: 100%;
+    }
+
+    .uploadForm .wrapper .preview-img {
+        width: 100%;
+        margin: 0 0 15px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .uploadForm .controls button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .uploadForm .controls .row {
+        width: 100%;
+    }
+
+    .uploadForm .controls .row .save-img {
+        margin-left: 0px;
+    }
+}
 
 /* end */
 

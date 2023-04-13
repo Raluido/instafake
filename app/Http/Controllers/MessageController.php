@@ -10,16 +10,16 @@ use Mockery\Undefined;
 
 class MessageController extends Controller
 {
-    public function showMessages($nick)
+    public function showAll($nick)
     {
         $id = auth()->id();
 
         $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender + receiver ORDER BY created_at DESC) AS total FROM messages) t WHERE t.total = 1 AND (t.sender = $id OR t.receiver = $id)");
 
-        return view('user.messages', compact('nick', 'messages', 'id'));
+        return view('messages.showAll', compact('nick', 'messages', 'id'));
     }
 
-    public function showMessage($nick, $receiver)
+    public function show($nick, $receiver)
     {
         $id = auth()->id();
 
@@ -33,10 +33,10 @@ class MessageController extends Controller
                 ->update(['read' => 1]);
         }
 
-        return view('user.message', compact('nick', 'id', 'messages', 'receiver'));
+        return view('messages.show', compact('nick', 'id', 'messages', 'receiver'));
     }
 
-    public function checkMessages()
+    public function check()
     {
         $id = auth()->id();
 
@@ -59,7 +59,7 @@ class MessageController extends Controller
         }
     }
 
-    public function searchUser($nick, $inputSearch)
+    public function search($nick, $inputSearch)
     {
         $users = Db::table('users')
             ->select('nick', 'id')
@@ -69,7 +69,7 @@ class MessageController extends Controller
         return $users;
     }
 
-    public function sendMessage(Request $request)
+    public function send(Request $request)
     {
         $id = auth()->id();
 

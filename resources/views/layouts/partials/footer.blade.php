@@ -1,18 +1,17 @@
 <nav class="">
     <div class="">
-        <h5 class="">
-            <a href="{{ route('home') }}" class="">
-                home
-            </a>
-        </h5>
+        <a href="{{ route('home') }}" class="">
+            <i class="fa-solid fa-house"></i>
+        </a>
     </div>
     <div class="">
-        <h5 class="">Añadir</h5>
+        <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div class="">
-        <h5 class="">
-            Reels
-        </h5>
+        <a href="{{ $nick }}/images/upload" class=""><i class="fa-solid fa-square-plus"></i></a>
+    </div>
+    <div class="">
+        <i class="fa-sharp fa-solid fa-circle-play"></i>
     </div>
     <div class="profileImg">
         @if(File::exists(Storage::url('media/' . $id . '/avatar.png')))

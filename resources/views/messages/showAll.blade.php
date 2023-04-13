@@ -19,7 +19,7 @@ use App\Models\User;
         <div class="bottom">
             @foreach($messages as $index)
             @if($id != $index->sender)
-            <a href="{{ route('user.showMessage', [$nick,$index->sender]) }}" class="">
+            <a href="{{ route('messages.show', [$nick,$index->sender]) }}" class="">
                 <div class="userMessage">
                     <?php
                     $avatar = User::find($index->sender);
@@ -30,7 +30,7 @@ use App\Models\User;
                     <div class="content">
                         <h4 class="">{{ $avatar->nick }}</h4>
                         <div class="innerContent">
-                            <h5 class="">{{ $index->content }}</h5>
+                            <h5 class="">{{ substr($index->content, 0, 15) }}...</h5>
                             <h6 class="">
                                 <?php
                                 $pastTime = date_create($index->created_at);
@@ -43,7 +43,7 @@ use App\Models\User;
                 </div>
             </a>
             @else
-            <a href="{{ route('user.showMessage', [$nick,$index->receiver]) }}" class="">
+            <a href="{{ route('messages.show', [$nick,$index->receiver]) }}" class="">
                 <div class="userMessage">
                     <?php
                     $avatar = User::find($index->receiver);
@@ -54,7 +54,7 @@ use App\Models\User;
                     <div class="content">
                         <h4 class="">{{ $avatar->nick }}</h4>
                         <div class="innerContent">
-                            <h5 class="">{{ $index->content }}</h5>
+                            <h5 class="">{{ substr($index->content, 0, 15)  }}...</h5>
                             <h6 class="">
                                 <?php
                                 $pastTime = date_create($index->created_at);

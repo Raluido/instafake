@@ -14,7 +14,7 @@
                 foreach ($messages as $index) :
                     if ($counter == 0 || $id == $index->sender) :
                 ?>
-                        <div class="userMessage">
+                        <div class="userMessage" style="display:flex; justify-content:end;">
                             <div class="innerUserMessage">
                                 <p class="">{{ $index->content }}</p>
                             </div>
@@ -25,7 +25,7 @@
                     <?php
                     else :
                     ?>
-                        <div class="userMessage" style="display:flex; justify-content:end;">
+                        <div class="userMessage">
                             <div class="innerUserMessage">
                                 <p class="">{{ $index->content }}</p>
                             </div>
@@ -39,10 +39,10 @@
                 endforeach;
                 ?>
             </div>
-            <form action="{{ route('user.sendMessage', $nick) }}" method=POST class="">
+            <form action="{{ route('messages.send', $nick) }}" method=POST class="">
                 @csrf
                 <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
-                <textarea name="content" id="textarea" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
+                <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
                 <input type="submit" id="sendMessageId" value="enviar" class="d-none">
             </form>
         </div>
