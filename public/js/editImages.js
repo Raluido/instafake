@@ -1,3 +1,5 @@
+var nick = document.getElementById('nick').value;
+
 const fileInput = document.querySelector(".file-input"),
     filterOptions = document.querySelectorAll(".filter button"),
     filterName = document.querySelector(".filter-info .name"),
@@ -104,11 +106,25 @@ const saveImage = () => {
     }
     ctx.scale(flipHorizontal, flipVertical);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+    ctx.save();
+    var dataURL = canvas.toDataURL("image/png");
 
-    const link = document.createElement("a");
-    link.download = "image.jpg";
-    link.href = canvas.toDataURL();
-    link.click();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: "/" + nick + "/images/publish",
+    });
+    $.ajax({
+        data: {
+            imgBase64: dataURL
+        },
+        success: function (data) {
+            console.log('ole');
+        }
+    });
 }
 
 filterSlider.addEventListener("input", updateFilter);

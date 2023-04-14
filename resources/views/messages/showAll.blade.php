@@ -1,4 +1,4 @@
-@extends('layouts.slave')
+@extends('layouts.showAllMessages')
 
 @section('main')
 <?php

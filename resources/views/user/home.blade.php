@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main')
-<section class="">
+<section class="home">
     <div class="stories">
         <div class="innerStories">
             <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">

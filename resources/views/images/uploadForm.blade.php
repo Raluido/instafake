@@ -39,6 +39,7 @@
         <button class="reset-filter">Reset Filters</button>
         <div class="row">
             <input type="file" class="file-input" accept="image/*" hidden>
+            <input type="hidden" id="nick" value="{{ $nick }}" class="">
             <button class="choose-img">Seleccionar imagen</button>
             <button class="save-img">Publicar</button>
         </div>

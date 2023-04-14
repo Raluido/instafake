@@ -36,6 +36,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
             Route::get('/images/upload', [ImageController::class, 'uploadForm'])->name('images.uploadForm');
+            Route::post('/images/publish', [ImageController::class, 'publish'])->name('images.publish');
             Route::get('/messages', [MessageController::class, 'showAll'])->name('messages.showAll');
             Route::get('/messages/{search}', [MessageController::class, 'search'])->name('messages.search');
             Route::get('/check', [MessageController::class, 'check'])->name('messages.check');
