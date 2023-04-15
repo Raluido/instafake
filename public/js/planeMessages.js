@@ -5,9 +5,10 @@ $.ajax({
     data: {},
     datatype: "json",
     success: function (data) {
-        if (data == 0) {
-            var element = document.getElementById("messageIcon");
-            element.classList.add("msgIcon");
+        if (data != 0) {
+            document.getElementById('innerCountMsg').innerHTML = data;
+            // var element = document.getElementById("messageIcon");
+            // element.classList.add("msgIcon");
         }
     }
 })
@@ -18,9 +19,10 @@ var intervalId = setInterval(function () {
         data: {},
         datatype: "json",
         success: function (data) {
-            if (data == 0) {
-                var element = document.getElementById("messageIcon");
-                element.classList.add("msgIcon");
+            if (data != 0) {
+                document.getElementById('innerCountMsg').innerHTML = data;
+                // var element = document.getElementById("messageIcon");
+                // element.classList.add("msgIcon");
             }
         }
     })

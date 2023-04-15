@@ -68,6 +68,30 @@ header .navbarMaster .likesAndMsg {
     align-items: center;
 }
 
+#messageIcon {
+    display: block;
+    z-index: 1;
+}
+
+header .navbarMaster .likesAndMsg .msg .countMsg {
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    background-color: red;
+    z-index: 10;
+    top: .8em;
+    right: .1em;
+}
+
+header .navbarMaster .likesAndMsg .msg .countMsg .innerCountMsg {
+    font-size: .6em;
+    margin: 0 .3em;
+}
+
+
+
+
+
 .msgIcon {
     color: red;
 }

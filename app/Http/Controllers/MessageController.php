@@ -30,6 +30,7 @@ class MessageController extends Controller
         foreach ($messages as $index) {
             $update = Db::table('messages')
                 ->where('id', $index->id)
+                ->where('receiver', $id)
                 ->update(['read' => 1]);
         }
 
@@ -42,21 +43,20 @@ class MessageController extends Controller
 
         $messages = Db::table('messages')
             ->select('read')
-            ->where('sender', $id)
-            ->orWhere('receiver', $id)
+            ->Where('receiver', $id)
             ->get();
 
-        if ($messages) {
-            return $result = true;
-        }
+        $count = 0;
 
-        foreach ($messages as $index) {
-            if ($index->read == 0) {
-                return $result = false;
-            } else {
-                return $result = true;
+        if ($messages) {
+            foreach ($messages as $index) {
+                if ($index->read == 0) {
+                    $count++;
+                }
             }
         }
+
+        return $count;
     }
 
     public function search($nick, $inputSearch)
