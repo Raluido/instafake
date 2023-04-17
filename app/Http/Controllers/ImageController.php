@@ -14,28 +14,28 @@ class ImageController extends Controller
 
     public function store(Request $request, $nick)
     {
-        $img = $request->all();
-
-        return redirect()->route('images.publishForm', ['nick' => $nick]);
-    }
-
-    public function publishForm($nick)
-    {
-        log::info($nick);
-
-        return view('images.publishForm', ['nick' => $nick]);
-    }
-
-    public function publish(Request $request)
-    {
         $id = auth()->id();
 
+        $img = $request->all();
         $img = ($img['imgBase64']);
         $img = str_replace('data:image/png;base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $fileData = base64_decode($img);
         //saving
-        $fileName = public_path('storage/media/' . $id . '/' . 'photo.png');
-        file_put_contents($fileName, $fileData);
+        $pathName = public_path('storage/media/' . $id . '_' . time() . '.png');
+        file_put_contents($pathName, $fileData);
+        $fileName = pathinfo($pathName)['basename'];
+
+        return $fileName;
+    }
+
+    public function publishForm($nick, $fileName)
+    {
+        return view('images.publishForm', ['nick' => $nick])->with('fileName', $fileName);
+    }
+
+    public function publish(Request $request)
+    {
+        $id = auth()->id();
     }
 }

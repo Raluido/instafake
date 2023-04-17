@@ -37,8 +37,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::group(['prefix' => '{nick}'], function () {
             Route::get('/image/upload', [ImageController::class, 'uploadForm'])->name('image.uploadForm');
             Route::post('/image/store', [ImageController::class, 'store'])->name('image.store');
-            Route::get('/image/publish/', [ImageController::class, 'publishForm'])->name('images.publishForm');
-            Route::post('/image/published', [ImageController::class, 'published'])->name('image.published');
+            Route::get('/image/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');
             Route::get('/messages', [MessageController::class, 'showAll'])->name('messages.showAll');
             Route::get('/messages/{search}', [MessageController::class, 'search'])->name('messages.search');
             Route::get('/check', [MessageController::class, 'check'])->name('messages.check');
