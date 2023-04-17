@@ -115,14 +115,14 @@ const saveImage = () => {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: "/" + nick + "/images/publish",
+        url: "/" + nick + "/image/store",
     });
     $.ajax({
         data: {
             imgBase64: dataURL
         },
         success: function (data) {
-            console.log('ole');
+
         }
     });
 }

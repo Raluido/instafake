@@ -12,11 +12,24 @@ class ImageController extends Controller
         return view('images.uploadForm')->with('nick', $nick);
     }
 
-    public function publish(Request $request, $nick)
+    public function store(Request $request, $nick)
+    {
+        $img = $request->all();
+
+        return redirect()->route('images.publishForm', ['nick' => $nick]);
+    }
+
+    public function publishForm($nick)
+    {
+        log::info($nick);
+
+        return view('images.publishForm', ['nick' => $nick]);
+    }
+
+    public function publish(Request $request)
     {
         $id = auth()->id();
 
-        $img = $request->all();
         $img = ($img['imgBase64']);
         $img = str_replace('data:image/png;base64,', '', $img);
         $img = str_replace(' ', '+', $img);

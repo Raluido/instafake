@@ -8,7 +8,7 @@
         <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div class="">
-        <a href="{{ $nick }}/images/upload" class=""><i class="fa-solid fa-square-plus"></i></a>
+        <a href="{{ $nick }}/image/upload" class=""><i class="fa-solid fa-square-plus"></i></a>
     </div>
     <div class="">
         <i class="fa-sharp fa-solid fa-circle-play"></i>
