@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="preview-img">
-            <img src="image-placeholder.svg" alt="preview-img">
+            <img src="{{ Storage::url('/media/baseImgs/image-placeholder.png') }}" alt="preview-img">
         </div>
     </div>
     <div class="controls">

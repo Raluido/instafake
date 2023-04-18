@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\DeleteTmpImg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Spatie\TemporaryDirectory\TemporaryDirectory;
+use Illuminate\Validation\Rules\Exists;
+use App\Models\Image;
 
 class ImageController extends Controller
 {
@@ -23,25 +25,40 @@ class ImageController extends Controller
         $img = str_replace(' ', '+', $img);
         $fileData = base64_decode($img);
         //saving
-        $location = public_path('storage/temp');
-        $name = time();
-        $newLocation = (new TemporaryDirectory($location))
-            ->name($name)
-            ->create();
-        $pathName = public_path('storage/temp/' . $name . '/' . $id . '_' . time() . '.png');
+        $pathName = public_path('storage/tmp/' . $id . '_' . time() . '.png');
         file_put_contents($pathName, $fileData);
         $fileName = pathinfo($pathName)['basename'];
+        DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
 
         return $fileName;
     }
 
     public function publishForm($nick, $fileName)
     {
-        return view('images.publishForm', ['nick' => $nick])->with('fileName', $fileName);
+        return view('images.publishForm', ['nick' => $nick, 'fileName' => $nick]);
     }
 
-    public function publish(Request $request)
+    public function published(Request $request, $nick)
     {
         $id = auth()->id();
+
+        $fileName = $request->input('fileName');
+
+        $path = public_path('storage/tmp/' . $fileName);
+        if (file_exists($path)) {
+            rename(public_path('storage/tmp/' . $fileName), public_path('storage/media/' . $id . '/library/images/' . $fileName));
+            $image = new Image();
+            $image->user_id = $id;
+            $image->fileName = $request->input('fileName');
+            $image->name = $request->input('name');
+            $image->location = $request->input('location');
+            $image->labels = $request->input('labels');
+            $image->save();
+            return view('home', ['nick' => $nick]);
+        } else {
+            echo "Tiempo excedido!!";
+            sleep(5);
+            return redirect()->back();
+        }
     }
 }

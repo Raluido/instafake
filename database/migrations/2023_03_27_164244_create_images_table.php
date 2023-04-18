@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('imagePath');
-            $table->mediumText('description');
+            $table->string('filename');
+            $table->string('name');
+            $table->string('location');
+            $table->string('labels');
             $table->timestamps();
         });
     }

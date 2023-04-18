@@ -563,6 +563,31 @@ main .message .innerMessage .bottom .chat .innerUserMessage p {
     border: 1px solid #5372F0;
 }
 
+/* publish images */
+
+main .publishForm .innerPublish {
+    padding: 5em 3em;
+}
+
+main .publishForm .innerPublish .bottom {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+}
+
+main .publishForm .innerPublish .bottom form {
+    width: 80%;
+    padding: 3em;
+    border: 1px solid white;
+}
+
+main .publishForm .innerPublish .bottom .inputForm {
+    margin-bottom: 1em;
+}
+
+
+/* end */
+
 @media screen and (max-width: 760px) {
     .uploadForm {
         padding: 25px;
