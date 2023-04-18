@@ -109,7 +109,6 @@ const saveImage = () => {
     ctx.save();
     var dataURL = canvas.toDataURL("image/png");
 
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Spatie\TemporaryDirectory\TemporaryDirectory;
 
 class ImageController extends Controller
 {
@@ -22,7 +23,12 @@ class ImageController extends Controller
         $img = str_replace(' ', '+', $img);
         $fileData = base64_decode($img);
         //saving
-        $pathName = public_path('storage/media/' . $id . '_' . time() . '.png');
+        $location = public_path('storage/temp');
+        $name = time();
+        $newLocation = (new TemporaryDirectory($location))
+            ->name($name)
+            ->create();
+        $pathName = public_path('storage/temp/' . $name . '/' . $id . '_' . time() . '.png');
         file_put_contents($pathName, $fileData);
         $fileName = pathinfo($pathName)['basename'];
 
