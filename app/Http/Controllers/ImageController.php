@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Exists;
 use App\Models\Image;
+use App\Models\User;
 
 class ImageController extends Controller
 {
@@ -35,7 +36,7 @@ class ImageController extends Controller
 
     public function publishForm($nick, $fileName)
     {
-        return view('images.publishForm', ['nick' => $nick, 'fileName' => $nick]);
+        return view('images.publishForm', ['nick' => $nick, 'fileName' => $fileName]);
     }
 
     public function published(Request $request, $nick)
@@ -54,7 +55,13 @@ class ImageController extends Controller
             $image->location = $request->input('location');
             $image->labels = $request->input('labels');
             $image->save();
-            return view('home', ['nick' => $nick]);
+
+            $images = User::find($id)->images;
+
+            if (empty($images)) {
+                $images = "No hay imagenes aún!!";
+            }
+            return view('user.home', compact('images', 'id', 'nick'));
         } else {
             echo "Tiempo excedido!!";
             sleep(5);

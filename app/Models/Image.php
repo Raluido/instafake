@@ -18,12 +18,12 @@ class Image extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function likes()
     {
-        return $this->hasMany(Likes::class);
+        return $this->hasMany(Like::class);
     }
 
     public function user()

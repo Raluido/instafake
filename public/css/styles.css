@@ -130,29 +130,31 @@ main .home {
     margin-top: 5em;
 }
 
-main .stories .innerStories {
+main .home .innerHome .top .innerTop {
     overflow-x: auto;
     white-space: nowrap;
     max-width: 120em;
 }
 
-main .stories .innerStories .story {
+main .home .innerHome .top .innerTop .story {
     display: inline-block;
     width: 4em;
     height: auto;
     margin-right: 1em;
 }
 
-main .stories .innerStories .story h5 {
+main .home .innerHome .top .innerTop .story h5 {
     font-size: .6em;
     text-align: center;
 }
 
-main .stories .innerStories .story img {
+main .home .innerHome .top .innerTop .story img {
     border-radius: 50%;
     width: 100%;
     height: auto;
 }
+
+main .home .innerHome .bottom .innerBottom 
 
 footer {
     position: fixed;
