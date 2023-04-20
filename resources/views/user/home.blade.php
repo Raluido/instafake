@@ -37,6 +37,9 @@
 
         <div class="bottom">
             <div class="innerBottom">
+                @if(is_string($images))
+                <p class="">{{ $images }}</p>
+                @else
                 @foreach($images as $image)
                 <div class="post">
                     <div class="image">
@@ -44,21 +47,38 @@
                             <img src="{{ Storage::url('media/' . $id . '/library/images/' . $image->filename) }}" alt="" class="">
                         </div>
                         <div class="icons">
-                            <i class="fa-solid fa-heart"></i>
+                            <?php
+                            $i = 0;
+                            foreach ($likes as $like) {
+                                if ($image->id == $like->image_id) {
+                                    $i++;
+                                };
+                            }
+                            ?>
+                            <i class="fa-solid fa-heart">{{ $i }}</i>
                             <i class="fa-solid fa-comment"></i>
                             <i class="fa-solid fa-paper-plane"></i>
                         </div>
                         <div class="">
                             <p class="">
-                                {{ $image->user_id }} {{ $image->name}}
+                                {{ $image->nick }} {{ $image->name}}
                             </p>
                         </div>
+                        @foreach($comments as $comment)
+                        @if($image->id == $comment->image_id)
                         <div class="">
-                            <p class="comment">{{ $image->comments }}</p>
+                            <p class="comment">{{ $comment->content }}</p>
                         </div>
+                        @else
+                        <div class="">
+                            <p class="">No hay comentarios aun!</p>
+                        </div>
+                        @endif
+                        @endforeach
                     </div>
                 </div>
                 @endforeach
+                @endif
             </div>
         </div>
         <input type="hidden" class="" id="inputNick" value="{{ $nick }}">

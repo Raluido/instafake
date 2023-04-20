@@ -45,7 +45,7 @@ class RegisterController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            $path = public_path('storage') . '/storage/media/' . $id;
+            $path = public_path('storage') . '/media/' . $id;
 
             if (!File::isDirectory($path)) {
 

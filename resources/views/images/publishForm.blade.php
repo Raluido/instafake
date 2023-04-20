@@ -18,10 +18,10 @@
                     <label for="" class="">Lugar</label>
                     <input type="text" name="location" class="">
                 </div>
-                <div class="inputForm">
+                <!-- <div class="inputForm">
                     <label for="" class="">Etiqueta a quien tu quieras</label>
                     <input type="text" name="labels" class="">
-                </div>
+                </div> -->
                 <div class="submitForm">
                     <input type="submit" value="Publicar" class="">
                 </div>

@@ -47,21 +47,17 @@ class ImageController extends Controller
 
         $path = public_path('storage/tmp/' . $fileName);
         if (file_exists($path)) {
-            rename(public_path('storage/tmp/' . $fileName), public_path('storage/media/' . $id . '/library/images/' . $fileName));
             $image = new Image();
             $image->user_id = $id;
             $image->fileName = $request->input('fileName');
             $image->name = $request->input('name');
             $image->location = $request->input('location');
-            $image->labels = $request->input('labels');
+            // $image->labels = $request->input('labels');
             $image->save();
 
-            $images = User::find($id)->images;
+            rename(public_path('storage/tmp/' . $fileName), public_path('storage/media/' . $id . '/library/images/' . $fileName));
 
-            if (empty($images)) {
-                $images = "No hay imagenes aún!!";
-            }
-            return view('user.home', compact('images', 'id', 'nick'));
+            return redirect()->route('home', ['nick' => $nick]);
         } else {
             echo "Tiempo excedido!!";
             sleep(5);

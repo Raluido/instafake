@@ -37,7 +37,7 @@ class LoginController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            $path = public_path('storage/media/' . $id);
+            $path = public_path('storage') . '/media/' . $id;
 
             if (!File::exists($path)) {
                 File::makeDirectory($path, 0777, true, true);
