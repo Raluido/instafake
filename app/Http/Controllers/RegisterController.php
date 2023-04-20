@@ -38,19 +38,26 @@ class RegisterController extends Controller
             Auth::login($user);
 
             $id = auth()->id();
+
+            $path = public_path('storage') . '/media/' . $id;
+            if (!File::exists($path)) {
+                File::makeDirectory($path, 0777, true, true);
+                $path = public_path('storage') . '/media/' . $id . '/library';
+                if (!File::exists($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                    $path = public_path('storage') . '/media/' . $id . '/library/images';
+                    if (!File::exists($path)) {
+                        File::makeDirectory($path, 0777, true, true);
+                    }
+                }
+            }
+
             Session::push('user', [
                 'user_id' => $id
             ]);
 
             $nick = User::where('id', $id)
                 ->value('nick');
-
-            $path = public_path('storage') . '/media/' . $id;
-
-            if (!File::isDirectory($path)) {
-
-                File::makeDirectory($path, 0777, true, true);
-            }
 
             return redirect()->route('home', compact('nick', 'id'));
         }

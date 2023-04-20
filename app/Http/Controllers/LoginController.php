@@ -38,9 +38,16 @@ class LoginController extends Controller
                 ->value('nick');
 
             $path = public_path('storage') . '/media/' . $id;
-
             if (!File::exists($path)) {
                 File::makeDirectory($path, 0777, true, true);
+                $path = public_path('storage') . '/media/' . $id . '/library';
+                if (!File::exists($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                    $path = public_path('storage') . '/media/' . $id . '/library/images';
+                    if (!File::exists($path)) {
+                        File::makeDirectory($path, 0777, true, true);
+                    }
+                }
             }
 
             return redirect()->route('home', compact('nick', 'id'));

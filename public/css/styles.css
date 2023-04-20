@@ -30,6 +30,7 @@ a {
 }
 
 body {
+    font-size: 0.9rem;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -152,6 +153,34 @@ main .home .innerHome .top .innerTop .story img {
     border-radius: 50%;
     width: 100%;
     height: auto;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image {
+    margin-bottom: 2em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .pic {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .pic img {
+    max-width: 100%;
+    height: 100%;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .icons {
+    width: 20vw;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .bottom {
+    padding-left: 1em;
 }
 
 footer {

@@ -64,4 +64,10 @@ class ImageController extends Controller
             return redirect()->back();
         }
     }
+
+    public function getLike($nick, $imageId, $userId)
+    {
+        log::info($imageId);
+        log::info($userId);
+    }
 }
