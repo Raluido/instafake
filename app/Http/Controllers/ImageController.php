@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Exists;
 use App\Models\Image;
 use App\Models\User;
+use App\Models\Like;
+use Illuminate\Support\Facades\DB;
 
 class ImageController extends Controller
 {
@@ -65,9 +67,42 @@ class ImageController extends Controller
         }
     }
 
-    public function getLike($nick, $imageId, $userId)
+    public function liked(Request $request, $nick)
     {
-        log::info($imageId);
-        log::info($userId);
+        $liked = $request->all();
+        $check = Db::table('likes')
+            ->where('giver', $liked['userId'])
+            ->where('image_id', $liked['imageId'])
+            ->exists();
+
+        if ($check != 1) {
+            $like = new Like();
+            $like->image_id = $liked['imageId'];
+            $like->giver = $liked['userId'];
+            $like->save();
+            return true;
+        } else {
+            $check = Db::table('likes')
+                ->where('giver', $liked['userId'])
+                ->where('image_id', $liked['imageId'])
+                ->delete();
+            return false;
+        }
     }
+
+    // public function checkLikes(Request $request, $nick)
+    // {
+    //     log::info("este es");
+    //     $liked = $request->all();
+    //     $check = Db::table('likes')
+    //         ->where('giver', $liked['userId'])
+    //         ->where('image_id', $liked['imageId'])
+    //         ->exists();
+
+    //     if ($check != 1) {
+    //         return false;
+    //     } else {
+    //         return true;
+    //     }
+    // }
 }

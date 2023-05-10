@@ -48,15 +48,28 @@
                         </div>
                         <div class="bottom">
                             <div class="icons">
+                                @if (is_array($likes))
                                 <?php
                                 $i = 0;
-                                foreach ($likes as $like) {
-                                    if ($image->id == $like->image_id) {
-                                        $i++;
-                                    };
-                                }
+                                $j = 0;
+                                $id = auth()->id();
                                 ?>
-                                <a href="" class="" onclick="getLike()" id="like"><i class="fa-regular fa-heart"></i></a>
+                                @foreach ($likes as $like)
+                                @if ($image->id == $like->image_id)
+                                <?php $i++; ?>
+                                @if ($like->giver == $id)
+                                <?php $j++; ?>
+                                @endif
+                                @endif
+                                @endforeach
+                                @if($j == 1)
+                                <a href="" class="" onclick="getLike()" id="like"><i id="heart" class="fa-regular fa-heart like"></i></a>
+                                @else
+                                <a href="" class="" onclick="getLike()" id="like"><i id="heart" class="fa-regular fa-heart"></i></a>
+                                @endif
+                                @else
+                                <a href="" class="" onclick="getLike()" id="like"><i id="heart" class="fa-regular fa-heart"></i></a>
+                                @endif
                                 <input type="hidden" id="imageId" value="{{ $image->id }}" class="">
                                 <input type="hidden" id="userId" value="{{ $image->follower }}" class="">
                                 <i class="fa-solid fa-comment"></i>

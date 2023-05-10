@@ -89,10 +89,6 @@ header .navbarMaster .likesAndMsg .msg .countMsg .innerCountMsg {
     margin: 0 .3em;
 }
 
-
-
-
-
 .msgIcon {
     color: red;
 }
@@ -157,6 +153,10 @@ main .home .innerHome .top .innerTop .story img {
 
 main .home .innerHome .bottom .innerBottom .post .image {
     margin-bottom: 2em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
+    color: red;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .pic {

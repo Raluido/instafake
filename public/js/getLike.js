@@ -7,11 +7,19 @@ function getLike() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: '/' + nick + '/getLike/' + imageId + '/' + userId,
+        url: '/' + nick + '/liked',
     });
-    $ajax({
-        data: {},
+    $.ajax({
+        data: {
+            'imageId': imageId,
+            'userId': userId
+        },
         success: function (data) {
+            if (data == true) {
+                document.getElementById(imageId).style.color = "red";
+            } else {
+                document.getElementById(imageId).classList.remove("like");
+            }
         },
     });
 }

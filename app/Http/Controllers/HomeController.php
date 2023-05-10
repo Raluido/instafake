@@ -39,7 +39,7 @@ class HomeController extends Controller
             }
 
             $likes = Db::table('likes')
-                ->select('users.nick', 'likes.image_id')
+                ->select('users.nick', 'likes.image_id', 'likes.giver')
                 ->join('images', 'images.id', '=', 'likes.image_id')
                 ->join('users', 'users.id', '=', 'likes.giver')
                 ->get();
