@@ -16,7 +16,7 @@ class HomeController extends Controller
         $id = auth()->id();
 
         $images = Db::table('followers')
-            ->select('users.nick', 'images.id', 'images.name', 'images.location', 'images.filename', 'followers.following', 'followers.follower')
+            ->select('users.nick', 'users.id AS userId', 'images.id', 'images.name', 'images.location', 'images.filename', 'followers.following', 'followers.follower')
             ->join('users', 'users.id', '=', 'followers.following')
             ->join('images', 'images.user_id', '=', 'followers.following')
             ->where('followers.follower', '=', $id)

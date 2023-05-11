@@ -48,30 +48,29 @@
                         </div>
                         <div class="bottom">
                             <div class="icons">
-                                @if (is_array($likes))
-                                <?php
+                                @php
                                 $i = 0;
                                 $j = 0;
                                 $id = auth()->id();
-                                ?>
+                                @endphp
+                                @if (!is_string($likes))
                                 @foreach ($likes as $like)
                                 @if ($image->id == $like->image_id)
-                                <?php $i++; ?>
+                                @php $i++; @endphp
                                 @if ($like->giver == $id)
-                                <?php $j++; ?>
+                                @php $j++; @endphp
                                 @endif
                                 @endif
                                 @endforeach
+
                                 @if($j == 1)
-                                <a href="" class="" onclick="getLike()" id="like"><i id="heart" class="fa-regular fa-heart like"></i></a>
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
                                 @else
-                                <a href="" class="" onclick="getLike()" id="like"><i id="heart" class="fa-regular fa-heart"></i></a>
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
                                 @else
-                                <a href="" class="" onclick="getLike()" id="like"><i id="heart" class="fa-regular fa-heart"></i></a>
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
-                                <input type="hidden" id="imageId" value="{{ $image->id }}" class="">
-                                <input type="hidden" id="userId" value="{{ $image->follower }}" class="">
                                 <i class="fa-solid fa-comment"></i>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
