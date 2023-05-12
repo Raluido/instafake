@@ -26,6 +26,7 @@ class HomeController extends Controller
             $images = "No hay imagenes aún!!";
             $comments = "";
             $likes = "";
+            $likedAr = "";
             $labels = "";
         } else {
             $comments = Db::table('comments')
@@ -56,10 +57,16 @@ class HomeController extends Controller
                 $liked = "";
             }
 
-            $likedAr = array();
+            $likedAr = [];
 
             foreach ($liked as $index) {
-                $likedAr[] = $index->image_id;
+                if ($index->giver == $id) {
+                    $likedAr[] = $index->image_id;
+                }
+            }
+
+            if (empty($likedAr[0])) {
+                $likedAr = "";
             }
 
             $labels = Db::table('labels')

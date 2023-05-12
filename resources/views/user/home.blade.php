@@ -53,8 +53,8 @@
                                 $id = auth()->id();
                                 @endphp
 
-                                @if (!is_string($likes))
-                                @if (in_array($id, $likedAr))
+                                @if (!is_string($likedAr))
+                                @if (in_array($image->id, $likedAr))
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
