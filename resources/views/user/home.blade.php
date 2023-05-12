@@ -50,27 +50,22 @@
                             <div class="icons">
                                 @php
                                 $i = 0;
-                                $j = 0;
                                 $id = auth()->id();
                                 @endphp
-                                @if (!is_string($likes))
-                                @foreach ($likes as $like)
-                                @if ($image->id == $like->image_id)
-                                @php $i++; @endphp
-                                @if ($like->giver == $id)
-                                @php $j++; @endphp
-                                @endif
-                                @endif
-                                @endforeach
 
-                                @if($j == 1)
+                                @if (!is_string($likes))
+                                @if (in_array($id, $likedAr))
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
-                                @else
-                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
+                                @foreach ($likedAr as $index)
+                                @if ($image->id == $index)
+                                @php $i++; @endphp
                                 @endif
+                                @endforeach
+                                @endif
+
                                 <i class="fa-solid fa-comment"></i>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>

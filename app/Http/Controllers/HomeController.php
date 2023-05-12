@@ -38,14 +38,28 @@ class HomeController extends Controller
                 $comments = "";
             }
 
-            $likes = Db::table('likes')
-                ->select('users.nick', 'likes.image_id', 'likes.giver')
-                ->join('images', 'images.id', '=', 'likes.image_id')
-                ->join('users', 'users.id', '=', 'likes.giver')
-                ->get();
+            //images with likes (from everyone) from following's user logued
+
+            $likes = Db::select("SELECT DISTINCT likes.image_id FROM likes WHERE likes.image_id IN
+             (SELECT DISTINCT images.id FROM followers JOIN images ON images.user_id = followers.following 
+             WHERE followers.follower = $id);");
 
             if (empty($likes[0])) {
                 $likes = "";
+            }
+
+            $liked = Db::select("SELECT DISTINCT likes.image_id, likes.giver FROM likes WHERE likes.image_id IN
+            (SELECT DISTINCT images.id FROM followers JOIN images ON images.user_id = followers.following 
+            WHERE followers.follower = $id);");
+
+            if (empty($liked[0])) {
+                $liked = "";
+            }
+
+            $likedAr = array();
+
+            foreach ($liked as $index) {
+                $likedAr[] = $index->image_id;
             }
 
             $labels = Db::table('labels')
@@ -59,6 +73,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.home', compact('images', 'likes', 'comments', 'id', 'nick'));
+        return view('user.home', compact('images', 'likes', 'likedAr', 'comments', 'id', 'nick'));
     }
 }
