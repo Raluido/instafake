@@ -59,18 +59,20 @@
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
-                                @foreach ($likedAr as $index)
-                                @if ($image->id == $index)
+                                @foreach ($likes as $index)
+                                @if ($image->id == $index->image_id)
                                 @php $i++; @endphp
                                 @endif
                                 @endforeach
+                                @else
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
 
                                 <i class="fa-solid fa-comment"></i>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
                             <div class="likes">
-                                <p class="">{{ $i }} likes</p>
+                                <p class="innerLikes">{{ $i }} likes</p>
                             </div>
                             <div class="imageName">
                                 <p class="">

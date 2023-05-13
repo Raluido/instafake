@@ -71,41 +71,40 @@ class ImageController extends Controller
     {
         $id = auth()->id();
 
-        $check = Db::select("SELECT * FROM likes WHERE giver = $id WHERE likes.image_id = $dataId;");
-
-        log::info($check);
-
+        $check = Db::select("SELECT * FROM likes WHERE likes.giver = $id AND likes.image_id = $dataId;");
 
         if (empty($check[0])) {
-            log::info("aqui");
-            die;
             $like = new Like();
             $like->image_id = $dataId;
             $like->giver = $id;
             $like->save();
-            return true;
+
+            $likesAmount = Db::table('likes')
+                ->where('image_id', $dataId)
+                ->count();
+
+            $result = [
+                true,
+                $likesAmount,
+            ];
+
+            return $result;
         } else {
             $check = Db::table('likes')
                 ->where('giver', $id)
                 ->where('image_id', $dataId)
                 ->delete();
-            return false;
+
+            $likesAmount = Db::table('likes')
+                ->where('image_id', $dataId)
+                ->count();
+
+            $result = [
+                false,
+                $likesAmount,
+            ];
+
+            return $result;
         }
     }
-
-    // public function checkLikes(Request $request, $nick)
-    // {
-    //     log::info("este es");
-    //     $liked = $request->all();
-    //     $check = Db::table('likes')
-    //         ->where('giver', $liked['userId'])
-    //         ->where('image_id', $liked['imageId'])
-    //         ->exists();
-
-    //     if ($check != 1) {
-    //         return false;
-    //     } else {
-    //         return true;
-    //     }
-    // }
 }
