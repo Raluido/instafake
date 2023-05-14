@@ -49,7 +49,6 @@
                         <div class="bottom">
                             <div class="icons">
                                 @php
-                                $i = 0;
                                 $id = auth()->id();
                                 @endphp
 
@@ -59,20 +58,17 @@
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
-                                @foreach ($likes as $index)
-                                @if ($image->id == $index->image_id)
-                                @php $i++; @endphp
-                                @endif
-                                @endforeach
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
-
+                                @php
+                                $like = App\Models\Like::where('image_id', '=', $image->id)->count();
+                                @endphp
                                 <i class="fa-solid fa-comment"></i>
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
                             <div class="likes">
-                                <p class="innerLikes">{{ $i }} likes</p>
+                                <p class="innerLikes">{{ $like }} likes</p>
                             </div>
                             <div class="imageName">
                                 <p class="">
