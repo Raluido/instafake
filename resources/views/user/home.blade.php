@@ -5,33 +5,17 @@
     <div class="innerHome">
         <div class="top">
             <div class="innerTop">
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
+                @if(File::exists(Storage::url('media/' . $id . '/avatar.png')))
+                <div class="story"><img src="{{ Storage::url('media/' . $id . '/avatar.png') }}" alt="" class="">
+                    <h5 class=""></h5>
                 </div>
+                @else
                 <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
+                    <h5 class=""></h5>
                 </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class="">Juana</h5>
-                </div>
+                @endif
+                @foreach
+                @endforeach
             </div>
         </div>
 
@@ -52,15 +36,18 @@
                                 $id = auth()->id();
                                 @endphp
 
-                                @if (!is_string($likedAr))
-                                @if (in_array($image->id, $likedAr))
+                                @if (!is_string($likes))
+
+                                @if(in_array($image->id, $likesArr))
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
+
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
+
                                 @php
                                 $like = App\Models\Like::where('image_id', '=', $image->id)->count();
                                 @endphp

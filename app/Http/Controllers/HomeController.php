@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
@@ -14,6 +15,10 @@ class HomeController extends Controller
     public function index($nick)
     {
         $id = auth()->id();
+        $images = "";
+        $comments = "";
+        $likes = "";
+        $labels = "";
 
         $images = Db::table('followers')
             ->select('users.nick', 'users.id AS userId', 'images.id', 'images.name', 'images.location', 'images.filename', 'followers.following', 'followers.follower')
@@ -26,7 +31,6 @@ class HomeController extends Controller
             $images = "No hay imagenes aún!!";
             $comments = "";
             $likes = "";
-            $likedAr = "";
             $labels = "";
         } else {
             $comments = Db::table('comments')
@@ -35,28 +39,16 @@ class HomeController extends Controller
                 ->join('users', 'users.id', '=', 'comments.commentator')
                 ->get();
 
-            if (empty($comments[0])) {
-                $comments = "";
-            }
+            $likes = Like::select('image_id')
+                ->where('giver', $id)
+                ->get();
 
-            $liked = Db::select("SELECT DISTINCT likes.image_id, likes.giver FROM likes WHERE likes.image_id IN
-            (SELECT DISTINCT images.id FROM followers JOIN images ON images.user_id = followers.following 
-            WHERE followers.follower = $id);");
+            $likesArr = array();
 
-            if (empty($liked[0])) {
-                $liked = "";
-            }
-
-            $likedAr = [];
-
-            foreach ($liked as $index) {
-                if ($index->giver == $id) {
-                    $likedAr[] = $index->image_id;
+            if (!is_string($likes)) {
+                foreach ($likes as $index) {
+                    $likesArr[] = $index->image_id;
                 }
-            }
-
-            if (empty($likedAr[0])) {
-                $likedAr = "";
             }
 
             $labels = Db::table('labels')
@@ -64,12 +56,8 @@ class HomeController extends Controller
                 ->join('images', 'images.id', '=', 'labels.image_id')
                 ->join('users', 'users.id', '=', 'labels.labeled')
                 ->get();
-
-            if (empty($labels[0])) {
-                $labels = "";
-            }
         }
 
-        return view('user.home', compact('images', 'likedAr', 'comments', 'id', 'nick'));
+        return view('user.home', compact('images', 'likesArr', 'likes', 'comments', 'id', 'nick'));
     }
 }
