@@ -58,6 +58,13 @@ class HomeController extends Controller
                 ->get();
         }
 
-        return view('user.home', compact('images', 'likesArr', 'likes', 'comments', 'id', 'nick'));
+        $stories = Db::table('followers')
+            ->select('stories.user_id', 'stories.id')
+            ->join('stories', 'stories.user_id', '=', 'followers.following')
+            ->join('users', 'users.id', '=', 'followers.following')
+            ->where('followers.follower', '=', $id)
+            ->get();
+
+        return view('user.home', compact('images', 'likesArr', 'likes', 'comments', 'stories', 'id', 'nick'));
     }
 }

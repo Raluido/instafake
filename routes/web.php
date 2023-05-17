@@ -7,6 +7,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\StoryController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Log;
 
@@ -36,6 +37,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
             Route::get('/liked/{dataId}', [ImageController::class, 'liked'])->name('image.getLike');
+            Route::get('/story/{dataId}/{userId}', [StoryController::class, 'getAll'])->name('story.getAll');
+            Route::get('/story/upload', [StoryController::class, 'uploadForm'])->name('story.uploadForm');
+            Route::post('/story/store', [StoryController::class, 'store'])->name('story.store');
+            Route::get('/story/publish/{fileName}', [StoryController::class, 'publishForm'])->name('story.publishForm');
+            Route::post('/story/published', [StoryController::class, 'published'])->name('story.published');
             Route::get('/image/upload', [ImageController::class, 'uploadForm'])->name('image.uploadForm');
             Route::post('/image/store', [ImageController::class, 'store'])->name('image.store');
             Route::get('/image/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');

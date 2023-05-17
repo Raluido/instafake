@@ -134,20 +134,27 @@ main .home .innerHome .top .innerTop {
     max-width: 120em;
 }
 
+main .home .innerHome .top .innerTop .addStory,
 main .home .innerHome .top .innerTop .story {
     display: inline-block;
     width: 4em;
-    height: auto;
+    height: 4em;
+    border-radius: 50%;
+    overflow: hidden;
     margin-right: 1em;
 }
 
-main .home .innerHome .top .innerTop .story h5 {
+main .home .innerHome .top .innerTop .story {
+    border: 2px solid aquamarine
+}
+
+main .home .innerHome .top .innerTop .addStory h5 {
     font-size: .6em;
     text-align: center;
 }
 
+main .home .innerHome .top .innerTop .addStory img,
 main .home .innerHome .top .innerTop .story img {
-    border-radius: 50%;
     width: 100%;
     height: auto;
 }

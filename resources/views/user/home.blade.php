@@ -5,20 +5,31 @@
     <div class="innerHome">
         <div class="top">
             <div class="innerTop">
-                @if(File::exists(Storage::url('media/' . $id . '/avatar.png')))
-                <div class="story"><img src="{{ Storage::url('media/' . $id . '/avatar.png') }}" alt="" class="">
+                @if(file_exists('storage/media/' . $id . '/avatar.jpg'))
+                <a href="{{ route('story.uploadForm', $nick) }}" class="addStory">
+                    <img src="{{ Storage::url('media/' . $id . '/avatar.jpg') }}" alt="" class="">
                     <h5 class=""></h5>
-                </div>
+                </a>
                 @else
-                <div class="story"><img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+                <a href="{{ route('story.uploadForm', $nick) }}" class="addStory">
+                    <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
                     <h5 class=""></h5>
-                </div>
+                </a>
                 @endif
-                @foreach
+                @if(is_string($stories))
+                @else
+                @foreach($stories as $story)
+                <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                    <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
+                </a>
                 @endforeach
+                @endif
             </div>
         </div>
-
+        <video class="d-none" width="100%" height="auto" id="storyPlay">
+            <source src="" id="mp4Source" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <div class="bottom">
             <div class="innerBottom">
                 @if(is_string($images))
@@ -89,6 +100,7 @@
 </section>
 @endsection
 @section('js')
+<script type="text/javascript" src="{{ asset('js/playStories.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/planeMessages.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
 @endsection
