@@ -7,26 +7,45 @@
             <div class="innerTop">
                 @if(file_exists('storage/media/' . $id . '/avatar.jpg'))
                 <a href="{{ route('story.uploadForm', $nick) }}" class="addStory">
-                    <img src="{{ Storage::url('media/' . $id . '/avatar.jpg') }}" alt="" class="">
-                    <h5 class=""></h5>
+                    <div class="addStoryImg">
+                        <img src="{{ Storage::url('media/' . $id . '/avatar.jpg') }}" alt="" class="">
+                    </div>
+                    <h5 class="">Tu historia</h5>
+                    <div class="addStoryPlus">
+                        <p class="">+</p>
+                    </div>
                 </a>
                 @else
                 <a href="{{ route('story.uploadForm', $nick) }}" class="addStory">
-                    <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    <h5 class=""></h5>
+                    <div class="addStoryImg">
+                        <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+                    </div>
+                    <h5 class="">Tu historia</h5>
                 </a>
                 @endif
                 @if(is_string($stories))
                 @else
                 @foreach($stories as $story)
+                @if(file_exists('storage/' . $story->user_id . '/avatar.jpg'))
                 <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
-                    <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
+                    <div class="storyImg">
+                        <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
+                    </div>
+                    <h5 class="">{{ $story->nick }}</h5>
                 </a>
+                @else
+                <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                    <div class="storyImg">
+                        <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+                    </div>
+                    <h5 class="">{{ $story->nick }}</h5>
+                </a>
+                @endif
                 @endforeach
                 @endif
             </div>
         </div>
-        <video class="d-none" width="100%" height="auto" id="storyPlay">
+        <video class="d-none storyPlayer" width="100%" height="auto" id="storyPlay" controls>
             <source src="" id="mp4Source" type="video/mp4">
             Your browser does not support the video tag.
         </video>

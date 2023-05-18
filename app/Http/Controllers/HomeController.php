@@ -18,7 +18,9 @@ class HomeController extends Controller
         $images = "";
         $comments = "";
         $likes = "";
+        $likesArr = "";
         $labels = "";
+        $stories = "";
 
         $images = Db::table('followers')
             ->select('users.nick', 'users.id AS userId', 'images.id', 'images.name', 'images.location', 'images.filename', 'followers.following', 'followers.follower')
@@ -43,9 +45,8 @@ class HomeController extends Controller
                 ->where('giver', $id)
                 ->get();
 
-            $likesArr = array();
-
             if (!is_string($likes)) {
+                $likesArr = array();
                 foreach ($likes as $index) {
                     $likesArr[] = $index->image_id;
                 }
@@ -59,10 +60,11 @@ class HomeController extends Controller
         }
 
         $stories = Db::table('followers')
-            ->select('stories.user_id', 'stories.id')
+            ->select('stories.user_id', 'stories.id', 'users.nick')
             ->join('stories', 'stories.user_id', '=', 'followers.following')
             ->join('users', 'users.id', '=', 'followers.following')
             ->where('followers.follower', '=', $id)
+            ->orderBy('stories.id', 'DESC')
             ->get();
 
         return view('user.home', compact('images', 'likesArr', 'likes', 'comments', 'stories', 'id', 'nick'));

@@ -132,25 +132,56 @@ main .home .innerHome .top .innerTop {
     overflow-x: auto;
     white-space: nowrap;
     max-width: 120em;
+    padding: 0 .5em;
 }
 
 main .home .innerHome .top .innerTop .addStory,
 main .home .innerHome .top .innerTop .story {
     display: inline-block;
-    width: 4em;
-    height: 4em;
-    border-radius: 50%;
-    overflow: hidden;
     margin-right: 1em;
 }
 
 main .home .innerHome .top .innerTop .story {
+    cursor: pointer;
+}
+
+main .home .innerHome .top .innerTop .addStory {
+    position: relative
+}
+
+main .home .innerHome .top .innerTop .addStoryPlus {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    left: 80%;
+    top: 50%;
+    border-radius: 50%;
+    background-color: #0099ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .home .innerHome .top .innerTop .addStoryPlus p {
+    margin: 0;
+}
+
+main .home .innerHome .top .innerTop .addStory .addStoryImg,
+main .home .innerHome .top .innerTop .story .storyImg {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+main .home .innerHome .top .innerTop .storyImg {
     border: 2px solid aquamarine
 }
 
-main .home .innerHome .top .innerTop .addStory h5 {
+main .home .innerHome .top .innerTop h5 {
     font-size: .6em;
     text-align: center;
+    margin: 0.5em 0;
 }
 
 main .home .innerHome .top .innerTop .addStory img,

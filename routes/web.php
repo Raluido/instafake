@@ -37,7 +37,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
             Route::get('/liked/{dataId}', [ImageController::class, 'liked'])->name('image.getLike');
-            Route::get('/story/{dataId}/{userId}', [StoryController::class, 'getAll'])->name('story.getAll');
+            Route::get('/story/getAll', [StoryController::class, 'getAll'])->name('story.getAll');
+            Route::get('/story/{dataId}/{userId}', [StoryController::class, 'playAll'])->name('story.playAll');
             Route::get('/story/upload', [StoryController::class, 'uploadForm'])->name('story.uploadForm');
             Route::post('/story/store', [StoryController::class, 'store'])->name('story.store');
             Route::get('/story/publish/{fileName}', [StoryController::class, 'publishForm'])->name('story.publishForm');
