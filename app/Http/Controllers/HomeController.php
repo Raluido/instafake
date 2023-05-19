@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\User;
+use App\Models\LikeComment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -21,6 +21,7 @@ class HomeController extends Controller
         $likesArr = "";
         $labels = "";
         $stories = "";
+        $likesComments = "";
 
         $images = Db::table('followers')
             ->select('users.nick', 'users.id AS userId', 'images.id', 'images.name', 'images.location', 'images.filename', 'followers.following', 'followers.follower')
@@ -36,7 +37,7 @@ class HomeController extends Controller
             $labels = "";
         } else {
             $comments = Db::table('comments')
-                ->select('users.nick', 'comments.image_id', 'comments.content')
+                ->select('users.nick', 'comments.id', 'comments.image_id', 'comments.content')
                 ->join('images', 'images.id', '=', 'comments.image_id')
                 ->join('users', 'users.id', '=', 'comments.commentator')
                 ->get();
@@ -67,6 +68,18 @@ class HomeController extends Controller
             ->orderBy('stories.id', 'DESC')
             ->get();
 
-        return view('user.home', compact('images', 'likesArr', 'likes', 'comments', 'stories', 'id', 'nick'));
+
+        $likesComments = LikeComment::where('giver', '=', $id)
+            ->get();
+
+        if (!is_string($likesComments)) {
+            $likesCommentsArr = array();
+            foreach ($likesComments as $index) {
+                $likesCommentsArr[] = $index;
+            }
+        }
+
+
+        return view('user.home', compact('images', 'likesArr', 'comments', 'likesCommentsArr', 'stories', 'id', 'nick'));
     }
 }

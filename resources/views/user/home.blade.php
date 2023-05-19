@@ -66,7 +66,7 @@
                                 $id = auth()->id();
                                 @endphp
 
-                                @if (!is_string($likes))
+                                @if (!is_string($likesArr))
 
                                 @if(in_array($image->id, $likesArr))
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
@@ -85,7 +85,7 @@
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
                             <div class="likes">
-                                <p class="innerLikes">{{ $like }} likes</p>
+                                <p class="countLikes">{{ $like }} likes</p>
                             </div>
                             <div class="imageName">
                                 <p class="">
@@ -93,15 +93,31 @@
                                 </p>
                             </div>
                             <div class="comments">
-                                @if(is_string($comments[0]))
+                                @if(is_string($comments))
                                 <div class="">
                                     <p class="">No hay comentarios aun!</p>
                                 </div>
                                 @else
                                 @foreach($comments as $comment)
                                 @if($image->id == $comment->image_id)
-                                <div class="">
+                                <div class="likesComments">
                                     <p class="">{{ $comment->content }}</p>
+                                    @php
+                                    $likeComment = App\Models\LikeComment::where('id', $comment->id)->count();
+                                    @endphp
+                                    @if(!is_string($likesCommentsArr))
+                                    @if(in_array($comment->id, $likesCommentsArr))
+                                    <div class="innerLikesComments">
+                                        <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment likeComment"></i></a>
+                                        <p class="countLikesComments">{{ $likeComment }}</p>
+                                    </div>
+                                    @else
+                                    <div class="innerLikesComments">
+                                        <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
+                                        <p class="countLikeComment">{{ $likeComment }}</p>
+                                    </div>
+                                    @endif
+                                    @endif
                                 </div>
                                 @endif
                                 @endforeach

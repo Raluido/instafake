@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Log;
 
@@ -37,6 +38,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
             Route::get('/liked/{dataId}', [ImageController::class, 'liked'])->name('image.getLike');
+            Route::get('/likedComment/{dataId}', [CommentController::class, 'liked'])->name('comment.getLike');
             Route::get('/story/getAll', [StoryController::class, 'getAll'])->name('story.getAll');
             Route::get('/story/{dataId}/{userId}', [StoryController::class, 'playAll'])->name('story.playAll');
             Route::get('/story/upload', [StoryController::class, 'uploadForm'])->name('story.uploadForm');
