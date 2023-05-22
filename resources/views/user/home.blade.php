@@ -103,18 +103,19 @@
                                 <div class="likesComments">
                                     <p class="">{{ $comment->content }}</p>
                                     @php
-                                    $likeComment = App\Models\LikeComment::where('id', $comment->id)->count();
+                                    $likeComment = "";
+                                    $likeComment = App\Models\LikeComment::where('comment_id', '=', $comment->id)->count();
                                     @endphp
                                     @if(!is_string($likesCommentsArr))
                                     @if(in_array($comment->id, $likesCommentsArr))
                                     <div class="innerLikesComments">
                                         <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment likeComment"></i></a>
-                                        <p class="countLikesComments">{{ $likeComment }}</p>
+                                        <p class="countLikesComments">{{ $likeComment }} likes</p>
                                     </div>
                                     @else
                                     <div class="innerLikesComments">
                                         <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
-                                        <p class="countLikeComment">{{ $likeComment }}</p>
+                                        <p class="countLikesComments">{{ $likeComment }} likes</p>
                                     </div>
                                     @endif
                                     @endif

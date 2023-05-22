@@ -225,6 +225,10 @@ main .home .innerHome .bottom .innerBottom .comments .likesComments {
     justify-content: space-between;
 }
 
+main .home .innerHome .bottom .innerBottom .comments .likesComments .innerLikesComments .likeComment {
+    color: red;
+}
+
 main .home .innerHome .bottom .innerBottom .comments .likesComments .countLikeComment {
     margin: .1em 0;
     text-align: center;

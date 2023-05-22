@@ -51,19 +51,34 @@ class User extends Authenticatable
         return $this->hasMany(Image::class);
     }
 
-    public function messages()
+    public function senders()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Message::class, 'sender');
+    }
+
+    public function receivers()
+    {
+        return $this->hasMany(Message::class, 'receiver');
     }
 
     public function followers()
     {
-        return $this->hasMany(Follower::class);
+        return $this->hasMany(Follower::class, 'follower');
+    }
+
+    public function followings()
+    {
+        return $this->hasMany(Follower::class, 'following');
     }
 
     public function stories()
     {
         return $this->hasMany(Story::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'commentator');
     }
 
     /**

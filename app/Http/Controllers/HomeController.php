@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\LikeComment;
@@ -69,16 +71,16 @@ class HomeController extends Controller
             ->get();
 
 
-        $likesComments = LikeComment::where('giver', '=', $id)
+        $likesComments = LikeComment::select('comment_id')
+            ->where('giver', '=', $id)
             ->get();
 
         if (!is_string($likesComments)) {
             $likesCommentsArr = array();
             foreach ($likesComments as $index) {
-                $likesCommentsArr[] = $index;
+                $likesCommentsArr[] = $index['comment_id'];
             }
         }
-
 
         return view('user.home', compact('images', 'likesArr', 'comments', 'likesCommentsArr', 'stories', 'id', 'nick'));
     }

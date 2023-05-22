@@ -9,8 +9,13 @@ class Follower extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function follower()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'follower');
+    }
+
+    public function following()
+    {
+        return $this->belongsTo(User::class, 'following');
     }
 }
