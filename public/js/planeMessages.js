@@ -15,7 +15,7 @@ $.ajax({
 var intervalId = setInterval(function () {
     $.ajax({
         type: 'GET',
-        url: "/" + nick + "/check",
+        url: "/" + nick + "/messages/check",
         data: {},
         datatype: "json",
         success: function (data) {

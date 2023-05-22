@@ -82,6 +82,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('user.home', compact('images', 'likesArr', 'comments', 'likesCommentsArr', 'stories', 'id', 'nick'));
+        return view('home.index', compact('images', 'likesArr', 'comments', 'likesCommentsArr', 'stories', 'id', 'nick'));
     }
 }

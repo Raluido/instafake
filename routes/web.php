@@ -32,28 +32,38 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
     });
 
-
     Route::middleware(['auth'])->group(function () {
         Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
         Route::get('/{nick?}', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => '{nick}'], function () {
+
             Route::get('/liked/{dataId}', [ImageController::class, 'liked'])->name('image.getLike');
             Route::get('/likedComment/{dataId}', [CommentController::class, 'liked'])->name('comment.getLike');
-            Route::get('/story/getAll', [StoryController::class, 'getAll'])->name('story.getAll');
-            Route::get('/story/{dataId}/{userId}', [StoryController::class, 'playAll'])->name('story.playAll');
-            Route::get('/story/upload', [StoryController::class, 'uploadForm'])->name('story.uploadForm');
-            Route::post('/story/store', [StoryController::class, 'store'])->name('story.store');
-            Route::get('/story/publish/{fileName}', [StoryController::class, 'publishForm'])->name('story.publishForm');
-            Route::post('/story/published', [StoryController::class, 'published'])->name('story.published');
-            Route::get('/image/upload', [ImageController::class, 'uploadForm'])->name('image.uploadForm');
-            Route::post('/image/store', [ImageController::class, 'store'])->name('image.store');
-            Route::get('/image/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');
-            Route::post('/image/published', [ImageController::class, 'published'])->name('images.published');
-            Route::get('/messages', [MessageController::class, 'showAll'])->name('messages.showAll');
-            Route::get('/messages/{search}', [MessageController::class, 'search'])->name('messages.search');
-            Route::get('/check', [MessageController::class, 'check'])->name('messages.check');
-            Route::get('/message/{receiver}', [MessageController::class, 'show'])->name('messages.show');
-            Route::post('/message/send', [MessageController::class, 'send'])->name('messages.send');
+
+            Route::get('/myProfile', [UserController::class, 'showProfile'])->name('user.myProfile');
+            Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profiles');
+
+            Route::group(['prefix' => 'story'], function () {
+                Route::get('/getAll', [StoryController::class, 'getAll'])->name('story.getAll');
+                Route::get('/{dataId}/{userId}', [StoryController::class, 'playAll'])->name('story.playAll');
+                Route::get('/upload', [StoryController::class, 'uploadForm'])->name('story.uploadForm');
+                Route::post('/store', [StoryController::class, 'store'])->name('story.store');
+                Route::get('/publish/{fileName}', [StoryController::class, 'publishForm'])->name('story.publishForm');
+                Route::post('/published', [StoryController::class, 'published'])->name('story.published');
+            });
+            Route::group(['prefix' => 'image'], function () {
+                Route::get('/upload', [ImageController::class, 'uploadForm'])->name('image.uploadForm');
+                Route::post('/store', [ImageController::class, 'store'])->name('image.store');
+                Route::get('/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');
+                Route::post('/published', [ImageController::class, 'published'])->name('images.published');
+            });
+            Route::group(['prefix' => 'messages'], function () {
+                Route::get('', [MessageController::class, 'showAll'])->name('messages.showAll');
+                Route::get('/{search}', [MessageController::class, 'search'])->name('messages.search');
+                Route::get('/check', [MessageController::class, 'check'])->name('messages.check');
+                Route::get('/{receiver}', [MessageController::class, 'show'])->name('messages.show');
+                Route::post('/send', [MessageController::class, 'send'])->name('messages.send');
+            });
         });
     });
 });
