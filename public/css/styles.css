@@ -668,6 +668,25 @@ main .publishForm .innerPublish .bottom .inputForm {
 
 /* end */
 
+/* myProfile */
+
+.myProfile nav {
+    margin: .5em 0;
+}
+
+.myProfile nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+/* end */
+
+
+
 @media screen and (max-width: 760px) {
     .uploadForm {
         padding: 25px;

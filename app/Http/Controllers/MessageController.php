@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Message;
+use App\Models\User;
 use Mockery\Undefined;
 
 class MessageController extends Controller
@@ -22,8 +23,10 @@ class MessageController extends Controller
     public function show($nick, $receiver)
     {
         $id = auth()->id();
-
         $total = $id + $receiver;
+
+        $receiverNick = User::where('id', $receiver)
+            ->value('nick');
 
         $messages = Db::select("SELECT * FROM (SELECT *, sender + receiver AS total FROM messages) t WHERE t.total = $total");
 
@@ -34,7 +37,7 @@ class MessageController extends Controller
                 ->update(['read' => 1]);
         }
 
-        return view('messages.show', compact('nick', 'id', 'messages', 'receiver'));
+        return view('messages.show', compact('nick', 'id', 'messages', 'receiver', 'receiverNick'));
     }
 
     public function check()

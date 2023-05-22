@@ -1,4 +1,4 @@
-const { forEach } = require("lodash");
+// const { forEach } = require("lodash");
 
 function searchUsers() {
     var nick = document.getElementById("nickId").value;
@@ -22,7 +22,7 @@ function searchUsers() {
                     if (data[0].nick !== "") {
                         data.forEach(element => {
                             document.getElementById("resultsId").innerHTML +=
-                                "<a href='/" + nick + "/message/" + element.id + "' style='display:block; margin-bottom:.5em; color: black;'>" + element.nick + "</a>"
+                                "<a href='/" + nick + "/messages/show/" + element.id + "' style='display:block; margin-bottom:.5em; color: black;'>" + element.nick + "</a>"
                         });
                         document.getElementById("resultsId").classList.remove("d-none");
                         document.getElementById("resultsId").classList.add("d-block");

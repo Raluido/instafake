@@ -13,12 +13,12 @@
 </head>
 
 <body>
-    <header class="showAllMessagesNav">
+    <header class="myProfile">
         <nav class="">
             <ul class="">
-                <li class=""><a href="/{{ $nick }}/messages" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
-                <li class="">{{ $receiverNick }}</li>
-                <li class=""><a href="{{ route('home') }}" class=""><i class="fa-regular fa-pen-to-square"></i></a></li>
+                <li class=""><a href="{{ route('home') }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
+                <li class="">{{ $nick }}</li>
+                <li class=""><a href="" class=""><i class="fa-regular fa-gear"></i></a></li>
             </ul>
         </nav>
     </header>
@@ -27,6 +27,5 @@
     </main>
 </body>
 <script class="" type="text/javascript" src="{{ asset('js/jquery-3.6.4.js') }}"></script>
-@yield('js')
 
 </html>

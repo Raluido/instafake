@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Log;
 
@@ -59,9 +60,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             });
             Route::group(['prefix' => 'messages'], function () {
                 Route::get('', [MessageController::class, 'showAll'])->name('messages.showAll');
-                Route::get('/{search}', [MessageController::class, 'search'])->name('messages.search');
                 Route::get('/check', [MessageController::class, 'check'])->name('messages.check');
-                Route::get('/{receiver}', [MessageController::class, 'show'])->name('messages.show');
+                Route::get('/{search}', [MessageController::class, 'search'])->name('messages.search');
+                Route::get('/show/{receiver}', [MessageController::class, 'show'])->name('messages.show');
                 Route::post('/send', [MessageController::class, 'send'])->name('messages.send');
             });
         });

@@ -1,7 +1,7 @@
 var nick = document.getElementById("inputNick").value;
 $.ajax({
     type: 'GET',
-    url: "/" + nick + "/check",
+    url: "/" + nick + "/messages/check",
     data: {},
     datatype: "json",
     success: function (data) {

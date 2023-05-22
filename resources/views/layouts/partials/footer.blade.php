@@ -16,13 +16,13 @@
     <div class="profileImg">
         @if(File::exists(Storage::url('media/' . $id . '/avatar.png')))
         <div class="">
-            <a href="{{ route('logout.perform') }}" class="">
+            <a href="{{ route('user.myProfile', $nick) }}" class="">
                 <img src="{{ Storage::url('media/' . $id . '/avatar.png') }}" alt="" class="">
             </a>
         </div>
         @else
         <div class="">
-            <a href="{{ route('logout.perform') }}" class="">
+            <a href="{{ route('user.myProfile', $nick) }}" class="">
                 <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
             </a>
         </div>
