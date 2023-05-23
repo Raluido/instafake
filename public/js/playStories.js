@@ -40,6 +40,6 @@ window.addEventListener("load", function () {
     })
 })
 
-window.setInterval(function () {
-    $(".innerTop").load(window.location.href + " .innerTop");
-}, 5000);
+// window.setInterval(function () {
+//     $(".innerTop").load(window.location.href + " .innerTop");
+// }, 5000);

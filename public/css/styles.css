@@ -679,6 +679,67 @@ main .publishForm .innerPublish .bottom .inputForm {
     justify-content: space-between;
 }
 
+main {
+    margin-top: 3em;
+}
+
+.myProfile .innerMyProfile .top {
+    padding: 0 1em;
+}
+
+.myProfile .innerMyProfile .top .innerTop {
+    display: flex;
+    justify-content: space-around;
+}
+
+.myProfile .innerMyProfile .top .innerTop .publishedAndFollows {
+    display: flex;
+}
+
+.myProfile .innerMyProfile .top .innerTop .publishedAndFollows a:nth-child(-n+2) {
+    margin-right: .5em;
+}
+
+.myProfile .innerMyProfile .top .innerTop .publishedAndFollows a {
+    text-align: center;
+}
+
+.myProfile .innerMyProfile .top .innerTop .avatar {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.myProfile .innerMyProfile .top .innerTop .avatar img {
+    width: 100%;
+    height: auto;
+    border: 1px solid chartreuse;
+    position: absolute;
+}
+
+.myProfile .innerMyProfile .bottom .innerBottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1px;
+    row-gap: 1px;
+}
+
+.myProfile .innerMyProfile .bottom .innerBottom .published {
+    width: auto;
+    max-height: 15em;
+    display: flex;
+    align-items: center;
+    background-color: #ccc;
+}
+
+.myProfile .innerMyProfile .bottom .innerBottom .published img {
+    width: 100%;
+    height: auto;
+}
+
+
 
 
 

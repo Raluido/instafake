@@ -11,28 +11,8 @@ class UserController extends Controller
 {
     public function showProfile($nick)
     {
-        $user = User::find(auth()->id())
-            ->get();
+        $user = User::find(auth()->id());
 
-        $images = User::find(auth()->id())
-            ->images()
-            ->get();
-
-        if (!isset($images[0])) {
-            $images = "Vacío!";
-        }
-
-        $published = User::find(auth()->id())
-            ->images()
-            ->count();
-
-        $followings = Follower::where('follower', auth()->id())
-            ->count();
-
-        $followers = Follower::where('following', auth()->id())
-            ->count();
-
-
-        return view('user.myProfile', compact('user', 'images', 'followers', 'followings', 'published', 'nick'));
+        return view('user.myProfile', compact('user', 'nick'));
     }
 }
