@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Follower;
 use App\Models\Like;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\LikeComment;
@@ -24,6 +25,14 @@ class HomeController extends Controller
         $labels = "";
         $stories = "";
         $likesComments = "";
+
+        $test = Follower::where('follower', $id)->get();
+        foreach ($test as $index) {
+            foreach ($index->userFollowing->images as $index1) {
+                log::info($index->following . $index->userFollowing->nick . $index1);
+            }
+        }
+        die();
 
         $images = Db::table('followers')
             ->select('users.nick', 'users.id AS userId', 'images.id', 'images.name', 'images.location', 'images.filename', 'followers.following', 'followers.follower')
