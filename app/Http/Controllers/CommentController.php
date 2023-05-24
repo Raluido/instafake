@@ -49,4 +49,9 @@ class CommentController extends Controller
             return $result;
         }
     }
+
+    public function showAll()
+    {
+        return view('comments.showAll');
+    }
 }

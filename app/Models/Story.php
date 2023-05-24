@@ -9,8 +9,10 @@ class Story extends Model
 {
     use HasFactory;
 
+    protected $table = 'stories';
+
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

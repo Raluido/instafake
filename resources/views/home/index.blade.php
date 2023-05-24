@@ -6,7 +6,7 @@
         <div class="top">
             <div class="innerTop">
                 @if(file_exists('storage/media/' . $id . '/avatar.jpg'))
-                <a href="{{ route('story.uploadForm', $nick) }}" class="addStory">
+                <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
                     <div class="addStoryImg">
                         <img src="{{ Storage::url('media/' . $id . '/avatar.jpg') }}" alt="" class="">
                     </div>
@@ -16,31 +16,31 @@
                     </div>
                 </a>
                 @else
-                <a href="{{ route('story.uploadForm', $nick) }}" class="addStory">
+                <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
                     <div class="addStoryImg">
                         <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
                     </div>
                     <h5 class="">Tu historia</h5>
                 </a>
                 @endif
-                @foreach($followings as $index)
-                @foreach($index->userFollowing->stories as $index1)
-                @if(file_exists('storage/' . $index1->user_id . '/avatar.jpg'))
-                <a class="story btn-play" data-story="{{ $index1->id }}" data-user="{{ $index1->user_id }}">
-                    <div class="storyImg">
-                        <img src="{{ Storage::url('media/' . $index1->user_id . '/avatar.jpg') }}" alt="" class="">
-                    </div>
-                    <h5 class="">{{ $story->nick }}</h5>
-                </a>
-                @else
-                <a class="story btn-play" data-story="{{ $index1->id }}" data-user="{{ $index1->user_id }}">
-                    <div class="storyImg">
-                        <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                    </div>
-                    <h5 class="">{{ $story->nick }}</h5>
-                </a>
-                @endif
-                @endforeach
+                @foreach($followings as $following)
+                    @foreach($following->userFollowing->stories as $story)
+                        @if(file_exists('storage/' . $story->user_id . '/avatar.jpg'))
+                        <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                            <div class="storyImg">
+                                <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
+                            </div>
+                            <h5 class="">{{ $story->user->nick }}</h5>
+                        </a>
+                        @else
+                        <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                            <div class="storyImg">
+                                <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+                            </div>
+                            <h5 class="">{{ $story->user->nick }}</h5>
+                        </a>
+                        @endif
+                    @endforeach
                 @endforeach
             </div>
         </div>
@@ -50,79 +50,89 @@
         </video>
         <div class="bottom">
             <div class="innerBottom">
-                @foreach($followings as $index)
-                @foreach($index->userFollowing->images as $index1)
-                <div class="post">
-                    <div class="image">
-                        <div class="pic">
-                            <img src="{{ Storage::url('media/' . $index->following . '/library/images/' . $index1->filename) }}" alt="" class="">
-                        </div>
-                        <div class="bottom">
-                            <div class="icons">
-                                @if(count($index1->likes) > 0)
-                                @foreach($index1->likes as $index2)
-                                @php $i = 0; @endphp
-                                @if($index1->id != $index2->image_id)
-                                @php $i++; @endphp
-                                @endif
-                                @endforeach
-                                @if((count($index1->likes) - 1) == $i)
-                                <a href="" class=""><i data-id="{{ $index1->id }}" class="fa-regular fa-heart btn-like"></i></a>
-                                @else
-                                <a href="" class=""><i data-id="{{ $index1->id }}" class="fa-regular fa-heart btn-like like"></i></a>
-                                @endif
+                @foreach($followings as $following)
+                    @foreach($following->userFollowing->images as $image)
+                        <div class="post">
+                            <div class="image">
+                                <div class="pic">
+                                    <img src="{{ Storage::url('media/' . $following->following . '/library/images/' . $image->filename) }}" alt="" class="">
+                                </div>
+                                <div class="bottom">
+                                    <div class="icons">
+                                        @if(count($image->likes) > 0)
+                                            @foreach($image->likes as $like)
+                                                @php $i = 0; @endphp
+                                                @if($following->follower != $like->giver)
+                                                @php $i++; @endphp
+                                                @endif
+                                            @endforeach
+                                            @if(count($image->likes) == $i)
+                                            <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
+                                            @else
+                                            <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
+                                            @endif
 
-                                @else
-                                <a href="" class=""><i data-id="{{ $index1->id }}" class="fa-regular fa-heart btn-like"></i></a>
-                                @endif
-                                <i class="fa-solid fa-comment"></i>
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </div>
-                            <div class="likes">
-                                <p class="countLikes">{{ count($index1->likes) }} likes</p>
-                            </div>
-                            <div class="imageName">
-                                <p class="">
-                                    <span class="" style="font-weight:bold;">{{ $index1->user->nick }}</span> {{ $index1->name}}
-                                </p>
-                            </div>
-                            <div class="comments">
-                                <div class="likesComments">
-                                    @if(count($index1->comments) > 0)
+                                        @else
+                                            <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
+                                        @endif
+                                            <a href="{{ route('comments.showAll', $nick) }}" class=""><i class="fa-solid fa-comment"></i></a>
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
+                                    <div class="likes" data-id="{{ $image->id }}">
+                                        <p class="countLikes" data-id="{{ $image->id }}">{{ count($image->likes) }} Me gusta</p>
+                                    </div>
+                                    <div class="imageName">
+                                        <p class="">
+                                            <span class="" style="font-weight:bold;">{{ $image->user->nick }}</span> {{ $image->name}}
+                                        </p>
+                                    </div>
+                                    <div class="comments">
+                                        <div class="likesComments">
+                                            @if(count($image->comments) > 0)
 
-                                    @foreach($index1->comments as $index3)
-                                    <p class="">{{ $index3->content }}</p>
+                                                @foreach($image->comments as $comment)
+                                                    <p class="">{{ $comment->content }}</p>
 
-                                    @php $i = 0; @endphp
-                                    @if($index1->id != $index3->image_id)
-                                    @php $i++; @endphp
-                                    @endif
-                                    @php var_dump($index1->likesComments); @endphp
-                                    @if($index1->likesComments != null)
-                                    @if((count($index1->likesComments) - 1) == $i)
-                                    <div class="innerLikesComments">
-                                        <a href="" class=""><i data-id="{{ $index3->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
-                                        <p class="countLikesComments">{{ count($index3->likesComments) }} likes</p>
+                                                    @if(count($comment->likesComments) > 0)
+
+                                                        @foreach($comment->likesComments as $likeComment)
+                                                            @php $i = 0; @endphp
+
+                                                            @if($following->follower != $likeComment->giver)
+                                                                @php $i++; @endphp
+                                                            @endif
+
+                                                        @endforeach
+
+                                                                @if(count($comment->likesComments) == $i)
+                                                                <div class="innerLikesComments" data-id="{{ $comment->id }}">
+                                                                    <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
+                                                                    <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                                                </div>
+                                                                @else
+                                                                <div class="innerLikesComments" data-id="{{ $comment->id }}">
+                                                                    <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment likeComment"></i></a>
+                                                                    <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                                                </div>
+                                                                @endif
+                                                            
+
+                                                    @else
+                                                        <div class="innerLikesComments" data-id="{{ $comment->id }}">
+                                                            <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
+                                                            <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }} Me gusta</p>
+                                                        </div>
+                                                    @endif
+
+                                                @endforeach
+
+                                            @endif
+                                        </div>
                                     </div>
-                                    @else
-                                    <div class="innerLikesComments">
-                                        <a href="" class=""><i data-id="{{ $index3->id }}" class="fa-regular fa-heart btn-likeComment likeComment"></i></a>
-                                        <p class="countLikesComments">{{ count($index3->likesComments) }} likes</p>
-                                    </div>
-                                    @endif
-                                    @endif
-                                    @endforeach
-                                    @else
-                                    <div class="innerLikesComments">
-                                        <p class="">Comenta algo...</p>
-                                    </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
                 @endforeach
             </div>
             <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
