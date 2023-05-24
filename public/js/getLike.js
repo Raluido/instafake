@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
         var tempId = $(this).data('id');
         event.preventDefault();
         $.ajax({
-            url: "/" + nick + '/image/liked/' + tempId,
+            url: "/" + nick + '/images/liked/' + tempId,
             type: 'GET',
             success: function (response) {
                 if (response[0] == 1) {
@@ -26,7 +26,7 @@ window.addEventListener("load", function () {
         var tempId = $(this).data('id');
         event.preventDefault();
         $.ajax({
-            url: "/" + nick + '/comment/liked/' + $(this).data('id'),
+            url: "/" + nick + '/comments/liked/' + $(this).data('id'),
             type: 'GET',
             success: function (response) {
                 if (response[0] == 1) {

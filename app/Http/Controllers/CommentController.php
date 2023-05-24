@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LikeComment;
+use App\Models\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class CommentController extends Controller
@@ -50,8 +52,13 @@ class CommentController extends Controller
         }
     }
 
-    public function showAll()
+    public function showAll($nick, $imageId)
     {
-        return view('comments.showAll');
+        $id = auth()->id();
+
+        $images = Image::where('id', $imageId)
+            ->get();
+
+        return view('comments.showAll', compact('nick', 'id', 'images'));
     }
 }

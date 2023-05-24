@@ -75,7 +75,7 @@
                                         @else
                                             <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                         @endif
-                                            <a href="{{ route('comments.showAll', $nick) }}" class=""><i class="fa-solid fa-comment"></i></a>
+                                            <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class=""><i class="fa-solid fa-comment"></i></a>
                                             <i class="fa-solid fa-paper-plane"></i>
                                     </div>
                                     <div class="likes" data-id="{{ $image->id }}">
@@ -120,7 +120,7 @@
                                                     @else
                                                         <div class="innerLikesComments" data-id="{{ $comment->id }}">
                                                             <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
-                                                            <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }} Me gusta</p>
+                                                            <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
                                                         </div>
                                                     @endif
 

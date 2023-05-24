@@ -65,7 +65,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             });
             Route::group(['prefix' => 'comments'], function () {
                 Route::get('/liked/{dataId}', [CommentController::class, 'liked'])->name('comments.getLike');
-                Route::get('/showAll', [CommentController::class, 'showAll'])->name('comments.showAll');
+                Route::get('/showAll/{imageId}', [CommentController::class, 'showAll'])->name('comments.showAll');
             });
         });
     });

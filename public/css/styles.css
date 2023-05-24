@@ -199,14 +199,18 @@ main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .pic {
-    width: 100%;
-    height: 60vh;
+    width: auto;
+    max-height: 60vh;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: antiquewhite;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .pic img {}
+main .home .innerHome .bottom .innerBottom .post .image .pic img {
+    width: 100%;
+    height: 100%;
+}
 
 main .home .innerHome .bottom .innerBottom .post .image .icons {
     width: 20vw;
@@ -223,15 +227,15 @@ main .home .innerHome .bottom .innerBottom .post .image .bottom {
 main .home .innerHome .bottom .innerBottom .comments .likesComments {
     display: flex;
     justify-content: space-between;
+    text-align: center;
 }
 
 main .home .innerHome .bottom .innerBottom .comments .likesComments .innerLikesComments .likeComment {
     color: red;
 }
 
-main .home .innerHome .bottom .innerBottom .comments .likesComments .countLikeComment {
-    margin: .1em 0;
-    text-align: center;
+main .home .innerHome .bottom .innerBottom .comments .likesComments .countLikesComments {
+    margin: .4em 0;
 }
 
 footer {
@@ -737,6 +741,25 @@ main {
 .myProfile .innerMyProfile .bottom .innerBottom .published img {
     width: 100%;
     height: auto;
+}
+
+/* Comments */
+
+.commentsNav nav ul {
+    display: grid;
+    grid-template-columns: [first] 10% [second] 80% [third] 10%;
+    margin: .5em 0;
+}
+
+.commentsNav nav ul .backHome {
+    display: inline;
+    grid-column: first / second;
+}
+
+.commentsNav nav ul .comments {
+    display: inline;
+    grid-column: second / third;
+    text-align: center;
 }
 
 
