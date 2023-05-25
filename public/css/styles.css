@@ -762,9 +762,50 @@ main {
     text-align: center;
 }
 
+.allComments .bottom .innerBottom {
+    padding: 0 1em;
+}
 
+.allComments .bottom .innerBottom .comments .avatar {
+    display: flex;
+    margin-bottom: 1em;
+}
 
+.allComments .bottom .innerBottom .comments .avatar .content {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
 
+.allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments {
+    text-align: center;
+}
+
+.allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments p {
+    margin: .5em 0;
+}
+
+.allComments .bottom .innerBottom .comments .avatar .innerAvatar {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1em;
+}
+
+.allComments .bottom .innerBottom .comments .avatar .innerAvatar img {
+    width: 100%;
+    height: auto;
+}
+
+.allComments .bottom .innerBottom .addNewComment {
+    margin-top: 2em;
+}
+
+.allComments .bottom .innerBottom .addNewComment textarea {
+    background-color: #262626;
+    color: white;
+}
 
 
 /* end */

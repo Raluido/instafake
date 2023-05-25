@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LikeComment;
 use App\Models\Image;
+use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -60,5 +61,19 @@ class CommentController extends Controller
             ->get();
 
         return view('comments.showAll', compact('nick', 'id', 'images'));
+    }
+
+    public function store($nick, Request $request)
+    {
+        $validated = $request->validate([
+            'content' => 'required|max:255',
+        ]);
+
+        $comment = Comment::create(
+            [
+                'content' => $validated['content'],
+                'image_id' => $request->imageId
+            ]
+        );
     }
 }
