@@ -87,10 +87,11 @@
                                         </p>
                                     </div>
                                     <div class="comments">
-                                        <div class="likesComments">
+                                        <div class="innerComments">
                                             @if(count($image->comments) > 0)
-
-                                                @foreach($image->comments as $comment)
+                                                <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class=""><p class="">Ver los {{ count($image->comments) }} comentarios</p></a>
+                                                <!-- @foreach($image->comments as $comment)
+                                                <div class="likesComments">
                                                     <p class="">{{ $comment->content }}</p>
 
                                                     @if(count($comment->likesComments) > 0)
@@ -124,7 +125,8 @@
                                                         </div>
                                                     @endif
 
-                                                @endforeach
+                                                </div>
+                                                @endforeach -->
 
                                             @endif
                                         </div>

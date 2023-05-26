@@ -74,5 +74,5 @@ use App\Models\User;
 </section>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ asset('js/searchUsers.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/searchUsersMsj.js') }}" defer></script>
 @endsection

@@ -29,6 +29,13 @@ a {
     display: block;
 }
 
+textarea,
+input,
+#resultsId {
+    background-color: #262626;
+    color: white;
+}
+
 body {
     font-size: 0.9rem;
     margin: 0;
@@ -691,9 +698,30 @@ main {
     padding: 0 1em;
 }
 
-.myProfile .innerMyProfile .top .innerTop {
+.myProfile .innerMyProfile .top .innerTop .followCount {
     display: flex;
     justify-content: space-around;
+}
+
+.myProfile .innerMyProfile .top .innerTop .followBtns {
+    display: flex;
+    margin: 1em 0;
+}
+
+.myProfile .innerMyProfile .top .innerTop .followBtns form {
+    margin-right: .5em;
+}
+
+.myProfile .innerMyProfile .top .innerTop .followBtns form,
+.myProfile .innerMyProfile .top .innerTop .followBtns button {
+    width: 50%;
+}
+
+.myProfile .innerMyProfile .top .innerTop .followBtns .inputSubmit,
+.myProfile .innerMyProfile .top .innerTop .followBtns .sendMsj {
+    background-color: #0099ff;
+    border-radius: 10%;
+    color: white;
 }
 
 .myProfile .innerMyProfile .top .innerTop .publishedAndFollows {
@@ -743,6 +771,8 @@ main {
     width: 100%;
     height: auto;
 }
+
+
 
 /* Comments */
 
@@ -803,11 +833,14 @@ main {
     margin-top: 2em;
 }
 
-.allComments .bottom .innerBottom .addNewComment textarea {
-    background-color: #262626;
-    color: white;
-}
+/* end */
 
+
+/* searchForm */
+
+.searchForm .innerSearchForm {
+    padding: 0 1em;
+}
 
 /* end */
 

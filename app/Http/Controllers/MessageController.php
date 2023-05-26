@@ -65,8 +65,9 @@ class MessageController extends Controller
     public function search($nick, $inputSearch)
     {
         $users = Db::table('users')
-            ->select('nick', 'id')
-            ->where('nick', 'LIKE', '%' . $inputSearch . '%')
+            ->join('followers', 'users.id', '=', 'followers.following')
+            ->where('followers.follower', '=', auth()->id())
+            ->where('users.nick', 'LIKE', '%' . $inputSearch . '%')
             ->get();
 
         return $users;

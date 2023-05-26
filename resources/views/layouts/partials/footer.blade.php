@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="">
-        <i class="fa-solid fa-magnifying-glass"><a href="{{ route('user.profiles) }}" class=""></a></i>
+        <a href="{{ route('user.searchForm', $nick) }}" class=""><i class="fa-solid fa-magnifying-glass"></i></a>
     </div>
     <div class="">
         <a href="{{ $nick }}/images/upload" class=""><i class="fa-solid fa-square-plus"></i></a>
