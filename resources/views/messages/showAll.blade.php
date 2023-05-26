@@ -12,7 +12,7 @@ use App\Models\User;
             <input type="hidden" id="nickId" class="" value="{{ $nick }}">
             <div class="">
                 <label for="" class="">Buscar</label>
-                <input type="text" id="searchId" class="" oninput="searchUsers()">
+                <input type="text" id="searchId" class="" oninput="searchUsersMsj()">
                 <div class="resultsClass d-none" id="resultsId"></div>
             </div>
         </div>

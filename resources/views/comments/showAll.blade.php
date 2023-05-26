@@ -76,11 +76,16 @@
                 <div class="addNewComment">
                     <form action="{{ route('comments.store', $nick) }}" method="POST" class="">
                         @csrf
-                        <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
+                        <textarea placeholder="Añade un comentario..." name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
                         <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
                         <input type="submit" id="sendMessageId" value="enviar" class="d-none">
                     </form>
                 </div>
+                @if(count($errors) > 0)
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                @endif
             </div>
             <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
         </div>

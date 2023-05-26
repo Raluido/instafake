@@ -39,7 +39,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::group(['prefix' => '{nick}'], function () {
 
             Route::get('/myProfile', [UserController::class, 'showProfile'])->name('user.myProfile');
-            Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profiles');
+            Route::get('/search', [UserController::class, 'search'])->name('user.searchForm');
+            Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
 
             Route::group(['prefix' => 'stories'], function () {
                 Route::get('/getAll', [StoryController::class, 'getAll'])->name('stories.getAll');

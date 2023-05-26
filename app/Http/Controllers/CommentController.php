@@ -71,9 +71,12 @@ class CommentController extends Controller
 
         $comment = Comment::create(
             [
+                'image_id' => $request['imageId'],
+                'commentator' => auth()->id(),
                 'content' => $validated['content'],
-                'image_id' => $request->imageId
             ]
         );
+
+        return redirect()->back()->withErrors(__('Ha habido un error al enviar el comentario, disculpe las molestias.'));
     }
 }

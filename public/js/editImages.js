@@ -114,14 +114,14 @@ const saveImage = () => {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        url: "/" + nick + "/image/store",
+        url: "/" + nick + "/images/store",
     });
     $.ajax({
         data: {
             imgBase64: dataURL
         },
         success: function (data) {
-            window.location.href = "http://instafake.com.devel/" + nick + "/image/publish/" + data;
+            window.location.href = "http://instafake.com.devel/" + nick + "/images/publish/" + data;
         }
     });
 }

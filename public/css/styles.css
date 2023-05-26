@@ -732,10 +732,11 @@ main {
 
 .myProfile .innerMyProfile .bottom .innerBottom .published {
     width: auto;
-    max-height: 15em;
+    height: 10em;
     display: flex;
     align-items: center;
     background-color: #ccc;
+    overflow: hidden;
 }
 
 .myProfile .innerMyProfile .bottom .innerBottom .published img {

@@ -5,10 +5,10 @@
         </a>
     </div>
     <div class="">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass"><a href="{{ route('user.profiles) }}" class=""></a></i>
     </div>
     <div class="">
-        <a href="{{ $nick }}/image/upload" class=""><i class="fa-solid fa-square-plus"></i></a>
+        <a href="{{ $nick }}/images/upload" class=""><i class="fa-solid fa-square-plus"></i></a>
     </div>
     <div class="">
         <i class="fa-sharp fa-solid fa-circle-play"></i>
