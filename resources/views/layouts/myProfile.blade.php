@@ -17,7 +17,7 @@
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
-                <li class="">{{ $user->nick }}</li>
+                <li class="">{{ $nick }}</li>
                 <li class=""><a href="{{ route('logout.perform') }}" class=""><i class="fa-regular fa-gear"></i></a></li>
             </ul>
         </nav>
@@ -28,4 +28,5 @@
 </body>
 <script class="" type="text/javascript" src="{{ asset('js/jquery-3.6.4.js') }}"></script>
 @yield('js')
+
 </html>

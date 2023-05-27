@@ -18,12 +18,15 @@ class UserController extends Controller
 
     public function searchForm($nick)
     {
-        return view('user.searchForm')->with(['nick' => $nick]);
+        $id = auth()->id();
+
+        return view('user.searchForm', compact('nick', 'id'));
     }
 
     public function search($nick, $inputSearch)
     {
         $users = User::where('nick', 'LIKE', '%' . $inputSearch . '%')
+            ->where('nick', '!=', $nick)
             ->get();
 
         return $users;
@@ -37,5 +40,24 @@ class UserController extends Controller
         $user = $user[0];
 
         return view('user.profile', compact('user', 'nick'));
+    }
+
+    public function follow(Request $request)
+    {
+        $following = Follower::create([
+            'following' => $request->following,
+            'follower' => auth()->id()
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function check($nick, $userId)
+    {
+        $following = Follower::where('following', $userId)
+            ->where('follower', auth()->id())
+            ->get();
+
+        return $following;
     }
 }

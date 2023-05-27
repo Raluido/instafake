@@ -23,8 +23,8 @@
                 <div class="followBtns">
                     <form action="{{ route('user.follow', $nick) }}" method="post" class="">
                         @csrf
-                        <input type="hidden" name="following" value="{{ $user->id }}" class="">
-                        <input type="hidden" name="follower" value="{{ auth()->id() }}" class="">
+                        <input type="hidden" name="following" id="followingId" value="{{ $user->id }}" class="">
+                        <input type="hidden" name="nick" id="nickName" value="{{ $nick }}" class="">
                         <input type="submit" value="Seguir" class="inputSubmit">
                     </form>
                     <button class="sendMsj"><a href="{{ route('messages.show', [$nick,$user->id]) }}" class="sendMsj">Enviar mensaje</a></button>
@@ -40,5 +40,7 @@
         </div>
     </div>
 </section>
-
 @endsection
+@section('js')
+<script class="" type="text/javascript" src="{{ asset('js/checkFollows.js') }}"></script>
+endsection
