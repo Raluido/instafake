@@ -5,10 +5,10 @@ window.addEventListener("load", function () {
         url: '/' + nick + '/checkFollows/' + userId,
         type: 'GET',
         success: function (data) {
-            if (data.lenght == 1) {
-
+            if (data == 1) {
+                $('.follow').addClass('d-none');
             } else {
-
+                $('.unFollow').addClass('d-none');
             }
         }
     })

@@ -42,8 +42,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/search', [UserController::class, 'searchForm'])->name('user.searchForm');
             Route::get('/search/{inputSearch}', [UserController::class, 'search'])->name('user.search');
             Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
-            Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
             Route::get('/checkFollows/{userId}', [UserController::class, 'check'])->name('user.checkFollows');
+            Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
+            Route::delete('/unfollow/{userId}', [UserController::class, 'remove'])->name('user.unfollow');
 
             Route::group(['prefix' => 'stories'], function () {
                 Route::get('/getAll', [StoryController::class, 'getAll'])->name('stories.getAll');

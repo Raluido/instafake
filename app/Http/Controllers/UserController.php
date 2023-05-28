@@ -58,6 +58,21 @@ class UserController extends Controller
             ->where('follower', auth()->id())
             ->get();
 
+        if (count($following) == 0) {
+            $following = false;
+        } else {
+            $following = true;
+        }
+
         return $following;
+    }
+
+    public function remove($nick, Request $request)
+    {
+        $delete = Follower::where('follower', auth()->id())
+            ->where('following', $request['following'])
+            ->delete();
+
+        return redirect()->back();
     }
 }
