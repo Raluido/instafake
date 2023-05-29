@@ -212,16 +212,17 @@ main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
 
 main .home .innerHome .bottom .innerBottom .post .image .pic {
     width: auto;
-    max-height: 60vh;
+    height: 60vh;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     align-items: center;
     background-color: antiquewhite;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .pic img {
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .icons {

@@ -24,6 +24,7 @@ class HomeController extends Controller
         $followings = Follower::where('follower', $id)
             ->get();
 
+
         $stories = Db::table('followers')
             ->select('stories.user_id', 'stories.id', 'users.nick')
             ->join('stories', 'stories.user_id', '=', 'followers.following')
@@ -31,7 +32,6 @@ class HomeController extends Controller
             ->where('followers.follower', '=', $id)
             ->orderBy('stories.id', 'DESC')
             ->get();
-
 
         $likesComments = LikeComment::select('comment_id')
             ->where('giver', '=', $id)
@@ -44,6 +44,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('home.index', compact('followings', 'id', 'nick'));
+        return view('home.index', compact('followings', 'id', 'stories', 'nick'));
     }
 }

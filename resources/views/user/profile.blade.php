@@ -15,11 +15,11 @@
                         <a href="" class="">{{ count($user->followers) }} <br> Seguidores</a>
                         <a href="" class="">{{ count($user->followings) }} <br> Siguiendo</a>
                     </div>
-                    <h4>{{ $user->name . " " . $user->surname}}</h4>
-                    <h3 class=""></h3>
-                    <h3 class=""></h3>
-                    <h3 class=""></h3>
                 </div>
+                <h4>{{ $user->name . " " . $user->surname}}</h4>
+                <h3 class=""></h3>
+                <h3 class=""></h3>
+                <h3 class=""></h3>
                 <div class="followBtns">
                     <form action="{{ route('user.follow', $nick) }}" method="post" class="follow">
                         @csrf
