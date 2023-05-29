@@ -82,9 +82,9 @@
                     </form>
                 </div>
                 @if(count($errors) > 0)
-                    @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
+                @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+                @endforeach
                 @endif
             </div>
             <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
@@ -94,4 +94,5 @@
 @section('js')
 <script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
 @endsection

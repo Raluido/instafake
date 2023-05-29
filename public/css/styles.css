@@ -36,6 +36,11 @@ input,
     color: white;
 }
 
+video {
+    position: relative;
+    z-index: 999;
+}
+
 body {
     font-size: 0.9rem;
     margin: 0;
@@ -814,6 +819,10 @@ main {
 
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments p {
     margin: .5em 0;
+}
+
+.allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments .likeComment {
+    color: red;
 }
 
 .allComments .bottom .innerBottom .comments .avatar .innerAvatar {

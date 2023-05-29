@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
         player.classList.remove('d-none');
         event.preventDefault();
         $.ajax({
-            url: nick + '/story/' + $(this).data('story') + '/' + $(this).data('user'),
+            url: nick + '/stories/' + $(this).data('story') + '/' + $(this).data('user'),
             type: 'GET',
             success: function (data) {
                 if (data != 'undefined') {
@@ -21,7 +21,7 @@ window.addEventListener("load", function () {
                         i++;
                         if (i == (videoCount)) {
                             player.classList.add('d-none');
-
+                            location.reload();
                         }
                         else {
                             videoPlay(arr_video[i].user_id, arr_video[i].path);
@@ -36,10 +36,11 @@ window.addEventListener("load", function () {
             $(mp4Vid).attr('src', '/storage/media/' + userId + '/library/stories/' + path);
             player.load();
             player.play();
+            player.requestFullscreen();
         }
     })
 })
 
-window.setInterval(function () {
-    $(".innerTop").load(window.location.href + " .innerTop");
-}, 5000);
+// window.setInterval(function () {
+//     $(".innerTop").load(window.location.href + " .innerTop");
+// }, 5000);
