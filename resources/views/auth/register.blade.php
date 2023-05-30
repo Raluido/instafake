@@ -8,7 +8,7 @@
         </div>
         <div class="bottom">
 
-            <form action="{{ route('register.store') }}" method="POST" class="">
+            <form action="{{ route('register.store') }}" method="POST" enctype="multipart/form-data" class="">
                 @csrf
                 <div class="inputForm">
                     <label for="nick" class="">Nick</label>
@@ -21,6 +21,13 @@
                     <label for="email" class="">Email</label>
                     <input type="email" name="email">
                     @if($errors->has('email'))
+                    <span class="danger">{{ $errors->first() }}</span>
+                    @endif
+                </div>
+                <div class="inputForm">
+                    <label for="image" class="">Avatar</label>
+                    <input type="file" name="image">
+                    @if($errors->has('image'))
                     <span class="danger">{{ $errors->first() }}</span>
                     @endif
                 </div>

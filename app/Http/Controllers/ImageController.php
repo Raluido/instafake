@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Jobs\DeleteTmpImg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rules\Exists;
 use App\Models\Image;
 use App\Models\User;
@@ -106,5 +108,11 @@ class ImageController extends Controller
 
             return $result;
         }
+    }
+
+    public function getImage($fileName)
+    {
+        $file = Storage::disk('image')->get($fileName);
+        return new Response($file, 200);
     }
 }
