@@ -21,6 +21,10 @@ a {
     color: white;
 }
 
+.danger {
+    color: red;
+}
+
 .d-none {
     display: none;
 }
