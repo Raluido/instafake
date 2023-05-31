@@ -11,6 +11,7 @@ use App\Http\Controllers\StoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Models\Image;
 use Illuminate\Support\Facades\Log;
 
 /*
@@ -58,6 +59,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/store', [ImageController::class, 'store'])->name('images.store');
                 Route::get('/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');
                 Route::post('/published', [ImageController::class, 'published'])->name('images.published');
+                Route::get('/show/{filename}', [ImageController::class, 'getImage'])->name('images.show');
             });
             Route::group(['prefix' => 'messages'], function () {
                 Route::get('', [MessageController::class, 'showAll'])->name('messages.showAll');

@@ -25,9 +25,9 @@
                     @endif
                 </div>
                 <div class="inputForm">
-                    <label for="image" class="">Avatar</label>
-                    <input type="file" name="image">
-                    @if($errors->has('image'))
+                    <label for="avatar" class="">Avatar</label>
+                    <input type="file" name="avatar">
+                    @if($errors->has('avatar'))
                     <span class="danger">{{ $errors->first() }}</span>
                     @endif
                 </div>

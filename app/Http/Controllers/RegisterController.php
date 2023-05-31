@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -38,12 +39,12 @@ class RegisterController extends Controller
         $user = new User();
         $user->nick = $validated['nick'];
         $user->email = $validated['email'];
-        $fileName = date('Y-m-d_H.i.s') . '.' . $validated['image']->extension();
-        Storage::disk('images')->put('/' . auth()->id(), $validated['image']);
-        $user->image = 'storage/app/images/' . auth()->id() . '/' . $fileName;
+        $filePath = $request->file('avatar');
+        $fileName = date('Y-m-d_H.i.s') . '.' . $filePath->extension();
+        $filePath->storeAs('/', $fileName, 'images');
+        $user->image = $fileName;
         $user->password = $validated['password'];
         $user->save();
-
 
         if (isset($user)) {
             Auth::login($user);

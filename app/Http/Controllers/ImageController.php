@@ -110,9 +110,9 @@ class ImageController extends Controller
         }
     }
 
-    public function getImage($fileName)
+    public function getImage($nick, $fileName)
     {
-        $file = Storage::disk('image')->get($fileName);
+        $file = Storage::disk('images')->get($fileName);
         return new Response($file, 200);
     }
 }
