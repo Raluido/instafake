@@ -14,18 +14,12 @@
         <i class="fa-sharp fa-solid fa-circle-play"></i>
     </div>
     <div class="profileImg">
-        @if(File::exists(Storage::url('media/' . $id . '/avatar.png')))
-        <div class="">
-            <a href="{{ route('user.myProfile', $nick) }}" class="">
-                <img src="{{ Storage::url('media/' . $id . '/avatar.png') }}" alt="" class="">
-            </a>
-        </div>
-        @else
-        <div class="">
-            <a href="{{ route('user.myProfile', $nick) }}" class="">
-                <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-            </a>
-        </div>
+        @if(auth()->user()->image)
+        <a href="{{ route('user.myProfile', $nick) }}" class="">
+            <div class="">
+                <img src="{{ route('images.show', ['filename' => auth()->user()->image, 'nick' => $nick]) }}" alt="" class="">
+            </div>
+        </a>
         @endif
     </div>
 </nav>

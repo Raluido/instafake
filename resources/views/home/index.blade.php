@@ -23,24 +23,22 @@
                     <h5 class="">Tu historia</h5>
                 </a>
                 @endif
-                @foreach($followings as $following)
-                    @foreach($following->userFollowing->stories as $story)
-                        @if(file_exists('storage/' . $story->user_id . '/avatar.jpg'))
-                        <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
-                            <div class="storyImg">
-                                <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
-                            </div>
-                            <h5 class="">{{ $story->user->nick }}</h5>
-                        </a>
-                        @else
-                        <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
-                            <div class="storyImg">
-                                <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                            </div>
-                            <h5 class="">{{ $story->user->nick }}</h5>
-                        </a>
-                        @endif
-                    @endforeach
+                @foreach($stories as $story)
+                    @if(file_exists('storage/' . $story->user_id . '/avatar.jpg'))
+                    <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                        <div class="storyImg">
+                            <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
+                        </div>
+                        <h5 class="">{{ $story->nick }}</h5>
+                    </a>
+                    @else
+                    <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                        <div class="storyImg">
+                            <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+                        </div>
+                        <h5 class="">{{ $story->nick }}</h5>
+                    </a>
+                    @endif
                 @endforeach
             </div>
         </div>

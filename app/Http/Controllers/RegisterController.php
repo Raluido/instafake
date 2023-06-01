@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Exists;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -32,7 +34,17 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
+        $validated = $request->validated();
+
+        $user = new User();
+        $user->nick = $validated['nick'];
+        $user->email = $validated['email'];
+        $filePath = $request->file('avatar');
+        $fileName = date('Y-m-d_H.i.s') . '.' . $filePath->extension();
+        $filePath->storeAs('/', $fileName, 'images');
+        $user->image = $fileName;
+        $user->password = $validated['password'];
+        $user->save();
 
         if (isset($user)) {
             Auth::login($user);
@@ -56,8 +68,7 @@ class RegisterController extends Controller
                 'user_id' => $id
             ]);
 
-            $nick = User::where('id', $id)
-                ->value('nick');
+            $nick = auth()->user()->nick;
 
             return redirect()->route('home', compact('nick', 'id'));
         }
