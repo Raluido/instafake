@@ -20,7 +20,7 @@ function searchUsersMsj() {
                     if (data[0].nick !== "") {
                         data.forEach(element => {
                             document.getElementById("resultsId").innerHTML +=
-                                "<a href='/" + nick + "/messages/show/" + element.id + "' style='display:block; margin-bottom:.5em;'>" + element.nick + "</a>"
+                                "<a href='/" + nick + "/messages/show/" + element.following + "' style='display:block; margin-bottom:.5em;'>" + element.nick + "</a>"
                         });
                         document.getElementById("resultsId").classList.remove("d-none");
                         document.getElementById("resultsId").classList.add("d-block");

@@ -77,6 +77,10 @@ class CommentController extends Controller
             ]
         );
 
-        return redirect()->back()->withErrors(__('Ha habido un error al enviar el comentario, disculpe las molestias.'));
+        if ($comment) {
+            return redirect()->back();
+        } else {
+            return redirect()->back()->withErrors(__('Ha habido un error al enviar el comentario, disculpe las molestias.'));
+        }
     }
 }

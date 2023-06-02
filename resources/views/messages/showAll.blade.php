@@ -32,11 +32,7 @@ use App\Models\User;
                         <div class="innerContent">
                             <h5 class="">{{ substr($index->content, 0, 15) }}...</h5>
                             <h6 class="">
-                                <?php
-                                $pastTime = date_create($index->created_at);
-                                $interval = $pastTime->diff(new DateTime("now"));
-                                echo $interval->format("Hace %i minutos y %a días");
-                                ?>
+                                {{ \FormatTime::LongTimeFilter($index->created_at) }}
                             </h6>
                         </div>
                     </div>
@@ -56,11 +52,7 @@ use App\Models\User;
                         <div class="innerContent">
                             <h5 class="">{{ substr($index->content, 0, 15)  }}...</h5>
                             <h6 class="">
-                                <?php
-                                $pastTime = date_create($index->created_at);
-                                $interval = $pastTime->diff(new DateTime("now"));
-                                echo $interval->format("Hace %i minutos y %a días");
-                                ?>
+                                {{ \FormatTime::LongTimeFilter($index->created_at) }}
                             </h6>
                         </div>
                     </div>

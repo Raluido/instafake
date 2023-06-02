@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use DateTime;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class FormatTime
 {
@@ -13,8 +14,8 @@ class FormatTime
             return "Sin fecha";
         }
 
-        $start_date = $date;
-        $since_start = $start_date->diff(new DateTime(date('Y-m-d') . " " . date('H-m-s')));
+        $start_date = new DateTime($date);
+        $since_start = $start_date->diff(new DateTime('now'));
 
         if ($since_start->y == 0) {
             if ($since_start->m == 0) {

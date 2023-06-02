@@ -112,7 +112,7 @@ class ImageController extends Controller
 
     public function getImage($nick, $fileName)
     {
-        $file = Storage::disk('images')->get($fileName);
+        $file = 'images' . '/' . auth()->user()->id . '/' . $fileName;
         return new Response($file, 200);
     }
 }

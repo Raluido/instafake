@@ -22,19 +22,7 @@
                             </div>
                         </div>
                         <div class="">
-                            <h5 class=""><?php
-                                            if (isset($previousIndex)) {
-                                                $previousTime = date_create($previousIndex->created_at);
-                                                $presentTime = date_create($index->created_at);
-                                                $interval = $previousTime->diff($presentTime);
-                                                if ($interval->format("%i") > 30 && $interval->format("%a") == 0) {
-                                                    echo $interval->format("%i minutos");
-                                                } elseif ($interval->format("%a") != 0) {
-                                                    echo date_format($presentTime, "d M, H:i");
-                                                }
-                                            }
-
-                                            ?></h5>
+                            <h5 class="">{{ FormatTime::LongTimeFilter($index->created_at) }}</h5>
                         </div>
                     <?php
                     else :
@@ -47,19 +35,7 @@
                             </div>
                         </div>
                         <div class="">
-                            <h5 class=""><?php
-                                            if (isset($previousIndex)) {
-                                                $previousTime = date_create($previousIndex->created_at);
-                                                $presentTime = date_create($index->created_at);
-                                                $interval = $previousTime->diff($presentTime);
-                                                if ($interval->format("%i") > 30 && $interval->format("%a") == 0) {
-                                                    echo $interval->format("%i minutos");
-                                                } elseif ($interval->format("%a") != 0) {
-                                                    echo date_format($presentTime, "d M, H:i");
-                                                }
-                                            }
-
-                                            ?></h5>
+                            <h5 class="">{{ FormatTime::LongTimeFilter($index->created_at) }}</h5>
                         </div>
                 <?php
                     endif;

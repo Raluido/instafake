@@ -290,7 +290,7 @@ footer nav .profileImg div {
 footer nav .profileImg img {
     width: 100%;
     height: auto;
-    
+
 }
 
 /* Login */
@@ -489,7 +489,6 @@ main .message .innerMessage .bottom .chat .innerUserMessage p {
 
 .messages .innerMessages .bottom .userMessage .content .innerContent {
     display: flex;
-    justify-content: space-evenly;
     margin-top: .3em;
 }
 
@@ -909,5 +908,36 @@ main {
 
     main .login .innerLogin {
         display: block;
+    }
+}
+
+@media (min-width: 1024px) {
+    header .navbarMaster .likesAndMsg {
+        width: 4%;
+    }
+
+    main .home .innerHome .bottom .innerBottom .post .image .pic img {
+        width: auto;
+        height: 100%;
+    }
+
+    .myProfile .innerMyProfile .top .innerTop .followCount {
+        display: flex;
+        justify-content: unset;
+    }
+
+    .myProfile .innerMyProfile .top .innerTop .followCount .avatar {
+        margin-right: 2em;
+    }
+
+    .myProfile .innerMyProfile .bottom .innerBottom .published {
+        width: auto;
+        height: 20em;
+        justify-content: center;
+    }
+
+    .myProfile .innerMyProfile .bottom .innerBottom .published img {
+        width: auto;
+        height: 100%;
     }
 }

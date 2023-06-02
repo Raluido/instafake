@@ -41,15 +41,17 @@ class RegisterController extends Controller
         $user->email = $validated['email'];
         $filePath = $request->file('avatar');
         $fileName = date('Y-m-d_H.i.s') . '.' . $filePath->extension();
-        $filePath->storeAs('/', $fileName, 'images');
         $user->image = $fileName;
         $user->password = $validated['password'];
         $user->save();
 
         if (isset($user)) {
             Auth::login($user);
-
             $id = auth()->id();
+
+            $path = public_path('images') . '/' . $id;
+            File::makeDirectory($path, 0777, true, true);
+            $filePath->storeAs('/' . $id, $fileName, 'images');
 
             $path = public_path('storage') . '/media/' . $id;
             if (!File::exists($path)) {
