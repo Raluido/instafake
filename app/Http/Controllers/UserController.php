@@ -42,6 +42,13 @@ class UserController extends Controller
         return view('user.profile', compact('user', 'nick'));
     }
 
+    public function getImage($nick, $fileName)
+    {
+        $id = auth()->user()->id;
+
+        return response()->file('images/' . $id . '/' . $fileName);
+    }
+
     public function follow(Request $request)
     {
         $following = Follower::create([

@@ -40,7 +40,7 @@ class RegisterController extends Controller
         $user->nick = $validated['nick'];
         $user->email = $validated['email'];
         $filePath = $request->file('avatar');
-        $fileName = date('Y-m-d_H.i.s') . '.' . $filePath->extension();
+        $fileName = 'avatar_' . date('Y-m-d_H.i.s') . '.' . $filePath->extension();
         $user->image = $fileName;
         $user->password = $validated['password'];
         $user->save();
@@ -52,19 +52,6 @@ class RegisterController extends Controller
             $path = public_path('images') . '/' . $id;
             File::makeDirectory($path, 0777, true, true);
             $filePath->storeAs('/' . $id, $fileName, 'images');
-
-            $path = public_path('storage') . '/media/' . $id;
-            if (!File::exists($path)) {
-                File::makeDirectory($path, 0777, true, true);
-                $path = public_path('storage') . '/media/' . $id . '/library';
-                if (!File::exists($path)) {
-                    File::makeDirectory($path, 0777, true, true);
-                    $path = public_path('storage') . '/media/' . $id . '/library/images';
-                    if (!File::exists($path)) {
-                        File::makeDirectory($path, 0777, true, true);
-                    }
-                }
-            }
 
             Session::push('user', [
                 'user_id' => $id

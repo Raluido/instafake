@@ -20,6 +20,12 @@
                 <img src="{{ route('images.show', ['filename' => auth()->user()->image, 'nick' => $nick]) }}" alt="" class="">
             </div>
         </a>
+        @else
+        <a href="{{ route('user.myProfile', $nick) }}" class="">
+            <div class="">
+                <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+            </div>
+        </a>
         @endif
     </div>
 </nav>

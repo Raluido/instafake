@@ -112,7 +112,8 @@ class ImageController extends Controller
 
     public function getImage($nick, $fileName)
     {
-        $file = 'images' . '/' . auth()->user()->id . '/' . $fileName;
-        return new Response($file, 200);
+        $id = auth()->user()->id;
+
+        return response()->file('images/' . $id . '/' . $fileName);
     }
 }

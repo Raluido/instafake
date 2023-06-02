@@ -26,12 +26,14 @@ class HomeController extends Controller
 
 
         $stories = Db::table('followers')
-            ->select('stories.user_id', 'stories.id', 'users.nick')
+            ->select('stories.user_id', 'stories.id', 'users.nick', 'users.image')
             ->join('stories', 'stories.user_id', '=', 'followers.following')
             ->join('users', 'users.id', '=', 'followers.following')
             ->where('followers.follower', '=', $id)
             ->orderBy('stories.id', 'DESC')
             ->get();
+
+        log::info($stories);
 
         $likesComments = LikeComment::select('comment_id')
             ->where('giver', '=', $id)

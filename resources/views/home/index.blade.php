@@ -5,10 +5,10 @@
     <div class="innerHome">
         <div class="top">
             <div class="innerTop">
-                @if(file_exists('storage/media/' . $id . '/avatar.jpg'))
+                @if(auth()->user()->image)
                 <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
                     <div class="addStoryImg">
-                        <img src="{{ Storage::url('media/' . $id . '/avatar.jpg') }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => auth()->user()->image]) }}" alt="" class="">
                     </div>
                     <h5 class="">Tu historia</h5>
                     <div class="addStoryPlus">
@@ -18,27 +18,30 @@
                 @else
                 <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
                     <div class="addStoryImg">
-                        <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     <h5 class="">Tu historia</h5>
+                    <div class="addStoryPlus">
+                        <p class="">+</p>
+                    </div>
                 </a>
                 @endif
                 @foreach($stories as $story)
-                    @if(file_exists('storage/' . $story->user_id . '/avatar.jpg'))
-                    <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
-                        <div class="storyImg">
-                            <img src="{{ Storage::url('media/' . $story->user_id . '/avatar.jpg') }}" alt="" class="">
-                        </div>
-                        <h5 class="">{{ $story->nick }}</h5>
-                    </a>
-                    @else
-                    <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
-                        <div class="storyImg">
-                            <img src="{{ Storage::url('media/default/avatar.png') }}" alt="" class="">
-                        </div>
-                        <h5 class="">{{ $story->nick }}</h5>
-                    </a>
-                    @endif
+                @if(auth()->user()->image)
+                <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                    <div class="storyImg">
+                        <img src="{{ route('stories.show', ['nick' => $nick, 'filename' => $story->image]) }}" alt="" class="">
+                    </div>
+                    <h5 class="">{{ $story->nick }}</h5>
+                </a>
+                @else
+                <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
+                    <div class="storyImg">
+                        <img src="{{ route('stories.show', ['nick' => $nick, 'filename' => $story->image]) }}" alt="" class="">
+                    </div>
+                    <h5 class="">{{ $story->nick }}</h5>
+                </a>
+                @endif
                 @endforeach
             </div>
         </div>
@@ -49,46 +52,48 @@
         <div class="bottom">
             <div class="innerBottom">
                 @foreach($followings as $following)
-                    @foreach($following->userFollowing->images as $image)
-                        <div class="post">
-                            <div class="image">
-                                <div class="pic">
-                                    <img src="{{ Storage::url('media/' . $following->following . '/library/images/' . $image->filename) }}" alt="" class="">
-                                </div>
-                                <div class="bottom">
-                                    <div class="icons">
-                                        @if(count($image->likes) > 0)
-                                            @foreach($image->likes as $like)
-                                                @php $i = 0; @endphp
-                                                @if($following->follower != $like->giver)
-                                                @php $i++; @endphp
-                                                @endif
-                                            @endforeach
-                                            @if(count($image->likes) == $i)
-                                            <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
-                                            @else
-                                            <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
-                                            @endif
+                @foreach($following->userFollowing->images as $image)
+                <div class="post">
+                    <div class="image">
+                        <div class="pic">
+                            <img src="{{ Storage::url('media/' . $following->following . '/library/images/' . $image->filename) }}" alt="" class="">
+                        </div>
+                        <div class="bottom">
+                            <div class="icons">
+                                @if(count($image->likes) > 0)
+                                @foreach($image->likes as $like)
+                                @php $i = 0; @endphp
+                                @if($following->follower != $like->giver)
+                                @php $i++; @endphp
+                                @endif
+                                @endforeach
+                                @if(count($image->likes) == $i)
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
+                                @else
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
+                                @endif
 
-                                        @else
-                                            <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
-                                        @endif
-                                            <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class=""><i class="fa-solid fa-comment"></i></a>
-                                            <i class="fa-solid fa-paper-plane"></i>
-                                    </div>
-                                    <div class="likes" data-id="{{ $image->id }}">
-                                        <p class="countLikes" data-id="{{ $image->id }}">{{ count($image->likes) }} Me gusta</p>
-                                    </div>
-                                    <div class="imageName">
-                                        <p class="">
-                                            <span class="" style="font-weight:bold;">{{ $image->user->nick }}</span> {{ $image->name}}
-                                        </p>
-                                    </div>
-                                    <div class="comments">
-                                        <div class="innerComments">
-                                            @if(count($image->comments) > 0)
-                                                <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class=""><p class="">Ver los {{ count($image->comments) }} comentarios</p></a>
-                                                <!-- @foreach($image->comments as $comment)
+                                @else
+                                <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
+                                @endif
+                                <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class=""><i class="fa-solid fa-comment"></i></a>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+                            <div class="likes" data-id="{{ $image->id }}">
+                                <p class="countLikes" data-id="{{ $image->id }}">{{ count($image->likes) }} Me gusta</p>
+                            </div>
+                            <div class="imageName">
+                                <p class="">
+                                    <span class="" style="font-weight:bold;">{{ $image->user->nick }}</span> {{ $image->name}}
+                                </p>
+                            </div>
+                            <div class="comments">
+                                <div class="innerComments">
+                                    @if(count($image->comments) > 0)
+                                    <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class="">
+                                        <p class="">Ver los {{ count($image->comments) }} comentarios</p>
+                                    </a>
+                                    <!-- @foreach($image->comments as $comment)
                                                 <div class="likesComments">
                                                     <p class="">{{ $comment->content }}</p>
 
@@ -126,13 +131,13 @@
                                                 </div>
                                                 @endforeach -->
 
-                                            @endif
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                </div>
+                @endforeach
                 @endforeach
             </div>
             <input type="hidden" class="" id="inputNick" value="{{ $nick }}">

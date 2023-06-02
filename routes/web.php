@@ -47,12 +47,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/checkFollows/{userId}', [UserController::class, 'check'])->name('user.checkFollows');
                 Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
                 Route::delete('/unfollow/{userId}', [UserController::class, 'remove'])->name('user.unfollow');
+                Route::get('/show/{filename}', [UserController::class, 'getImage'])->name('user.avatar');
             });
             Route::group(['prefix' => 'stories'], function () {
                 Route::get('/getAll', [StoryController::class, 'getAll'])->name('stories.getAll');
                 Route::get('/{dataId}/{userId}', [StoryController::class, 'playAll'])->name('stories.playAll');
                 Route::get('/upload', [StoryController::class, 'uploadForm'])->name('stories.uploadForm');
                 Route::post('/store', [StoryController::class, 'store'])->name('stories.store');
+                Route::get('/show/{filename}', [StoryController::class, 'getStory'])->name('stories.show');
             });
             Route::group(['prefix' => 'images'], function () {
                 Route::get('/liked/{dataId}', [ImageController::class, 'liked'])->name('images.getLike');

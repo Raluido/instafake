@@ -45,6 +45,13 @@ class StoryController extends Controller
         return $stories;
     }
 
+    public function getStory($nick, $fileName)
+    {
+        $id = auth()->user()->id;
+
+        return response()->file('stories/' . $id . '/' . $fileName);
+    }
+
     public function uploadForm($nick)
     {
         return view('stories.uploadForm')->with('nick', $nick);
@@ -55,13 +62,14 @@ class StoryController extends Controller
         if ($request->hasFile('videoFile')) {
             $story = new Story();
             $story->user_id = auth()->id();
-            $path = public_path() . '/storage/media/' . auth()->id() . '/library/stories';
+            $path = public_path('stories') . '/' . auth()->id();
             if (!File::exists($path)) {
                 File::makeDirectory($path, 775, true);
             }
             $fileName = date('Y-m-d_H.i.s') . '.' . $request->file('videoFile')->extension();
-            $request->videoFile->storeAs('/public/media/' . auth()->id() . '/library/stories/', $fileName);
-            $story->path = 'storage/media/' . auth()->id() . '/library/stories/' . $fileName;
+            $filepath = $request->file('videoFile');
+            $filepath->storeAs('/' . auth()->id(), $fileName, 'stories');
+            $story->path = $fileName;
             $story->save();
         } else {
             log::info("no hay file");
