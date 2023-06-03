@@ -1,4 +1,4 @@
-@extends('layouts.noHeaderFooter')
+@extends('layouts.justBack')
 
 @section('main')
 <section class="uploadForm disable">

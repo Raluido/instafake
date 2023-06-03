@@ -7,9 +7,15 @@
         <div class="top">
             <div class="innerTop">
                 <div class="followCount">
+                    @if(auth()->user()->image)
                     <div class="avatar">
-                        <img src="{{ Storage::url('media/' . $user->id . '/' . $user->image) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => auth()->user()->image]) }}" alt="" class="">
                     </div>
+                    @else
+                    <div class="avatar">
+                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                    </div>
+                    @endif
                     <div class="publishedAndFollows">
                         <a href="" class="">{{ count($user->images) }} <br> Publicaciones</a>
                         <a href="" class="">{{ count($user->followers) }} <br> Seguidores</a>

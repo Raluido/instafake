@@ -64,7 +64,7 @@ class StoryController extends Controller
             $story->user_id = auth()->id();
             $path = public_path('stories') . '/' . auth()->id();
             if (!File::exists($path)) {
-                File::makeDirectory($path, 775, true);
+                File::makeDirectory($path, 0777, true);
             }
             $fileName = date('Y-m-d_H.i.s') . '.' . $request->file('videoFile')->extension();
             $filepath = $request->file('videoFile');

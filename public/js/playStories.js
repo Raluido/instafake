@@ -33,7 +33,8 @@ window.addEventListener("load", function () {
 
         // Set video source and start autoplay     
         function videoPlay(userId, path) {
-            $(mp4Vid).attr('src', path);
+            var fullPath = 'stories/' + userId + '/' + path;
+            $(mp4Vid).attr('src', fullPath);
             player.load();
             player.play();
             player.requestFullscreen();

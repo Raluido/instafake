@@ -3,7 +3,7 @@ function searchUsers() {
     var inputSearch = document.getElementById("searchId").value;
     $.ajax({
         type: 'GET',
-        url: "/" + nick + "/search/" + inputSearch,
+        url: "/" + nick + "/user/search/" + inputSearch,
         data: {},
         datatype: "json",
         success: function (data) {
@@ -20,7 +20,7 @@ function searchUsers() {
                     if (data[0].nick !== "") {
                         data.forEach(element => {
                             document.getElementById("resultsId").innerHTML +=
-                                "<a href='/" + nick + "/profile/" + element.id + "' style='display:block; margin-bottom:.5em;'>" + element.nick + "</a>"
+                                "<a href='/" + nick + "/user/profile/" + element.id + "' style='display:block; margin-bottom:.5em;'>" + element.nick + "</a>"
                         });
                         document.getElementById("resultsId").classList.remove("d-none");
                         document.getElementById("resultsId").classList.add("d-block");

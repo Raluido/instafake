@@ -47,7 +47,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/checkFollows/{userId}', [UserController::class, 'check'])->name('user.checkFollows');
                 Route::post('/follow', [UserController::class, 'follow'])->name('user.follow');
                 Route::delete('/unfollow/{userId}', [UserController::class, 'remove'])->name('user.unfollow');
-                Route::get('/show/{filename}', [UserController::class, 'getImage'])->name('user.avatar');
+                Route::get('/show/{filename}/{id?}', [UserController::class, 'getImage'])->name('user.avatar');
             });
             Route::group(['prefix' => 'stories'], function () {
                 Route::get('/getAll', [StoryController::class, 'getAll'])->name('stories.getAll');

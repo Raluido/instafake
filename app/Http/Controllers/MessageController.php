@@ -37,7 +37,7 @@ class MessageController extends Controller
                 ->update(['read' => 1]);
         }
 
-        return view('messages.show', compact('nick', 'id', 'messages', 'receiver', 'receiverNick'));
+        return view('messages.show', compact('nick', 'messages', 'receiver', 'receiverNick'));
     }
 
     public function check()

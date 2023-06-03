@@ -27,17 +27,17 @@
                 </a>
                 @endif
                 @foreach($stories as $story)
-                @if(auth()->user()->image)
+                @if($story->image)
                 <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
                     <div class="storyImg">
-                        <img src="{{ route('stories.show', ['nick' => $nick, 'filename' => $story->image]) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $story->image, 'id' => $story->user_id]) }}" alt="" class="">
                     </div>
                     <h5 class="">{{ $story->nick }}</h5>
                 </a>
                 @else
                 <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
                     <div class="storyImg">
-                        <img src="{{ route('stories.show', ['nick' => $nick, 'filename' => $story->image]) }}" alt="" class="">
+                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     <h5 class="">{{ $story->nick }}</h5>
                 </a>

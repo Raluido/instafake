@@ -42,9 +42,11 @@ class UserController extends Controller
         return view('user.profile', compact('user', 'nick'));
     }
 
-    public function getImage($nick, $fileName)
+    public function getImage($nick, $fileName, $id = null)
     {
-        $id = auth()->user()->id;
+        if ($id == null) {
+            $id = auth()->user()->id;
+        }
 
         return response()->file('images/' . $id . '/' . $fileName);
     }

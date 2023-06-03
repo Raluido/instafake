@@ -391,7 +391,9 @@ main .innerMessage .bottom form {
 }
 
 main .message .innerMessage .bottom .chat .innerUserMessage {
-    max-width: 15em;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender {
@@ -403,7 +405,26 @@ main section.message div.innerMessage div.bottom div.chat div h5 {
     text-align: center;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage>div {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .profile,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .profile {
+    position: relative;
+    width: 4em;
+    height: 4em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin-right: 2em;
+    border-radius: 50%;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .profile img,
+    main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .profile img {
+    position: absolute;
+    width: 4em;
+    height: auto;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content {
     background-color: #262626;
     padding: .5px;
     border-radius: 500px;
@@ -735,6 +756,10 @@ main {
     background-color: #0099ff;
     border-radius: 10%;
     color: white;
+}
+
+.myProfile .innerMyProfile .top .innerTop .followBtns .sendMsj {
+    align-self: flex-start;
 }
 
 .myProfile .innerMyProfile .top .innerTop .publishedAndFollows {

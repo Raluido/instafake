@@ -1,4 +1,4 @@
-@extends('layouts.noHeader')
+@extends('layouts.justBack')
 
 @section('main')
 

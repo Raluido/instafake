@@ -2,7 +2,6 @@
 
 @section('main')
 <?php
-
 use App\Models\User;
 ?>
 <section class="messages">
@@ -17,42 +16,54 @@ use App\Models\User;
             </div>
         </div>
         <div class="bottom">
-            @foreach($messages as $index)
-            @if($id != $index->sender)
-            <a href="{{ route('messages.show', [$nick,$index->sender]) }}" class="">
+            @foreach($messages as $message)
+            @if(auth()->id() != $message->sender)
+            <a href="{{ route('messages.show', [$nick,$message->sender]) }}" class="">
                 <div class="userMessage">
-                    <?php
-                    $avatar = User::find($index->sender);
-                    ?>
+                    @php 
+                    $user = User::find($message->sender);
+                    @endphp
+                    @if($user->avatar)
                     <div class="profile">
-                        <img src="{{ Storage::url($avatar->image) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $message->sender->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
+                    @else
+                    <div class="profile">
+                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                    </div>
+                    @endif
                     <div class="content">
-                        <h4 class="">{{ $avatar->nick }}</h4>
+                        <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
-                            <h5 class="">{{ substr($index->content, 0, 15) }}...</h5>
+                            <h5 class="">{{ substr($message->content, 0, 15) }}...</h5>
                             <h6 class="">
-                                {{ \FormatTime::LongTimeFilter($index->created_at) }}
+                                {{ \FormatTime::LongTimeFilter($message->created_at) }}
                             </h6>
                         </div>
                     </div>
                 </div>
             </a>
             @else
-            <a href="{{ route('messages.show', [$nick,$index->receiver]) }}" class="">
+            <a href="{{ route('messages.show', [$nick,$message->receiver]) }}" class="">
                 <div class="userMessage">
-                    <?php
-                    $avatar = User::find($index->receiver);
-                    ?>
+                    @php 
+                    $user = User::find($message->receiver);
+                    @endphp
+                    @if($user->avatar)
                     <div class="profile">
-                        <img src="{{ Storage::url($avatar->image) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
+                    @else
+                    <div class="profile">
+                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                    </div>
+                    @endif
                     <div class="content">
-                        <h4 class="">{{ $avatar->nick }}</h4>
+                        <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
-                            <h5 class="">{{ substr($index->content, 0, 15)  }}...</h5>
+                            <h5 class="">{{ substr($message->content, 0, 15)  }}...</h5>
                             <h6 class="">
-                                {{ \FormatTime::LongTimeFilter($index->created_at) }}
+                                {{ \FormatTime::LongTimeFilter($message->created_at) }}
                             </h6>
                         </div>
                     </div>

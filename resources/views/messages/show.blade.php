@@ -1,7 +1,9 @@
 @extends('layouts.showMessages')
 
 @section('main')
-
+<?php
+use App\Models\User;
+?>
 <section class="message">
     <div class="innerMessage">
         <div class="top">
@@ -10,37 +12,58 @@
         <div class="bottom">
             <div class="chat">
                 <?php
-                $counter = 0;
-                foreach ($messages as $index) :
-                    if ($counter == 0 || $id == $index->sender) :
+                foreach ($messages as $message) :
+                    if (auth()->id() == $message->sender) :
                 ?>
                         <div class="userMessageSender">
                             <div class="innerUserMessage">
-                                <div class="">
-                                    <p class="">{{ $index->content }}</p>
+                                @php
+                                $user = User::find($message->sender);
+                                @endphp
+                                @if($user->avatar)
+                                <div class="profile">
+                                    <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $message->sender->image, 'id' => $user->id]) }}" alt="" class="">
+                                </div>
+                                @else
+                                <div class="profile">
+                                    <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                                </div>
+                                @endif
+                                <div class="content">
+                                    <p class="">{{ $message->content }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="">
-                            <h5 class="">{{ FormatTime::LongTimeFilter($index->created_at) }}</h5>
+                            <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
                         </div>
                     <?php
-                    else :
+                    elseif (auth()->id() == $message->receiver) :
                     ?>
                         <div class="userMessageReceiver">
                             <div class="innerUserMessage">
-                                <div class="">
-                                    <p class="">{{ $index->content }}</p>
+                                @php
+                                $user = User::find($message->receiver);
+                                @endphp
+                                @if($user->avatar)
+                                <div class="profile">
+                                    <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
+                                </div>
+                                @else
+                                <div class="profile">
+                                    <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                                </div>
+                                @endif
+                                <div class="content">
+                                    <p class="">{{ $message->content }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="">
-                            <h5 class="">{{ FormatTime::LongTimeFilter($index->created_at) }}</h5>
+                            <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
                         </div>
                 <?php
                     endif;
-                    $counter++;
-                    $previousIndex = $index;
                 endforeach;
                 ?>
             </div>
