@@ -54,5 +54,5 @@
 </section>
 @endsection
 @section('js')
-<script class="" type="text/javascript" src="{{ asset('js/checkFollows.js') }}"></script>
+<script class="" type="text/javascript" src="{{ asset('js/checkFollows.js') }}" defer></script>
 endsection

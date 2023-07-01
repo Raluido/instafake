@@ -58,6 +58,8 @@ class UserController extends Controller
             'follower' => auth()->id()
         ]);
 
+        $user = User::find($request->following);
+
         return redirect()->back();
     }
 

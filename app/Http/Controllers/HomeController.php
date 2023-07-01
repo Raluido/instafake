@@ -24,7 +24,6 @@ class HomeController extends Controller
         $followings = Follower::where('follower', $id)
             ->get();
 
-
         $stories = Db::table('followers')
             ->select('stories.user_id', 'stories.id', 'users.nick', 'users.image')
             ->join('stories', 'stories.user_id', '=', 'followers.following')
@@ -33,18 +32,16 @@ class HomeController extends Controller
             ->orderBy('stories.id', 'DESC')
             ->get();
 
-        log::info($stories);
+        // $likesComments = LikeComment::select('comment_id')
+        //     ->where('giver', '=', $id)
+        //     ->get();
 
-        $likesComments = LikeComment::select('comment_id')
-            ->where('giver', '=', $id)
-            ->get();
-
-        if (!is_string($likesComments)) {
-            $likesCommentsArr = array();
-            foreach ($likesComments as $index) {
-                $likesCommentsArr[] = $index['comment_id'];
-            }
-        }
+        // if (!is_string($likesComments)) {
+        //     $likesCommentsArr = array();
+        //     foreach ($likesComments as $index) {
+        //         $likesCommentsArr[] = $index['comment_id'];
+        //     }
+        // }
 
         return view('home.index', compact('followings', 'id', 'stories', 'nick'));
     }

@@ -7,6 +7,9 @@
             <img src="{{ Storage::url('media/baseImgs/homePrev.png') }}" alt="" class="">
         </div>
         <div class="">
+            <div class="">
+                @include('layouts.partials.messages')
+            </div>
             <h2 class="">InstaFake</h2>
             <form action="{{ route('login.authenticate') }}" method="POST" class="">
                 @csrf

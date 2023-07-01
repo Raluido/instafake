@@ -50,11 +50,11 @@ class LoginController extends Controller
                 }
             }
 
-            return redirect()->route('home', compact('nick', 'id'));
+            return redirect()->route('home', [$nick => 'nick']);
+        } else {
+            return back()->withErrors([
+                'email' => 'Tu email no coincide con el de la base de datos.',
+            ])->onlyInput('email');
         }
-
-        return back()->withErrors([
-            'email' => 'Tu email no coincide con el de la base de datos.',
-        ])->onlyInput('email');
     }
 }
