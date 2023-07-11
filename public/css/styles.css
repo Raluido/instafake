@@ -175,7 +175,6 @@ main .home .innerHome .top .innerTop .addStoryPlus {
     background-color: #0099ff;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 main .home .innerHome .top .innerTop .addStoryPlus p {
