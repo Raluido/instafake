@@ -30,7 +30,7 @@ class ImageController extends Controller
         $img = str_replace(' ', '+', $img);
         $fileData = base64_decode($img);
         //saving
-        $pathName = public_path('storage/tmp/' . $id . '_' . time() . '.png');
+        $pathName = public_path('images/tmp/' . $id . '_' . time() . '.png');
         file_put_contents($pathName, $fileData);
         $fileName = pathinfo($pathName)['basename'];
         DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
@@ -49,8 +49,8 @@ class ImageController extends Controller
 
         $fileName = $request->input('fileName');
 
-        $path = public_path('storage/tmp/' . $fileName);
-        if (file_exists($path)) {
+        $path = 'images/tmp/' . $fileName;
+        if (Storage::exists($path)) {
             $image = new Image();
             $image->user_id = $id;
             $image->fileName = $request->input('fileName');
@@ -59,7 +59,16 @@ class ImageController extends Controller
             // $image->labels = $request->input('labels');
             $image->save();
 
-            rename(public_path('storage/tmp/' . $fileName), public_path('storage/media/' . $id . '/library/images/' . $fileName));
+            $path = 'images/' . $id;
+
+            if (Storage::exists($path)) {
+            } else {
+                Storage::makeDirectory($path, 0777, true, true);
+            }
+
+            log::info("sdfsfdf");
+
+            rename(public_path('images/tmp/' . $fileName), public_path('images/' . $id . '/' . $fileName));
 
             return redirect()->route('home', ['nick' => $nick]);
         } else {

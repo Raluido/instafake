@@ -23,7 +23,7 @@
         @else
         <a href="{{ route('user.myProfile', $nick) }}" class="">
             <div class="">
-                <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
             </div>
         </a>
         @endif

@@ -34,7 +34,7 @@ class DeleteTmpImg implements ShouldQueue
     public function handle()
     {
         $fileName = $this->fileName;
-        $path = public_path('storage/tmp/' . $fileName);
+        $path = public_path('images/tmp/' . $fileName);
         if (file_exists($path)) {
             unlink($path);
         }

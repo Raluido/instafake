@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
@@ -37,15 +37,15 @@ class LoginController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            $path = public_path('storage') . '/media/' . $id;
-            if (!File::exists($path)) {
-                File::makeDirectory($path, 0777, true, true);
-                $path = public_path('storage') . '/media/' . $id . '/library';
-                if (!File::exists($path)) {
-                    File::makeDirectory($path, 0777, true, true);
-                    $path = public_path('storage') . '/media/' . $id . '/library/images';
-                    if (!File::exists($path)) {
-                        File::makeDirectory($path, 0777, true, true);
+            $path = public_path('profiles') . '/media/' . $id;
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path, 0777);
+                $path = public_path('profiles') . '/media/' . $id;
+                if (!Storage::exists($path)) {
+                    Storage::makeDirectory($path, 0777);
+                    $path = public_path('profiles') . '/media/' . $id;
+                    if (!Storage::exists($path)) {
+                        Storage::makeDirectory($path, 0777);
                     }
                 }
             }

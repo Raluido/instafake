@@ -60,6 +60,14 @@ return [
             'throw' => false,
         ],
 
+        'profiles' => [
+            'driver' => 'local',
+            'root' => storage_path('app/profiles'),
+            'url' => env('APP_URL') . '/profiles',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -88,7 +96,8 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('images') => storage_path('app/images'),
-        public_path('stories') => storage_path('app/stories')
+        public_path('stories') => storage_path('app/stories'),
+        public_path('profiles') => storage_path('app/profiles')
     ],
 
 ];

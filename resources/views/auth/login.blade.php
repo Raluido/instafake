@@ -4,7 +4,7 @@
 <section class="login">
     <div class="innerLogin">
         <div class="imageLogin">
-            <img src="{{ Storage::url('media/baseImgs/homePrev.png') }}" alt="" class="">
+            <img src="{{ Storage::url('baseImgs/homePrev.png') }}" alt="" class="">
         </div>
         <div class="">
             <div class="">

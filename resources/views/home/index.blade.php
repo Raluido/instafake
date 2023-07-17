@@ -18,7 +18,7 @@
                 @else
                 <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
                     <div class="addStoryImg">
-                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     <h5 class="">Tu historia</h5>
                     <div class="addStoryPlus">
@@ -56,7 +56,7 @@
                 <div class="post">
                     <div class="image">
                         <div class="pic">
-                            <img src="{{ Storage::url('media/' . $following->following . '/library/images/' . $image->filename) }}" alt="" class="">
+                            <img src="{{ Storage::disk('images')->url($following->following . '/' . $image->filename) }}" alt="" class="">
                         </div>
                         <div class="bottom">
                             <div class="icons">

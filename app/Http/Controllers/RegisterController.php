@@ -49,10 +49,6 @@ class RegisterController extends Controller
             Auth::login($user);
             $id = auth()->id();
 
-            $path = public_path('images') . '/' . $id;
-            File::makeDirectory($path, 0777, true, true);
-            $filePath->storeAs('/' . $id, $fileName, 'images');
-
             Session::push('user', [
                 'user_id' => $id
             ]);
