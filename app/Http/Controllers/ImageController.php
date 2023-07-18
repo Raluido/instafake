@@ -50,6 +50,7 @@ class ImageController extends Controller
         $fileName = $request->input('fileName');
 
         $path = 'images/tmp/' . $fileName;
+
         if (Storage::exists($path)) {
             $image = new Image();
             $image->user_id = $id;
@@ -65,8 +66,6 @@ class ImageController extends Controller
             } else {
                 Storage::makeDirectory($path, 0777, true, true);
             }
-
-            log::info("sdfsfdf");
 
             rename(public_path('images/tmp/' . $fileName), public_path('images/' . $id . '/' . $fileName));
 
