@@ -2,6 +2,9 @@
 /public/build
 /public/hot
 /public/storage
+/public/profiles
+/public/images
+/public/stories
 /public/fontawesome
 /storage/*.key
 /vendor

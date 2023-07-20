@@ -121,6 +121,7 @@ const saveImage = () => {
             imgBase64: dataURL
         },
         success: function (data) {
+            console.log("estoy aqui");
             window.location.href = "http://instafake.com.devel/" + nick + "/images/publish/" + data;
         }
     });

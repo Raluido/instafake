@@ -40,6 +40,8 @@ class ImageController extends Controller
 
     public function publishForm($nick, $fileName)
     {
+        log::info($nick);
+        log::info($fileName);
         return view('images.showPublishForm', ['nick' => $nick, 'fileName' => $fileName]);
     }
 

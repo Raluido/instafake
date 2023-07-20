@@ -417,7 +417,7 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .profile img,
-    main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .profile img {
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .profile img {
     position: absolute;
     width: 4em;
     height: auto;
@@ -709,6 +709,29 @@ main .publishForm .innerPublish .bottom .inputForm {
     margin-bottom: 1em;
 }
 
+/* add story */
+
+main .addStoryForm {
+    padding: 25px;
+}
+
+main .addStoryForm .addStoryFormInner {
+    padding: 1em;
+}
+
+main .addStoryForm .addStoryFormInner .inputDiv {
+    margin: 1em 0;
+}
+
+main .addStoryForm .addStoryFormInner .submitDiv {
+    margin: 3em 0;
+    display: flex;
+    justify-content: center;
+}
+
+main .addStoryForm .addStoryFormInner .submitDiv>input {
+    width: 40%;
+}
 
 /* end */
 

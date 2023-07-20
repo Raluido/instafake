@@ -48,7 +48,7 @@ class UserController extends Controller
             $id = auth()->user()->id;
         }
 
-        return response()->file('images/' . $id . '/' . $fileName);
+        return response()->file('profiles/' . $id . '/' . $fileName);
     }
 
     public function follow(Request $request)

@@ -91,9 +91,7 @@
                                 <div class="innerComments">
                                     @if(count($image->comments) > 0)
                                     <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class="">
-                                        <a href="{{ route('comments.showall') }}" class="">
-                                            <p class="">Ver los {{ count($image->comments) }} comentarios</p>
-                                        </a>
+                                        <p class="">Ver los {{ count($image->comments) }} comentarios</p>
                                     </a>
                                     <!-- @foreach($image->comments as $comment)
                                                 <div class="likesComments">

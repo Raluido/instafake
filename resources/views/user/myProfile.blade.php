@@ -13,7 +13,7 @@
                     </div>
                     @else
                     <div class="avatar">
-                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     @endif
                     <div class="publishedAndFollows">
@@ -31,7 +31,7 @@
         <div class="bottom">
             <div class="innerBottom">
                 @foreach($user->images as $index)
-                <div class="published"><img src="{{ Storage::url('media/' . $user->id . '/library/images/' . $index->filename) }}" alt="" class=""></div>
+                <div class="published"><img src="{{ Storage::disk('images')->url($user->id . '/' . $index->filename) }}" alt="" class=""></div>
                 @endforeach
             </div>
         </div>

@@ -71,10 +71,14 @@ class StoryController extends Controller
             $filepath->storeAs('/' . auth()->id(), $fileName, 'stories');
             $story->path = $fileName;
             $story->save();
-        } else {
-            log::info("no hay file");
-        }
 
-        return redirect()->back();
+            return redirect()
+                ->back()
+                ->withSuccess("La story se ha añadido correctamente");
+        } else {
+            return redirect()
+                ->back()
+                ->withErrors("No has seleccionado ninguna story");
+        }
     }
 }
