@@ -123,6 +123,6 @@ class ImageController extends Controller
     {
         $id = auth()->user()->id;
 
-        return response()->file('images/' . $id . '/' . $fileName);
+        return response()->file('profiles/' . $id . '/' . $fileName);
     }
 }

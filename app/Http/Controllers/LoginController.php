@@ -37,11 +37,6 @@ class LoginController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            $path = 'profiles/' . $id;
-            if (!Storage::exists($path)) {
-                Storage::makeDirectory($path);
-            }
-
             return redirect()->route('home', [$nick => 'nick']);
         } else {
             return back()->withErrors([

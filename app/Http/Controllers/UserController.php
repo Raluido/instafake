@@ -16,6 +16,13 @@ class UserController extends Controller
         return view('user.myProfile', compact('user', 'nick'));
     }
 
+    public function showData($nick)
+    {
+        $user = User::find(auth()->id());
+
+        return view('user.showData', compact($nick, $user));
+    }
+
     public function searchForm($nick)
     {
         $id = auth()->id();

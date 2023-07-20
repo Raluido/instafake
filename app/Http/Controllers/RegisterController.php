@@ -50,10 +50,11 @@ class RegisterController extends Controller
             $id = auth()->id();
 
             $path = 'profiles/' . $id;
-            if (Storage::exists($path)) {
-            } else {
-                Storage::makeDirectory($path, 0777);
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path);
             }
+
+            $filePath->storeAs($path, $fileName);
 
             Session::push('user', [
                 'user_id' => $id

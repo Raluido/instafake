@@ -41,6 +41,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/myProfile', [UserController::class, 'showProfile'])->name('user.myProfile');
+                Route::get('myProfile/data', [UserController::class, 'showData'])->name('user.showData');
+                Route::update('myProfile/updateData/{user}', [UserController::class, 'updateData'])->name('user.updateData');
                 Route::get('/search', [UserController::class, 'searchForm'])->name('user.searchForm');
                 Route::get('/search/{inputSearch}', [UserController::class, 'search'])->name('user.search');
                 Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
