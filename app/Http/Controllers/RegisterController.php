@@ -49,6 +49,12 @@ class RegisterController extends Controller
             Auth::login($user);
             $id = auth()->id();
 
+            $path = 'profiles/' . $id;
+            if (Storage::exists($path)) {
+            } else {
+                Storage::makeDirectory($path, 0777);
+            }
+
             Session::push('user', [
                 'user_id' => $id
             ]);
