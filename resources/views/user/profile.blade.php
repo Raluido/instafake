@@ -13,7 +13,7 @@
                     </div>
                     @else
                     <div class="avatar">
-                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     @endif
                     <div class="publishedAndFollows">

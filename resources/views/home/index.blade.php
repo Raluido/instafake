@@ -37,7 +37,7 @@
                 @else
                 <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
                     <div class="storyImg">
-                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     <h5 class="">{{ $story->nick }}</h5>
                 </a>
@@ -45,7 +45,7 @@
                 @endforeach
             </div>
         </div>
-        <video class="d-none storyPlayer" width="100%" height="auto" id="storyPlay" controls>
+        <video class="d-none storyPlayer" width="100%" height="auto" id="storyPlay">
             <source src="" id="mp4Source" type="video/mp4">
             Your browser does not support the video tag.
         </video>
