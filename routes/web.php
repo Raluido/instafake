@@ -43,6 +43,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/myProfile', [UserController::class, 'showProfile'])->name('user.myProfile');
                 Route::get('myProfile/data', [UserController::class, 'showData'])->name('user.showData');
                 Route::post('myProfile/updateData', [UserController::class, 'updateData'])->name('user.updateData');
+                Route::post('myProfile/deleteAvatar', [UserController::class, 'deleteAvatar'])->name('user.deleteAvatar');
                 Route::get('/search', [UserController::class, 'searchForm'])->name('user.searchForm');
                 Route::get('/search/{inputSearch}', [UserController::class, 'search'])->name('user.search');
                 Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
@@ -73,6 +74,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/{search}', [MessageController::class, 'search'])->name('messages.search');
                 Route::get('/show/{receiver}', [MessageController::class, 'show'])->name('messages.show');
                 Route::post('/send', [MessageController::class, 'send'])->name('messages.send');
+                Route::get('/{search}/{image}', [MessageController::class, 'sendLinks'])->name('messages.searchFormLinks');
             });
             Route::group(['prefix' => 'comments'], function () {
                 Route::get('/liked/{dataId}', [CommentController::class, 'liked'])->name('comments.getLike');

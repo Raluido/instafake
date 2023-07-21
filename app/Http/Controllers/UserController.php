@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Follower;
+use App\Models\Image;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -32,6 +34,9 @@ class UserController extends Controller
         $user->nick = $request->input('nick');
         $user->password = $request->input('password');
         if ($request->hasFile('avatar')) {
+            if ($user->image != null && Storage::exists('profiles/' . $user->id . '/' . $user->image)) {
+                unlink(public_path('profiles/' . $user->id . '/' . $user->image));
+            }
             $file = $request->file('avatar');
             $extension = $file->getClientOriginalExtension();
             $fileName = 'avatar' . '_' . time() . '_.' . $extension;
@@ -45,17 +50,18 @@ class UserController extends Controller
             ->withSuccess('Hemos actualizado el usuario correctamente!');
     }
 
-    public function deleteAvatar($nick, User $user)
+    public function deleteAvatar($nick)
     {
-        $delete = Db::Table('user')
-            ->where('id', $user->id)
-            ->delete();
-
-        if ($delete) {
-            return redirect()
-                ->back()
-                ->withSuccess("La imagen se ha eliminado correctamente");
+        $user = User::find(auth()->id());
+        if (Storage::exists('profiles/' . $user->id . '/' . $user->image)) {
+            unlink(public_path('profiles/' . $user->id . '/' . $user->image));
+            $user->image = null;
+            $user->update();
         }
+
+        return redirect()
+            ->back()
+            ->withSuccess("La imagen se ha eliminado correctamente");
     }
 
     public function searchForm($nick)

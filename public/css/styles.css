@@ -847,7 +847,7 @@ main {
 }
 
 .updateProfile .bottom .submitDiv {
-    margin: 4em 0;
+    margin: 2em 0;
     display: flex;
     justify-content: center;
 }
@@ -857,7 +857,6 @@ main {
 }
 
 .updateProfile .bottom .innerAvatarThumbnail {
-    margin-top: 1em;
     width: 2em;
     height: auto;
     position: absolute;
@@ -865,15 +864,17 @@ main {
 
 .updateProfile .bottom .innerAvatarThumbnailDel {
     position: relative;
-    top: 6px;
+    top: 20px;
     left: 20px;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: #6C757D;
+    width: 1.5em;
+    height: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.updateProfile .bottom .innerAvatarThumbnailDel input {
+    border-radius: 50%;
 }
 
 .updateProfile .bottom .innerAvatarThumbnail>img {

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Image;
 use Mockery\Undefined;
 
 class MessageController extends Controller
@@ -73,6 +74,7 @@ class MessageController extends Controller
         return $users;
     }
 
+
     public function send(Request $request)
     {
         $id = auth()->id();
@@ -85,5 +87,14 @@ class MessageController extends Controller
         $message->save();
 
         return back();
+    }
+
+    public function sendLinks($nick, $inputSearch, Image $image)
+    {
+        $id = auth()->id();
+
+        $imageId = $image->id;
+
+        return ['users' => $users, 'image' => $image];
     }
 }

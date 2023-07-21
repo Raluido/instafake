@@ -38,23 +38,26 @@
                 <div class="inputDiv">
                     <label for="avatar" class="">Avatar</label>
                     <input type="file" name="avatar" value="{{ $user->avatar }}" class="">
-                    @if(file_exists(public_path('profiles/' . $user->id . '/' . $user->image)))
-                    <div class="avatarThumbnail">
-                        <div class="innerAvatarThumbnail">
-                            <img src="{{ Storage::disk('profiles')->url($user->id . '/' . $user->image) }}" alt="" class="">
-                        </div>
-                        <div class="innerAvatarThumbnailDel">
-                            <form action="{{ route('images.delete', ['nick' => $nick, ]) }}" class=""></form>
-                            x
-                        </div>
-                    </div>
-                    @endif
                 </div>
                 <div class="submitDiv">
                     <input type="submit" class="" value="Actualizar">
                 </div>
-
             </form>
+
+            @if($user->image != null && file_exists(public_path('profiles/' . $user->id . '/' . $user->image)))
+            <div class="avatarThumbnail">
+                <div class="innerAvatarThumbnail">
+                    <img src="{{ Storage::disk('profiles')->url($user->id . '/' . $user->image) }}" alt="" class="">
+                </div>
+                <div class="innerAvatarThumbnailDel">
+                    <form action="{{ route('user.deleteAvatar', ['nick' => $nick]) }}" method="post" class="">
+                        @csrf
+                        <input type="submit" class="" value="x">
+                    </form>
+                </div>
+            </div>
+            @endif
+
         </div>
     </div>
 </section>
