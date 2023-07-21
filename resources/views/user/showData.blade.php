@@ -2,51 +2,61 @@
 
 @section('main')
 
-<section class="">
-    <div class="">
-        <h3 class="">
-            Panel de usuario
-        </h3>
-    </div>
-    <div class="">
-        <form action="{{ route('user.updateData', ['nick' => $nick, 'user' => $user->id]) }}" class="">
-            @csrf
-            <div class="">
-                <label for="name" class="">Nombre</label>
-                <input type="text" name="name" value="{{ $user->name }}" class="">
-            </div>
-            <div class="">
-                <label for="surname" class="">Apellidos</label>
-                <input type="text" name="surname" value="{{ $user->surname }}" class="">
-            </div>
-            <div class="">
-                <label for="nick" class="">Nick</label>
-                <input type="text" name="nick" value="{{ $user->nick }}" class="">
-            </div>
-            <div class="">
-                <label for="password" class="">Contraseña</label>
-                <input type="text" name="password" class="">
-            </div>
-            <div class="">
-                <label for="repitePassword" class="">Repite Contraseña</label>
-                <input type="text" name="repitePassword" class="">
-            </div>
-            <div class="">
-                <label for="image" class="">Avatar</label>
-                <input type="file" name="avatar" value="{{ $user->avatar }}" class="">
-                @if(file_exists(public_path('profile/' . $user->id . '/' . $user->avatar)))
-                <div class="">
-                    <img src="{{ Storage::url('profile/' . $user->id . '/' . $user->avatar)) }}" alt="" class="">
+<section class="updateProfile">
+    <div class="innerUpdateProfile">
+        <div class="top">
+            <h2 class="">
+                Panel de usuario
+            </h2>
+        </div>
+        <div class="">
+            @include('layouts.partials.messages')
+        </div>
+        <div class="bottom">
+            <form action="{{ route('user.updateData', ['nick' => $nick]) }}" enctype="multipart/form-data" method="post" class="">
+                @csrf
+                <div class="inputDiv">
+                    <label for="name" class="">Nombre</label>
+                    <input type="text" name="name" value="{{ $user->name }}" class="">
                 </div>
-                @endif
-            </div>
-            <div class="">
-                <input type="submit" class="" value="Actualizar">
-            </div>
+                <div class="inputDiv">
+                    <label for="surname" class="">Apellidos</label>
+                    <input type="text" name="surname" value="{{ $user->surname }}" class="">
+                </div>
+                <div class="inputDiv">
+                    <label for="nick" class="">Nick</label>
+                    <input type="text" name="nick" value="{{ $user->nick }}" class="">
+                </div>
+                <div class="inputDiv">
+                    <label for="password" class="">Contraseña</label>
+                    <input type="password" name="password" class="">
+                </div>
+                <div class="inputDiv">
+                    <label for="password_confirmation" class="">Repite Contraseña</label>
+                    <input type="password" name="password_confirmation" class="">
+                </div>
+                <div class="inputDiv">
+                    <label for="avatar" class="">Avatar</label>
+                    <input type="file" name="avatar" value="{{ $user->avatar }}" class="">
+                    @if(file_exists(public_path('profiles/' . $user->id . '/' . $user->image)))
+                    <div class="avatarThumbnail">
+                        <div class="innerAvatarThumbnail">
+                            <img src="{{ Storage::disk('profiles')->url($user->id . '/' . $user->image) }}" alt="" class="">
+                        </div>
+                        <div class="innerAvatarThumbnailDel">
+                            <form action="{{ route('images.delete', ['nick' => $nick, ]) }}" class=""></form>
+                            x
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                <div class="submitDiv">
+                    <input type="submit" class="" value="Actualizar">
+                </div>
 
-        </form>
+            </form>
+        </div>
     </div>
-
 </section>
 
 

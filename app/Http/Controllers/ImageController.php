@@ -78,6 +78,19 @@ class ImageController extends Controller
         }
     }
 
+    public function delete($nick, Image $image)
+    {
+        $delete = Db::Table('image')
+            ->where('id', $image->id)
+            ->delete();
+
+        if ($delete) {
+            return redirect()
+                ->back()
+                ->withSuccess("La imagen se ha eliminado correctamente");
+        }
+    }
+
     public function liked($nick, $dataId)
     {
         $id = auth()->id();

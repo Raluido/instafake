@@ -832,6 +832,54 @@ main {
     height: auto;
 }
 
+/* uploadForm */
+
+.updateProfile {
+    padding: 25px;
+}
+
+.updateProfile .bottom .inputDiv {
+    margin: 1em 0;
+}
+
+.updateProfile .bottom .inputDiv>label {
+    margin: 0 0 .5em 0;
+}
+
+.updateProfile .bottom .submitDiv {
+    margin: 4em 0;
+    display: flex;
+    justify-content: center;
+}
+
+.updateProfile .bottom .submitDiv>input {
+    width: fit-content;
+}
+
+.updateProfile .bottom .innerAvatarThumbnail {
+    margin-top: 1em;
+    width: 2em;
+    height: auto;
+    position: absolute;
+}
+
+.updateProfile .bottom .innerAvatarThumbnailDel {
+    position: relative;
+    top: 6px;
+    left: 20px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #6C757D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.updateProfile .bottom .innerAvatarThumbnail>img {
+    width: 100%;
+    height: 100%;
+}
 
 
 /* Comments */

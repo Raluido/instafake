@@ -42,7 +42,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/myProfile', [UserController::class, 'showProfile'])->name('user.myProfile');
                 Route::get('myProfile/data', [UserController::class, 'showData'])->name('user.showData');
-                Route::update('myProfile/updateData/{user}', [UserController::class, 'updateData'])->name('user.updateData');
+                Route::post('myProfile/updateData', [UserController::class, 'updateData'])->name('user.updateData');
                 Route::get('/search', [UserController::class, 'searchForm'])->name('user.searchForm');
                 Route::get('/search/{inputSearch}', [UserController::class, 'search'])->name('user.search');
                 Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
@@ -64,6 +64,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/store', [ImageController::class, 'store'])->name('images.store');
                 Route::get('/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');
                 Route::post('/published', [ImageController::class, 'published'])->name('images.published');
+                Route::post('/delete/{id}', [ImageController::class, 'delete'])->name('images.delete');
                 Route::get('/show/{filename}', [ImageController::class, 'getImage'])->name('images.show');
             });
             Route::group(['prefix' => 'messages'], function () {
