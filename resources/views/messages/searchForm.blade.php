@@ -22,4 +22,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/searchUsersLinks.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/callAjax.js') }}" defer></script>
 @endsection

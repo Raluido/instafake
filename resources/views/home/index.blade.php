@@ -77,7 +77,7 @@
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
                                 <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class=""><i class="fa-solid fa-comment"></i></a>
-                                <a href="{{ route('user.searchFormLinks', ['nick' => $nick, 'image' => $image->id]) }}" class=""><i class="fa-solid fa-paper-plane"></i></a>
+                                <a href="{{ route('messages.searchForm', ['nick' => $nick, 'imageId' => $image->id]) }}" class=""><i class="fa-solid fa-paper-plane"></i></a>
                             </div>
                             <div class="likes" data-id="{{ $image->id }}">
                                 <p class="countLikes" data-id="{{ $image->id }}">{{ count($image->likes) }} Me gusta</p>

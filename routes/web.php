@@ -74,7 +74,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/{search}', [MessageController::class, 'search'])->name('messages.search');
                 Route::get('/show/{receiver}', [MessageController::class, 'show'])->name('messages.show');
                 Route::post('/send', [MessageController::class, 'send'])->name('messages.send');
-                Route::get('/{search}/{image}', [MessageController::class, 'sendLinks'])->name('messages.searchFormLinks');
+                Route::get('/sendLinks/searchForm/{imageId}', [MessageController::class, 'searchForm'])->name('messages.searchForm');
+                Route::get('/sendLinks/{search}', [MessageController::class, 'searchForLinks'])->name('messages.searchForLinks');
+                Route::get('/sendLinks/{receiver}/{imageId}', [MessageController::class, 'sendLinks'])->name('messages.searchFormLinks');
             });
             Route::group(['prefix' => 'comments'], function () {
                 Route::get('/liked/{dataId}', [CommentController::class, 'liked'])->name('comments.getLike');

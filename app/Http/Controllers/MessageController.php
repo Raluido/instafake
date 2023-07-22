@@ -74,7 +74,6 @@ class MessageController extends Controller
         return $users;
     }
 
-
     public function send(Request $request)
     {
         $id = auth()->id();
@@ -89,12 +88,42 @@ class MessageController extends Controller
         return back();
     }
 
-    public function sendLinks($nick, $inputSearch, Image $image)
+    public function searchForm($nick, $imageId)
+    {
+        return view('messages.searchForm', compact('nick', 'imageId'));
+    }
+
+    public function searchForLinks($nick, $inputSearch)
     {
         $id = auth()->id();
 
-        $imageId = $image->id;
+        $users = Db::table('users')
+            ->join('followers', 'users.id', '=', 'followers.following')
+            ->where('followers.follower', '=', $id)
+            ->where('users.nick', 'LIKE', '%' . $inputSearch . '%')
+            ->get();
 
-        return ['users' => $users, 'image' => $image];
+        return $users;
+    }
+
+    public function sendLinks($nick, $receiverId, $imageId)
+    {
+        $image = Image::find($imageId);
+        $nick = $image->user->nick;
+        $userId = $image->user->id;
+        $avatar = $image->user->image;
+        $image = $image->filename;
+        $name = $image->name;
+
+        $message = new Message();
+        $message->sender = auth()->id();
+        $message->receiver = $receiverId;
+        $message->read = false;
+        $message->content = "<div class='link'><div class='top'><img src='profiles/"
+            . $userId . '/' . $avatar . "'><h3>" . $nick . "</h3></div><div class='middle' 
+        <img src='images/" . $userId . '/' . $image . "'></div><div class='bottom'>
+        <h3>" . $nick . "</h3><h3>" . $name . "</h3></div></div>";
+
+        return ['nick' => $nick, 'avatar' => $avatar, 'image' => $image, 'name' => $name];
     }
 }

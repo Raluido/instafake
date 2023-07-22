@@ -4,11 +4,11 @@ function searchUsersLinks() {
     var inputSearch = document.getElementById("searchId").value;
     $.ajax({
         type: 'GET',
-        url: '/' + nick + '/messages/' + inputSearch + '/' + imageId,
+        url: '/' + nick + '/messages/sendLinks/' + inputSearch,
         data: {},
         datatype: "json",
         success: function (data) {
-            if (typeof data === 'string') {
+            if (typeof data[0] === 'string') {
                 document.getElementById("resultsId").classList.remove("d-block");
                 document.getElementById("resultsId").classList.add("d-none");
             } else {
@@ -21,7 +21,7 @@ function searchUsersLinks() {
                     if (data[0].nick !== "") {
                         data.forEach(element => {
                             document.getElementById("resultsId").innerHTML +=
-                                "<a href='/" + nick + "/messages/show/" + element.following + "' style='display:block; margin-bottom:.5em;'>" + element.nick + "</a>"
+                                "<div class='links' onclick='callAjax()' data-receiverId=" + element.id + " data-imageId=" + imageId + " style='display:block; margin-bottom:.5em;'>" + element.nick + "</div>"
                         });
                         document.getElementById("resultsId").classList.remove("d-none");
                         document.getElementById("resultsId").classList.add("d-block");
