@@ -58,7 +58,7 @@
                         <div class="top">
                             <div class="icon">
                                 @if($image->user->image != null && file_exists('profiles/' . $image->user->id . '/' . $image->user->image))
-                                <img src="{{ $image->user->image }}" alt="" class="">
+                                <img src="{{ Storage::disk('profiles')->url($image->user->id . '/' . $image->user->image) }}" alt="" class="">
                                 @else
                                 <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                                 @endif

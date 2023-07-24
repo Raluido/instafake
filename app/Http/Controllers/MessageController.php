@@ -117,9 +117,9 @@ class MessageController extends Controller
             $userId = $image->user->id;
         }
         if ($image->user->image != null) {
-            $avatar = $image->user->image;
+            $avatar = '/profiles/' . $userId . '/' . $image->user->image;
         } else {
-            $avatar = 'profiles/default/avatar.png';
+            $avatar = '/profiles/default/avatar.png';
         }
         if ($image->user->name != null) {
             $name = $image->name;
@@ -134,7 +134,7 @@ class MessageController extends Controller
         $message->sender = auth()->id();
         $message->receiver = $receiverId;
         $message->read = false;
-        $message->content = "<div class='link'><div class='top'><div class=''><img src='" . env('APP_URL') . "/user/show/" . $avatar . "/" . auth()->id() . "'></div><h3>" . $nick . "</h3></div><div class='middle'><img src='" . env('APP_URL') . "/images/show/" . $fileName . "/" . auth()->id() . "'></div><div class='bottom'><h3>" . $nick . "</h3><h3>" . $name . "</h3></div></div>";
+        $message->content = "<div class='link'><div class='top'><div class=''><img src='" . env('APP_URL') . $avatar . "'></div><h4>" . $nick . "</h4></div><div class='middle'><img src='" . env('APP_URL') . "/images/" . $userId . "/" . $fileName . "'></div><div class='bottom'><div class=''><h4>" . $nick . "</h4></div><div class=''><p>" . $name . "</p></div></div>";
         $pass = $message->save();
 
         return $pass;

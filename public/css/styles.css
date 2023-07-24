@@ -452,15 +452,60 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
     height: auto;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link {
     background-color: #262626;
     padding: .5px;
-    border-radius: 500px;
+    border-radius: 5%;
     width: fit-content;
 }
 
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .text {
+    background-color: #262626;
+    padding: .5px;
+    border-radius: 40%;
+    width: fit-content;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle {
+    width: 15em;
+    height: auto;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle>img {
+    width: 100%;
+    height: auto;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top,
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom div {
+    display: flex;
+    align-items: center;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div {
+    width: 2em;
+    height: 2em;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: .5em;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div>img {
+    width: 100%;
+    height: auto;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom h3:nth-child(1) {
+    margin-right: 1em;
+}
+
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage>div {
-    border: 1px solid #262626;
+    background-color: #262626;
     padding: .5px;
     border-radius: 500px;
     width: fit-content;
@@ -538,7 +583,12 @@ main .message .innerMessage .bottom .chat .innerUserMessage p {
 
 .messages .innerMessages .bottom .userMessage .content .innerContent {
     display: flex;
+    align-items: center;
     margin-top: .3em;
+}
+
+.messages .innerMessages .bottom .userMessage .content .innerContent div:nth-child(1) {
+    margin-right: .5em;
 }
 
 .messages .innerMessages .bottom .userMessage .content h5,
@@ -845,6 +895,7 @@ main {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 1px;
     row-gap: 1px;
+    º
 }
 
 .myProfile .innerMyProfile .bottom .innerBottom .published {
@@ -947,11 +998,14 @@ main {
 }
 
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments p {
-    margin: .5em 0;
+    margin: 0;
 }
 
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments .likeComment {
@@ -959,8 +1013,8 @@ main {
 }
 
 .allComments .bottom .innerBottom .comments .avatar .innerAvatar {
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 1em;

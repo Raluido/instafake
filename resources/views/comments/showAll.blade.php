@@ -17,7 +17,7 @@
                 @foreach($images as $image)
                 <div class="comments">
                     <div class="innerComments">
-                        @if($i == 0)
+                        <!-- if($i == 0)
                         <div class="avatar">
                             <div class="innerAvatar">
                                 <img src="{{ Storage::url('media/' . $image->user->id . '/' . $image->user->image) }}" alt="" class="">
@@ -26,12 +26,24 @@
                                 <h4 class="">{{ $image->name }}</h4>
                             </div>
                         </div>
-                        @endif
+                        endif -->
                         @foreach($image->comments as $comment)
                         @php $i++; @endphp
                         <div class="avatar">
                             <div class="innerAvatar">
-                                <img src="{{ Storage::url('media/' . $comment->user->id . '/' . $comment->user->image) }}" alt="" class="">
+                                @if(auth()->user()->image)
+                                <a href="{{ route('user.myProfile', $nick) }}" class="">
+                                    <div class="">
+                                        <img src="{{ Storage::disk('profiles')->url($comment->user->id . '/' . $comment->user->image) }}" alt="" class="">
+                                    </div>
+                                </a>
+                                @else
+                                <a href="{{ route('user.myProfile', $nick) }}" class="">
+                                    <div class="">
+                                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
+                                    </div>
+                                </a>
+                                @endif
                             </div>
                             <div class="content">
                                 <p class="">{{ $comment->content }}</p>

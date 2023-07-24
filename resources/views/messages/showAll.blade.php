@@ -2,6 +2,7 @@
 
 @section('main')
 <?php
+
 use App\Models\User;
 ?>
 <section class="messages">
@@ -20,7 +21,7 @@ use App\Models\User;
             @if(auth()->id() != $message->sender)
             <a href="{{ route('messages.show', [$nick,$message->sender]) }}" class="">
                 <div class="userMessage">
-                    @php 
+                    @php
                     $user = User::find($message->sender);
                     @endphp
                     @if($user->avatar)
@@ -35,14 +36,26 @@ use App\Models\User;
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
-                        @if(substr($message->content, 0, 4) == "<div")
-                            <div class="">{!! $message->content !!}</div>
-                            @else
-                            <div class="">{{ $message->content }}</div>
-                        @endif
-                            <h6 class="">
-                                {{ \FormatTime::LongTimeFilter($message->created_at) }}
-                            </h6>
+                            <?php
+                            if (substr($message->content, 0, 4) == '<div') :
+                            ?>
+                                <div class="">
+                                    <p>Has recibido una imágen</p>
+                                </div>
+                            <?php
+                            else :
+                            ?>
+                                <div class="">
+                                    <p>Has recibido una mensaje</p>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
+                            <div class="">
+                                <h6 class="">
+                                    {{ \FormatTime::LongTimeFilter($message->created_at) }}
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +63,7 @@ use App\Models\User;
             @else
             <a href="{{ route('messages.show', [$nick,$message->receiver]) }}" class="">
                 <div class="userMessage">
-                    @php 
+                    @php
                     $user = User::find($message->receiver);
                     @endphp
                     @if($user->avatar)
@@ -65,14 +78,26 @@ use App\Models\User;
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
-                        @if(substr($message->content, 0, 4) == "<div")
-                            <div class="">{!! $message->content !!}</div>
-                        @else
-                            <div class="">{{ $message->content }}</div>
-                        @endif                            
-                            <h6 class="">
-                                {{ \FormatTime::LongTimeFilter($message->created_at) }}
-                            </h6>
+                            <?php
+                            if (substr($message->content, 0, 4) == '<div') :
+                            ?>
+                                <div class="">
+                                    <p>Has recibido una imágen</p>
+                                </div>
+                            <?php
+                            else :
+                            ?>
+                                <div class="">
+                                    <p>Has recibido una mensaje</p>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
+                            <div class="">
+                                <h6 class="">
+                                    {{ \FormatTime::LongTimeFilter($message->created_at) }}
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>
