@@ -35,7 +35,11 @@ use App\Models\User;
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
-                            <h5 class="">{{ substr($message->content, 0, 15) }}...</h5>
+                        @if(substr($message->content, 0, 4) == "<div")
+                            <div class="">{!! $message->content !!}</div>
+                            @else
+                            <div class="">{{ $message->content }}</div>
+                        @endif
                             <h6 class="">
                                 {{ \FormatTime::LongTimeFilter($message->created_at) }}
                             </h6>
@@ -61,7 +65,11 @@ use App\Models\User;
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
-                            <h5 class="">{{ substr($message->content, 0, 15)  }}...</h5>
+                        @if(substr($message->content, 0, 4) == "<div")
+                            <div class="">{!! $message->content !!}</div>
+                        @else
+                            <div class="">{{ $message->content }}</div>
+                        @endif                            
                             <h6 class="">
                                 {{ \FormatTime::LongTimeFilter($message->created_at) }}
                             </h6>

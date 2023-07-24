@@ -7,8 +7,10 @@ function callAjax() {
         url: '/' + nick + '/messages/sendLinks/' + receiverId + '/' + imageId,
         data: {},
         success: function (data) {
-            if(data[0] !== undefined){
-                
+            if (data == 1) {
+                window.location.href = "http://instafake.com.devel/" + nick + "/messages/show/" + receiverId;
+            } else {
+
             }
         }
     })

@@ -98,6 +98,7 @@ class MessageController extends Controller
         $id = auth()->id();
 
         $users = Db::table('users')
+            ->select('users.id', 'users.nick')
             ->join('followers', 'users.id', '=', 'followers.following')
             ->where('followers.follower', '=', $id)
             ->where('users.nick', 'LIKE', '%' . $inputSearch . '%')
@@ -109,21 +110,33 @@ class MessageController extends Controller
     public function sendLinks($nick, $receiverId, $imageId)
     {
         $image = Image::find($imageId);
-        $nick = $image->user->nick;
-        $userId = $image->user->id;
-        $avatar = $image->user->image;
-        $image = $image->filename;
-        $name = $image->name;
+        if ($image->user->nick != null) {
+            $nick = $image->user->nick;
+        }
+        if ($image->user->id != null) {
+            $userId = $image->user->id;
+        }
+        if ($image->user->image != null) {
+            $avatar = $image->user->image;
+        } else {
+            $avatar = 'profiles/default/avatar.png';
+        }
+        if ($image->user->name != null) {
+            $name = $image->name;
+        } else {
+            $name = "";
+        }
+        if ($image->filename != null) {
+            $fileName = $image->filename;
+        }
 
         $message = new Message();
         $message->sender = auth()->id();
         $message->receiver = $receiverId;
         $message->read = false;
-        $message->content = "<div class='link'><div class='top'><img src='profiles/"
-            . $userId . '/' . $avatar . "'><h3>" . $nick . "</h3></div><div class='middle' 
-        <img src='images/" . $userId . '/' . $image . "'></div><div class='bottom'>
-        <h3>" . $nick . "</h3><h3>" . $name . "</h3></div></div>";
+        $message->content = "<div class='link'><div class='top'><div class=''><img src='" . env('APP_URL') . "/user/show/" . $avatar . "/" . auth()->id() . "'></div><h3>" . $nick . "</h3></div><div class='middle'><img src='" . env('APP_URL') . "/images/show/" . $fileName . "/" . auth()->id() . "'></div><div class='bottom'><h3>" . $nick . "</h3><h3>" . $name . "</h3></div></div>";
+        $pass = $message->save();
 
-        return ['nick' => $nick, 'avatar' => $avatar, 'image' => $image, 'name' => $name];
+        return $pass;
     }
 }

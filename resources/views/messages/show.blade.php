@@ -2,6 +2,7 @@
 
 @section('main')
 <?php
+
 use App\Models\User;
 ?>
 <section class="message">
@@ -30,7 +31,11 @@ use App\Models\User;
                                 </div>
                                 @endif
                                 <div class="content">
-                                    <p class="">{{ $message->content }}</p>
+                                    @if(substr($message->content, 0, 4) == "<div")
+                                    <div class="">{!! $message->content !!}</div>
+                                    @else
+                                    <div class="">{{ $message->content }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -55,7 +60,11 @@ use App\Models\User;
                                 </div>
                                 @endif
                                 <div class="content">
-                                    <p class="">{{ $message->content }}</p>
+                                @if(substr($message->content, 0, 4) == "<div")
+                                    <div class="">{!! $message->content !!}</div>
+                                    @else
+                                    <div class="">{{ $message->content }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

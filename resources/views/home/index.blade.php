@@ -55,6 +55,27 @@
                 @foreach($following->userFollowing->images as $image)
                 <div class="post">
                     <div class="image">
+                        <div class="top">
+                            <div class="icon">
+                                @if($image->user->image != null && file_exists('profiles/' . $image->user->id . '/' . $image->user->image))
+                                <img src="{{ $image->user->image }}" alt="" class="">
+                                @else
+                                <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
+                                @endif
+                            </div>
+                            <div class="info">
+                                <div class="name">
+                                    <h5 class="">
+                                        {{ $image->user->nick }}
+                                    </h5>
+                                </div>
+                                <div class="place">
+                                    <p class="">
+                                        {{ $image->location }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="pic">
                             <img src="{{ Storage::disk('images')->url($following->following . '/' . $image->filename) }}" alt="" class="">
                         </div>

@@ -144,6 +144,10 @@ main .home {
     margin-bottom: 5em;
 }
 
+main .home .innerHome .top {
+    margin-bottom: .8em;
+}
+
 main .home .innerHome .top .innerTop {
     overflow-x: auto;
     white-space: nowrap;
@@ -207,6 +211,31 @@ main .home .innerHome .top .innerTop .story img {
 
 main .home .innerHome .bottom .innerBottom .post .image {
     margin-bottom: 2em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .top {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 .5em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .top .icon {
+    width: 2.3em;
+    height: 2.3em;
+    overflow: hidden;
+    border: 2px solid red;
+    border-radius: 50%;
+    margin-right: 1em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .top .info h5,
+main .home .innerHome .bottom .innerBottom .post .image .top .info p {
+    margin: .1em;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .top .icon>img {
+    width: auto;
+    height: 100%;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
