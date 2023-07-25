@@ -32,17 +32,6 @@ class HomeController extends Controller
             ->orderBy('stories.id', 'DESC')
             ->get();
 
-        // $likesComments = LikeComment::select('comment_id')
-        //     ->where('giver', '=', $id)
-        //     ->get();
-
-        // if (!is_string($likesComments)) {
-        //     $likesCommentsArr = array();
-        //     foreach ($likesComments as $index) {
-        //         $likesCommentsArr[] = $index['comment_id'];
-        //     }
-        // }
-
         return view('home.index', compact('followings', 'id', 'stories', 'nick'));
     }
 }

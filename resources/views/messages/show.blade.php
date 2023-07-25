@@ -8,7 +8,6 @@ use App\Models\User;
 <section class="message">
     <div class="innerMessage">
         <div class="top">
-            <h4>Mis mensajes</h4>
         </div>
         <div class="bottom">
             <div class="chat">
@@ -27,12 +26,11 @@ use App\Models\User;
                                 </div>
                                 @else
                                 <div class="profile">
-                                    <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                                    <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                                 </div>
                                 @endif
                                 <div class="content">
-                                    @if(substr($message->content, 0, 4) == '<div') 
-                                        {!! $message->content !!}
+                                    @if(substr($message->content, 0, 4) == '<div') {!! $message->content !!}
                                         @else
                                         <div class="text">
                                             <p class="">{{ $message->content }}</p>
@@ -58,33 +56,32 @@ use App\Models\User;
                                 </div>
                                 @else
                                 <div class="profile">
-                                    <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                                    <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                                 </div>
                                 @endif
                                 <div class="content">
-                                    @if(substr($message->content, 0, 4) == "<div") 
-                                    <div class="">{!! $message->content !!}</div>
+                                    @if(substr($message->content, 0, 4) == "<div") <div class="">{!! $message->content !!}</div>
                                 @else
-                                    <div class="">{{ $message->content }}</div>
+                                <div class="">{{ $message->content }}</div>
                                 @endif
-                                    <div class="">
-                                        <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
-                                    </div>
+                                <div class="">
+                                    <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
                                 </div>
                             </div>
                         </div>
             </div>
-    <?php
+        </div>
+<?php
                     endif;
                 endforeach;
-    ?>
-        </div>
-        <form action="{{ route('messages.send', $nick) }}" method=POST class="">
-            @csrf
-            <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
-            <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
-            <input type="submit" id="sendMessageId" value="enviar" class="d-none">
-        </form>
+?>
+    </div>
+    <form action="{{ route('messages.send', $nick) }}" method=POST class="">
+        @csrf
+        <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
+        <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
+        <input type="submit" id="sendMessageId" value="enviar" class="d-none">
+    </form>
     </div>
     </div>
 </section>

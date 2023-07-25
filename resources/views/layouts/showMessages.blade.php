@@ -17,7 +17,16 @@
         <nav class="">
             <ul class="">
                 <li class=""><a href="/{{ $nick }}/messages" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
-                <li class="">{{ $receiverNick }}</li>
+                <li class="avatarNick">
+                    <div class="avatar">
+                        @if($receiverAvatar != null && Storage::disk('profiles')->exists($receiver . '/' . $receiverAvatar))
+                        <img src="{{ Storage::disk('profiles')->url($receiver . '/' . $receiverAvatar) }}" alt="" class="">
+                        @else
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
+                        @endif
+                    </div>
+                    <div class="">{{ $receiverNick }}</div>
+                </li>
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-regular fa-pen-to-square"></i></a></li>
             </ul>
         </nav>

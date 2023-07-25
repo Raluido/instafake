@@ -26,8 +26,9 @@ class MessageController extends Controller
         $id = auth()->id();
         $total = $id + $receiver;
 
-        $receiverNick = User::where('id', $receiver)
-            ->value('nick');
+        $receiverUser = User::find($receiver);
+        $receiverNick = $receiverUser->nick;
+        $receiverAvatar = $receiverUser->image;
 
         $messages = Db::select("SELECT * FROM (SELECT *, sender + receiver AS total FROM messages) t WHERE t.total = $total");
 
@@ -38,7 +39,7 @@ class MessageController extends Controller
                 ->update(['read' => 1]);
         }
 
-        return view('messages.show', compact('nick', 'messages', 'receiver', 'receiverNick'));
+        return view('messages.show', compact('nick', 'messages', 'receiver', 'receiverNick', 'receiverAvatar'));
     }
 
     public function check()

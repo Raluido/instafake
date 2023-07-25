@@ -516,6 +516,24 @@ main .message .innerMessage .bottom .chat .innerUserMessage p {
     margin: 0.6em .8em;
 }
 
+.showAllMessagesNav nav ul .avatarNick {
+    display: flex;
+    align-items: center;
+}
+
+.showAllMessagesNav nav ul .avatarNick .avatar {
+    width: 2em;
+    height: 2em;
+    margin-right: 1em;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.showAllMessagesNav nav ul .avatarNick .avatar img {
+    width: 100%;
+    height: auto;
+}
+
 /* growinput*/
 
 .textarea {
@@ -910,6 +928,23 @@ main {
 .myProfile .innerMyProfile .bottom .innerBottom .published img {
     width: 100%;
     height: auto;
+}
+
+.myProfile nav .dropDown {
+    position: absolute;
+    right: 1em;
+    text-align: center;
+    padding: .5em 0;
+    background-color: #6C757D;
+    width: 7em;
+}
+
+.myProfile nav .dropDown a {
+    display: block;
+}
+
+.myProfile nav .dropDown a:nth-child(1) {
+    margin-bottom: 1em;
 }
 
 /* uploadForm */

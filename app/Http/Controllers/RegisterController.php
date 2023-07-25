@@ -39,32 +39,40 @@ class RegisterController extends Controller
         $user = new User();
         $user->nick = $validated['nick'];
         $user->email = $validated['email'];
-        $filePath = $request->file('avatar');
-        $fileName = 'avatar_' . date('Y-m-d_H.i.s') . '.' . $filePath->extension();
-        $user->image = $fileName;
-        $user->password = $validated['password'];
-        $user->save();
-
-        if (isset($user)) {
-            Auth::login($user);
-            $id = auth()->id();
-
-            $path = 'profiles/' . $id;
-            if (!Storage::exists($path)) {
-                Storage::makeDirectory($path);
-            }
-
-            $filePath->storeAs($path, $fileName);
-
-            Session::push('user', [
-                'user_id' => $id
-            ]);
-
-            $nick = auth()->user()->nick;
-
-            return redirect()->route('home', compact('nick', 'id'));
+        if ($request->hasFile('avatar')) {
+            $filePath = $request->file('avatar');
+            $fileName = 'avatar_' . date('Y-m-d_H.i.s') . '.' . $filePath->getClientOriginalExtension();
+            $user->image = $fileName;
         }
+        $user->password = $validated['password'];
+        $pass = $user->save();
 
-        return back()->with('error', 'Ha habido un error en el registro');
+
+        if ($pass) {
+            if (Auth::attempt(['email' => $user->email, 'password' => $request->input('password')])) {
+                $request->session()->regenerate();
+
+                $user = auth()->user();
+                $nick = $user->nick;
+
+                Session::push('user', [
+                    'user_id' => $user->id
+                ]);
+
+                $path = 'profiles/' . $user->id;
+                if (!Storage::exists($path)) {
+                    Storage::makeDirectory($path);
+                } else {
+                    Storage::deleteDirectory($path);
+                    Storage::makeDirectory($path);
+                }
+
+                $filePath->storeAs($path, $fileName);
+
+                return redirect()->route('home', ['nick' => $nick]);
+            } else {
+                return back()->with('error', 'Ha habido un error en el registro');
+            }
+        }
     }
 }

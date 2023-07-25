@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
@@ -37,11 +36,13 @@ class LoginController extends Controller
             $nick = User::where('id', $id)
                 ->value('nick');
 
-            return redirect()->route('home', [$nick => 'nick']);
+            return redirect()
+                ->route('home', [$nick => 'nick']);
         } else {
-            return back()->withErrors([
-                'email' => 'Tu email no coincide con el de la base de datos.',
-            ])->onlyInput('email');
+            return back()
+                ->withErrors([
+                    'email' => 'Tu email no coincide con el de la base de datos.',
+                ])->onlyInput('email');
         }
     }
 }

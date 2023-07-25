@@ -18,8 +18,12 @@
             <ul class="">
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
                 <li class="">{{ $nick }}</li>
-                <li class=""><a href="{{ route('user.showData', ['nick' => $nick]) }}" class=""><i class="fa-regular fa-gear"></i></a></li>
+                <li class="dropDownMenu" onclick="openMenu()"><i class="fa-regular fa-gear"></i></a></li>
             </ul>
+            <div class="dropDown d-none">
+                <a href="{{ route('user.showData', ['nick' => $nick]) }}" class="">Datos de usuario</a>
+                <a href="{{ route('logout.perform') }}" class="">Logout</a>
+            </div>
         </nav>
     </header>
     <main class="">
@@ -27,6 +31,7 @@
     </main>
 </body>
 <script class="" type="text/javascript" src="{{ asset('js/jquery-3.6.4.js') }}"></script>
+<script class="" type="text/javascript" src="{{ asset('js/openMenu.js') }}"></script>
 @yield('js')
 
 </html>

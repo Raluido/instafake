@@ -30,7 +30,7 @@ use App\Models\User;
                     </div>
                     @else
                     <div class="profile">
-                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     @endif
                     <div class="content">
@@ -72,7 +72,7 @@ use App\Models\User;
                     </div>
                     @else
                     <div class="profile">
-                        <img src="{{ Storage::disk('images')->url('default/avatar.png') }}" alt="" class="">
+                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                     </div>
                     @endif
                     <div class="content">
@@ -82,13 +82,13 @@ use App\Models\User;
                             if (substr($message->content, 0, 4) == '<div') :
                             ?>
                                 <div class="">
-                                    <p>Has recibido una imágen</p>
+                                    <p>Has enviado una imágen</p>
                                 </div>
                             <?php
                             else :
                             ?>
                                 <div class="">
-                                    <p>Has recibido una mensaje</p>
+                                    <p>Has enviado una mensaje</p>
                                 </div>
                             <?php
                             endif;
