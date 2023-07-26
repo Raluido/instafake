@@ -75,9 +75,19 @@ class UserController extends Controller
 
     public function explore($nick, $imageId)
     {
-        $images = Image::where('id', '>=', $imageId)->get();
+        $images = Image::where('id', '>=', $imageId)
+            ->get();
 
         return view('user.explore', ['nick' => $nick, 'images' => $images]);
+    }
+
+    public function publications($nick, $imageId, $userId)
+    {
+        $images = Image::where('user_id', $userId)
+            ->where('id', '>=', $imageId)
+            ->get();
+
+        return view('user.publications', ['nick' => $nick, 'images' => $images, 'userId' => $userId]);
     }
 
     public function search($nick, $inputSearch)

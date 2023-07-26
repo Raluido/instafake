@@ -1,4 +1,4 @@
-@extends('layouts.explore')
+@extends('layouts.publications')
 
 @section('main')
 
@@ -27,31 +27,6 @@
                             </p>
                         </div>
                     </div>
-                    @php
-                    $i = 0;
-                    @endphp
-                    @foreach($image->user->followings as $following)
-                    @if($following->follower == auth()->id())
-                    @php
-                    $i++;
-                    @endphp
-                    @endif
-                    @endforeach
-                    @if($i == 1)
-                    <form action="{{ route('user.unfollow', [$nick, $image->user->id]) }}" id="formId" method="post" class="unfollow">
-                        @csrf
-                        @method('delete')
-                        <input type="hidden" name="following" id="followingId" value="{{ $image->user->id }}" class="">
-                        <input type="submit" value="Dejar de seguir" class="inputSubmit">
-                    </form>
-                    @else
-                    <form action="{{ route('user.follow', $nick) }}" id="formId" class="follow" method="post">
-                        @csrf
-                        <input type="hidden" name="following" id="followingId" value="{{ $image->user->id }}" class="">
-                        <input type="hidden" id="nickName" value="{{ $nick }}" class="">
-                        <input type="submit" value="Seguir" class="inputSubmit">
-                    </form>
-                    @endif
                 </div>
                 <div class="pic">
                     <img src="{{ Storage::disk('images')->url($image->user->id . '/' . $image->filename) }}" alt="" class="">
@@ -103,6 +78,5 @@
 </section>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ asset('js/checkFollows.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
 @endsection

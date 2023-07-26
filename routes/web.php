@@ -46,6 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/myProfile/deleteAvatar', [UserController::class, 'deleteAvatar'])->name('user.deleteAvatar');
                 Route::get('/search', [UserController::class, 'searchForm'])->name('user.searchForm');
                 Route::get('/explore/{imageId}', [UserController::class, 'explore'])->name('user.explore');
+                Route::get('/publications/{imageId}/{userId}', [UserController::class, 'publications'])->name('user.publications');
                 Route::get('/search/{inputSearch}', [UserController::class, 'search'])->name('user.search');
                 Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
                 Route::get('/checkFollows/{userId}', [UserController::class, 'check'])->name('user.checkFollows');

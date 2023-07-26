@@ -144,8 +144,21 @@ main .home {
     margin-bottom: 5em;
 }
 
-main .home .innerHome .top {
-    margin-bottom: .8em;
+.headerExplore nav ul {
+    display: flex;
+}
+
+.headerExplore nav ul li:nth-child(1) {
+    margin-right: .5em;
+}
+
+.headerExplore nav {
+    margin: .5em 0;
+}
+
+main .home .innerHome .top,
+main .explore .innerExplore .top {
+    margin-bottom: .5em;
 }
 
 main .home .innerHome .top .innerTop {
@@ -210,19 +223,35 @@ main .home .innerHome .top .innerTop .story img {
 }
 
 main .home .innerHome .bottom .innerBottom .post .image,
-.explore .innerExplore .bottom .innerBottom .post .image {
+main .explore .innerExplore .post .image {
     margin-bottom: 2em;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .top,
-.explore .innerExplore .bottom .innerBottom .post .image .top {
+main .home .innerHome .bottom .innerBottom .post .image .top {
     display: flex;
     align-items: center;
     padding: 0 0 0 .5em;
 }
 
+.explore .innerExplore .post .image .top {
+    display: grid;
+    grid-template-columns: .15fr .15fr .7fr;
+    padding: 0 0 0 .5em;
+}
+
+.explore .innerExplore .post .image .top form {
+    display: flex;
+    justify-content: center;
+}
+
+.explore .innerExplore .post .image .top form .inputSubmit {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10%;
+}
+
 main .home .innerHome .bottom .innerBottom .post .image .top .icon,
-.explore .innerExplore .bottom .innerBottom .post .image .top .icon {
+.explore .innerExplore .post .image .top .icon {
     width: 2.3em;
     height: 2.3em;
     overflow: hidden;
@@ -233,23 +262,24 @@ main .home .innerHome .bottom .innerBottom .post .image .top .icon,
 
 main .home .innerHome .bottom .innerBottom .post .image .top .info h5,
 main .home .innerHome .bottom .innerBottom .post .image .top .info p,
-.explore .innerExplore .bottom .innerBottom .post .image .top .info h5,
-.explore .innerExplore .bottom .innerBottom .post .image .top .info p {
+.explore .innerExplore .post .image .top .info h5,
+.explore .innerExplore .post .image .top .info p {
     margin: .1em;
 }
 
-.explore .innerExplore .bottom .innerBottom .post .image .top .icon>img,
-main .home .innerHome .bottom .innerBottom .post .image .top .icon>img {
+main .home .innerHome .bottom .innerBottom .post .image .top .icon>img,
+.explore .innerExplore .post .image .top .icon>img {
     width: auto;
     height: 100%;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like,
-    main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
+.explore .innerExplore .post .image .bottom .icons .like {
     color: red;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .pic {
+main .home .innerHome .bottom .innerBottom .post .image .pic,
+.explore .innerExplore .post .image .pic {
     width: auto;
     height: 60vh;
     display: flex;
@@ -259,34 +289,40 @@ main .home .innerHome .bottom .innerBottom .post .image .pic {
     background-color: antiquewhite;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .pic img {
+main .home .innerHome .bottom .innerBottom .post .image .pic img,
+.explore .innerExplore .post .image .pic img {
     width: 100%;
     height: auto;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .icons {
+main .home .innerHome .bottom .innerBottom .post .image .icons,
+.explore .innerExplore .post .image .icons {
     width: 20vw;
     display: flex;
     justify-content: space-between;
     padding-top: 1em;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .bottom {
+main .home .innerHome .bottom .innerBottom .post .image .bottom,
+.explore .innerExplore .post .image .bottom {
     padding-left: 1em;
     padding-right: 1em;
 }
 
-main .home .innerHome .bottom .innerBottom .comments .likesComments {
+main .home .innerHome .bottom .innerBottom .comments .likesComments,
+.explore .innerExplore .post .image .bottom .comments .likesComments {
     display: flex;
     justify-content: space-between;
     text-align: center;
 }
 
-main .home .innerHome .bottom .innerBottom .comments .likesComments .innerLikesComments .likeComment {
+main .home .innerHome .bottom .innerBottom .comments .likesComments .innerLikesComments .likeComment,
+.explore .innerExplore .post .image .bottom .comments .likesComments .innerLikesComments .likeComment {
     color: red;
 }
 
-main .home .innerHome .bottom .innerBottom .comments .likesComments .countLikesComments {
+main .home .innerHome .bottom .innerBottom .comments .likesComments .countLikesComments,
+.explore .innerExplore .post .image .bottom .comments .likesComments .countLikesComments {
     margin: .4em 0;
 }
 
@@ -1075,12 +1111,9 @@ main {
 
 /* searchForm */
 
-.searchForm .innerSearchForm {
-    padding: 0 1em;
-}
-
 .searchForm .innerSearchForm .top {
     margin-bottom: 1em;
+    padding: 0 1em;
 }
 
 .searchForm .innerSearchForm .bottom .innerBottom {

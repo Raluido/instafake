@@ -46,7 +46,7 @@
         <div class="bottom">
             <div class="innerBottom">
                 @foreach($user->images as $index)
-                <div class="published"><img src="{{ Storage::disk('images')->url($user->id . '/' . $index->filename) }}" alt="" class=""></div>
+                <div class="published"><a href="{{ route('user.publications',  ['nick' => $nick, 'imageId' => $index->id, 'userId' => $index->user->id]) }}" class=""><img src="{{ Storage::disk('images')->url($user->id . '/' . $index->filename) }}" alt="" class=""></a></div>
                 @endforeach
             </div>
         </div>

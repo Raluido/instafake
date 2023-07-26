@@ -14,10 +14,10 @@
 </head>
 
 <body>
-    <header class="myProfile">
+    <header class="headerExplore">
         <nav class="">
             <ul class="">
-                <li class=""><a href="{{ URL::previous() }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
+                <li class=""><a href="{{ route('user.searchForm', $nick) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
                 <li class="">Explorar</li>
             </ul>
         </nav>
@@ -28,4 +28,5 @@
 </body>
 <script class="" type="text/javascript" src="{{ asset('js/jquery-3.6.4.js') }}"></script>
 @yield('js')
+
 </html>
