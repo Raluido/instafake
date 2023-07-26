@@ -13,6 +13,11 @@
         </div>
         <div class="bottom">
             <div class="innerBottom">
+                @foreach($images as $image)
+                <div class="image">
+                    <a href="{{ route('user.explore', ['nick' => $nick, 'imageId' => $image->id]) }}" class=""><img src="{{ Storage::disk('images')->url($image->user->id . '/' . $image->filename) }}" alt="" class=""></a>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
-window.addEventListener("load", function () {
-    var userId = document.getElementById("followingId").value;
-    var nick = document.getElementById("nickName").value;
+$('#formId').on('submit', function (event) {
+    var element = $(this);
+    var userId = element.children("followingId").value;
+    var nick = element.children("nickName").value;
     $.ajax({
         url: '/' + nick + '/user/checkFollows/' + userId,
         type: 'GET',

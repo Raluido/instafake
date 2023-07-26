@@ -209,17 +209,20 @@ main .home .innerHome .top .innerTop .story img {
     height: auto;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image {
+main .home .innerHome .bottom .innerBottom .post .image,
+.explore .innerExplore .bottom .innerBottom .post .image {
     margin-bottom: 2em;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .top {
+main .home .innerHome .bottom .innerBottom .post .image .top,
+.explore .innerExplore .bottom .innerBottom .post .image .top {
     display: flex;
     align-items: center;
     padding: 0 0 0 .5em;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .top .icon {
+main .home .innerHome .bottom .innerBottom .post .image .top .icon,
+.explore .innerExplore .bottom .innerBottom .post .image .top .icon {
     width: 2.3em;
     height: 2.3em;
     overflow: hidden;
@@ -229,16 +232,20 @@ main .home .innerHome .bottom .innerBottom .post .image .top .icon {
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .top .info h5,
-main .home .innerHome .bottom .innerBottom .post .image .top .info p {
+main .home .innerHome .bottom .innerBottom .post .image .top .info p,
+.explore .innerExplore .bottom .innerBottom .post .image .top .info h5,
+.explore .innerExplore .bottom .innerBottom .post .image .top .info p {
     margin: .1em;
 }
 
+.explore .innerExplore .bottom .innerBottom .post .image .top .icon>img,
 main .home .innerHome .bottom .innerBottom .post .image .top .icon>img {
     width: auto;
     height: 100%;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
+main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like,
+    main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like {
     color: red;
 }
 
@@ -913,7 +920,6 @@ main {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 1px;
     row-gap: 1px;
-    º
 }
 
 .myProfile .innerMyProfile .bottom .innerBottom .published {
@@ -1071,6 +1077,31 @@ main {
 
 .searchForm .innerSearchForm {
     padding: 0 1em;
+}
+
+.searchForm .innerSearchForm .top {
+    margin-bottom: 1em;
+}
+
+.searchForm .innerSearchForm .bottom .innerBottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1px;
+    row-gap: 1px;
+}
+
+.searchForm .innerSearchForm .bottom .innerBottom .image {
+    width: auto;
+    height: 10em;
+    display: flex;
+    align-items: center;
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+.searchForm .innerSearchForm .bottom .innerBottom .image img {
+    width: 100%;
+    height: auto;
 }
 
 /* end */

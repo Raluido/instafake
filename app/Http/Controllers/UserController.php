@@ -68,7 +68,16 @@ class UserController extends Controller
     {
         $id = auth()->id();
 
-        return view('user.searchForm', compact('nick', 'id'));
+        $images = Image::all();
+
+        return view('user.searchForm', compact('nick', 'id', 'images'));
+    }
+
+    public function explore($nick, $imageId)
+    {
+        $images = Image::where('id', '>=', $imageId)->get();
+
+        return view('user.explore', ['nick' => $nick, 'images' => $images]);
     }
 
     public function search($nick, $inputSearch)
