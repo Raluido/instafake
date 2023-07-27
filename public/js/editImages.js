@@ -108,7 +108,33 @@ const saveImage = () => {
     ctx.scale(flipHorizontal, flipVertical);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
     ctx.save();
-    var dataURL = canvas.toDataURL("image/png");
+    const dataURL = canvas.toDataURL("image/jpeg").split(';base64,')[1];
+
+    function base64ToBlob(base64, mime) {
+        mime = mime || '';
+        var sliceSize = 1024;
+        var byteChars = window.atob(base64);
+        var byteArrays = [];
+
+        for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+            var slice = byteChars.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        return new Blob(byteArrays, { type: mime });
+    }
+
+    var blob = base64ToBlob(dataURL, 'image/jpeg');
+    var formData = new FormData();
+    formData.append('picture', blob);
 
     $.ajaxSetup({
         headers: {
@@ -116,13 +142,15 @@ const saveImage = () => {
         },
         type: "POST",
         url: "/" + nick + "/images/store",
+        cache: false,
+        contentType: false,
+        processData: false,
     });
     $.ajax({
         data: {
-            imgBase64: dataURL
+            data: formData
         },
         success: function (data) {
-            console.log("ahora si");
             window.location.href = url + "/" + nick + "/images/publish/" + data;
         }
     });
