@@ -1,6 +1,6 @@
     <nav class="navbarMaster">
         <div class="logo">
-            <h5>InstaFake</h5>
+            <img src="{{ Storage::url('baseImgs/instaFakeBg.png') }}" alt="" class="">
         </div>
         <div class="likesAndMsg">
             <div class="likesPage"><a href="" class=""><i class="fa-solid fa-heart"></i></a></div>
