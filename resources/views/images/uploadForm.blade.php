@@ -40,6 +40,7 @@
         <div class="row">
             <input type="file" class="file-input" accept="image/*" hidden>
             <input type="hidden" id="nick" value="{{ $nick }}" class="">
+            <input type="hidden" id="url" value="{{ env('APP_URL') }}" class="">
             <button class="choose-img">Seleccionar imagen</button>
             <button class="save-img">Nueva publicación</button>
         </div>

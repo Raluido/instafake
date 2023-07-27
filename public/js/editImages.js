@@ -1,4 +1,5 @@
 var nick = document.getElementById('nick').value;
+var url = document.getElementById('url').value;
 
 const fileInput = document.querySelector(".file-input"),
     filterOptions = document.querySelectorAll(".filter button"),
@@ -122,7 +123,7 @@ const saveImage = () => {
         },
         success: function (data) {
             console.log("ahora si");
-            window.location.href = "http://instafake.com.devel/" + nick + "/images/publish/" + data;
+            window.location.href = url + "/" + nick + "/images/publish/" + data;
         }
     });
 }
