@@ -26,15 +26,17 @@ class ImageController extends Controller
         // $img = str_replace('data:image/png;base64,', '', $img);
         // $img = str_replace(' ', '+', $img);
         // $fileData = base64_decode($img);
-        
-        $id = auth()->id();
-        $img = $request->files->get('picture');
-        //saving
 
-        $pathName = public_path('images/tmp/' . $id . '_' . time() . '.png');
-        file_put_contents($pathName, $img);
-        $fileName = pathinfo($pathName)['basename'];
-        DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
+        $id = auth()->id();
+        if ($request->hasFile('image_url')) {
+            $img = $request->file('image_url');
+            //saving
+
+            $pathName = public_path('images/tmp/' . $id . '_' . time() . '.png');
+            file_put_contents($pathName, $img);
+            $fileName = pathinfo($pathName)['basename'];
+            DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
+        }
 
         return $fileName;
     }
