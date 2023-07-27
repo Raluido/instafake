@@ -37,6 +37,7 @@
                     @endphp
                     @endif
                     @endforeach
+                    @if(auth()->id() != $image->user->id)
                     @if($i == 1)
                     <form action="{{ route('user.unfollow', [$nick, $image->user->id]) }}" id="formId" method="post" class="unfollow">
                         @csrf
@@ -51,6 +52,7 @@
                         <input type="hidden" id="nickName" value="{{ $nick }}" class="">
                         <input type="submit" value="Seguir" class="inputSubmit">
                     </form>
+                    @endif
                     @endif
                 </div>
                 <div class="pic">

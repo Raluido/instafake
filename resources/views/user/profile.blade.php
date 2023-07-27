@@ -26,6 +26,7 @@
                 <h3 class=""></h3>
                 <h3 class=""></h3>
                 <h3 class=""></h3>
+                @if(auth()->id() != $user->id)
                 <div class="followBtns">
                     <form action="{{ route('user.follow', $nick) }}" method="post" class="follow">
                         @csrf
@@ -41,6 +42,7 @@
                     </form>
                     <button class="sendMsj"><a href="{{ route('messages.show', [$nick,$user->id]) }}" class="">Enviar mensaje</a></button>
                 </div>
+                @endif
             </div>
         </div>
         <div class="bottom">
