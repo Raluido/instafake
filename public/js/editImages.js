@@ -107,35 +107,22 @@ const saveImage = () => {
     }
     ctx.scale(flipHorizontal, flipVertical);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+    ctx.save();
+    var urlImage = canvas.toDataURL("image/jpeg", 0.1);
 
-    canvas.toBlob(function (blob) {
-        // var newImg = document.createElement('img');
-        // newImg.src = URL.createObjectURL(blob);
-        // document.body.appendChild(newImg);
-
-        var formData = new FormData();
-        formData.append('image_url', blob);
-
-        //console.log(formData.get('file'));
-        // console.log(base64);
-        //throw new error();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-        });
-        $.ajax({
-            url: "/" + nick + "/images/store",
-            data: formData,
-            processData: false,
-            contentType: false,
-            type: "POST",
-            success: function (data) {
-                window.location.href = url + "/" + nick + "/images/publish/" + data;
-            },
-        })
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
     });
-
+    $.ajax({
+        url: "/" + nick + "/images/store",
+        data: { imgBase64: urlImage },
+        type: "POST",
+        success: function (data) {
+            window.location.href = url + "/" + nick + "/images/publish/" + data;
+        },
+    })
 }
 
 
