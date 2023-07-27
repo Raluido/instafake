@@ -108,25 +108,23 @@ const saveImage = () => {
     ctx.scale(flipHorizontal, flipVertical);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
     ctx.save();
-    var dataURL = canvas.toDataURL("image/png");
+    var urlImage = canvas.toDataURL("image/jpeg", 0.1);
 
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        type: "POST",
-        url: "/" + nick + "/images/store",
     });
     $.ajax({
-        data: {
-            imgBase64: dataURL
-        },
+        url: "/" + nick + "/images/store",
+        data: { imgBase64: urlImage },
+        type: "POST",
         success: function (data) {
-            console.log("ahora si");
             window.location.href = url + "/" + nick + "/images/publish/" + data;
-        }
-    });
+        },
+    })
 }
+
 
 filterSlider.addEventListener("input", updateFilter);
 resetFilterBtn.addEventListener("click", resetFilter);

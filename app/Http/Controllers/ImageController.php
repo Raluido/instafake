@@ -26,11 +26,10 @@ class ImageController extends Controller
 
         $img = $request->all();
         $img = ($img['imgBase64']);
-        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace('data:image/jpeg;base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $fileData = base64_decode($img);
-        //saving
-        $pathName = public_path('images/tmp/' . $id . '_' . time() . '.png');
+        $pathName = public_path('images/tmp/' . $id . '_' . time() . '.jpeg');
         file_put_contents($pathName, $fileData);
         $fileName = pathinfo($pathName)['basename'];
         DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
@@ -40,7 +39,6 @@ class ImageController extends Controller
 
     public function publishForm($nick, $fileName)
     {
-        log::info("no se porque");
         return view('images.showPublishForm', ['nick' => $nick, 'fileName' => $fileName]);
     }
 
