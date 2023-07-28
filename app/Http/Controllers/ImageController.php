@@ -24,13 +24,17 @@ class ImageController extends Controller
     {
         $id = auth()->id();
 
-        $img = $request->all();
-        $img = ($img['imgBase64']);
-        $img = str_replace('data:image/jpeg;base64,', '', $img);
-        $img = str_replace(' ', '+', $img);
-        $fileData = base64_decode($img);
+        // $img = $request->all();
+        // $img = ($img['imgBase64']);
+        // $img = str_replace('data:image/jpeg;base64,', '', $img);
+        // $img = str_replace(' ', '+', $img);
+        // $fileData = base64_decode($img);
+
+        $img = $request->file('picture');
+        $img = file_get_contents($img);
+
         $pathName = public_path('images/tmp/' . $id . '_' . time() . '.jpeg');
-        file_put_contents($pathName, $fileData);
+        file_put_contents($pathName, $img);
         $fileName = pathinfo($pathName)['basename'];
         DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
 
