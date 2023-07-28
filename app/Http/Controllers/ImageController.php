@@ -80,11 +80,18 @@ class ImageController extends Controller
         }
     }
 
-    public function delete($nick, Image $image)
+    public function editForm($nick, $imageId)
     {
-        $delete = Db::Table('image')
-            ->where('id', $image->id)
+        return view('images.edit', ['nick' => $nick, 'imageId' => $imageId]);
+    }
+
+    public function delete($nick, $imageId)
+    {
+        $delete = Db::Table('images')
+            ->where('id', $imageId)
             ->delete();
+
+        log::info($imageId);
 
         if ($delete) {
             return redirect()

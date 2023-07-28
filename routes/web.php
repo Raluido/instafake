@@ -46,7 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/myProfile/deleteAvatar', [UserController::class, 'deleteAvatar'])->name('user.deleteAvatar');
                 Route::get('/search', [UserController::class, 'searchForm'])->name('user.searchForm');
                 Route::get('/explore/{imageId}', [UserController::class, 'explore'])->name('user.explore');
-                Route::get('/publications/{imageId}/{userId}', [UserController::class, 'publications'])->name('user.publications');
+                Route::get('/publications/{imageId}', [UserController::class, 'publications'])->name('user.publications');
                 Route::get('/search/{inputSearch}', [UserController::class, 'search'])->name('user.search');
                 Route::get('/profile/{userId}', [UserController::class, 'showProfiles'])->name('user.profile');
                 Route::get('/checkFollows/{userId}', [UserController::class, 'check'])->name('user.checkFollows');
@@ -67,7 +67,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/store', [ImageController::class, 'store'])->name('images.store');
                 Route::get('/publish/{fileName}', [ImageController::class, 'publishForm'])->name('images.publishForm');
                 Route::post('/published', [ImageController::class, 'published'])->name('images.published');
-                Route::post('/delete/{id}', [ImageController::class, 'delete'])->name('images.delete');
+                Route::get('/edit/{imageId}', [ImageController::class, 'editForm'])->name('images.editForm');
+                Route::post('/edit', [ImageController::class, 'edit'])->name('images.edit');
+                Route::post('/delete/{imageId}', [ImageController::class, 'delete'])->name('images.delete');
                 Route::get('/show/{filename}', [ImageController::class, 'getImage'])->name('images.show');
             });
             Route::group(['prefix' => 'messages'], function () {

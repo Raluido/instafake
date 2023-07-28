@@ -27,6 +27,17 @@
                             </p>
                         </div>
                     </div>
+                    <div class="imageOptions">
+                        <div class="click" data-img="{{ $image->id }}"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                            <div class="links">
+                                <a href="{{ route('images.editForm', ['nick' => $nick, 'imageId' => $image->id]) }}" class="">Editar</a>
+                                <form action="{{ route('images.delete', ['nick' => $nick, 'imageId' => $image->id]) }}" method="post" class="">
+                                    @csrf
+                                    <input type="submit" class="" value="Eliminar">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="pic">
                     <img src="{{ Storage::disk('images')->url($image->user->id . '/' . $image->filename) }}" alt="" class="">
@@ -79,4 +90,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/imageOptionsMenu.js') }}" defer></script>
 @endsection

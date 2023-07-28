@@ -245,6 +245,32 @@ main .home .innerHome .bottom .innerBottom .post .image .top {
     padding: 0 0 0 .5em;
 }
 
+.explore .innerExplore .post .image .top .imageOptions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.explore .innerExplore .post .image .top .imageOptions .links {
+    position: absolute;
+    top: 6em;
+    right: 1em;
+    padding: .5em;
+    background-color: #6C757D;
+}
+
+.explore .innerExplore .post .image .top .imageOptions .links a {
+    display: block;
+    margin-bottom: .5em;
+}
+
+.explore .innerExplore .post .image .top .imageOptions .links input {
+    background-color: transparent;
+    border: unset;
+    padding: unset;
+}
+
 .explore .innerExplore .post .image .top form {
     display: flex;
     justify-content: center;
