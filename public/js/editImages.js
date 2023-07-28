@@ -108,7 +108,39 @@ const saveImage = () => {
     ctx.scale(flipHorizontal, flipVertical);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
     ctx.save();
-    var urlImage = canvas.toDataURL("image/jpeg", 0.1);
+    var jpegFile = canvas.toDataURL("image/jpeg", 0.5);
+
+    function base64ToBlob(base64, mime) {
+        mime = mime || '';
+        var sliceSize = 1024;
+        var byteChars = window.atob(base64);
+        var byteArrays = [];
+
+        for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+            var slice = byteChars.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        return new Blob(byteArrays, { type: mime });
+    }
+
+    var jpegFile64 = jpegFile.replace(/^data:image\/(jpeg);base64,/, "");
+    var jpegBlob = base64ToBlob(jpegFile64, 'image/jpeg');
+    // console.log(jpegBlob);
+    // throw new error();
+
+    var formdata = new FormData();
+    formdata.append('picture', jpegBlob);
+    // console.log(formdata.get('picture'));
+    // throw new error();
 
     $.ajaxSetup({
         headers: {
@@ -117,8 +149,11 @@ const saveImage = () => {
     });
     $.ajax({
         url: "/" + nick + "/images/store",
-        data: { imgBase64: urlImage },
+        data: formdata,
+        dataType: "text",
         type: "POST",
+        processData: false,
+        contentType: false,
         success: function (data) {
             window.location.href = url + "/" + nick + "/images/publish/" + data;
         },
