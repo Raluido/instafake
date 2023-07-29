@@ -67,7 +67,7 @@ class ImageController extends Controller
 
             if (Storage::exists($path)) {
             } else {
-                Storage::makeDirectory($path, 0777, true, true);
+                Storage::makeDirectory($path);
             }
 
             rename(public_path('images/tmp/' . $fileName), public_path('images/' . $id . '/' . $fileName));

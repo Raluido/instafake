@@ -28,14 +28,15 @@
                         </div>
                     </div>
                     <div class="imageOptions">
-                        <div class="click" data-img="{{ $image->id }}"><i class="fa-solid fa-ellipsis-vertical"></i></a>
-                            <div class="links">
-                                <a href="{{ route('images.editForm', ['nick' => $nick, 'imageId' => $image->id]) }}" class="">Editar</a>
-                                <form action="{{ route('images.delete', ['nick' => $nick, 'imageId' => $image->id]) }}" method="post" class="">
-                                    @csrf
-                                    <input type="submit" class="" value="Eliminar">
-                                </form>
-                            </div>
+                        <div class="menuImage" id="{{ $image->id }}">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                        <div class="links d-none" id="{{ $image->id }}">
+                            <a href="{{ route('images.editForm', ['nick' => $nick, 'imageId' => $image->id]) }}" class="">Editar</a>
+                            <form action="{{ route('images.delete', ['nick' => $nick, 'imageId' => $image->id]) }}" method="post" class="">
+                                @csrf
+                                <input type="submit" class="" value="Eliminar">
+                            </form>
                         </div>
                     </div>
                 </div>
