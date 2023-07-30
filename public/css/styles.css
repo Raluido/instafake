@@ -252,12 +252,14 @@ main .home .innerHome .bottom .innerBottom .post .image .top {
     margin-right: 1em;
 }
 
+.explore .innerExplore .post .image .top .menuImage {
+    position: relative;
+}
+
 .explore .innerExplore .post .image .top .imageOptions .links {
-    position: absolute;
-    top: 6em;
-    right: 1em;
+    right: 0em;
     padding: .5em;
-    background-color: #6C757D;
+    background-color: #262626;
 }
 
 .explore .innerExplore .post .image .top .imageOptions .links a {
@@ -1009,7 +1011,7 @@ main {
     right: 1em;
     text-align: center;
     padding: .5em 0;
-    background-color: #6C757D;
+    background-color: #262626;
     width: 7em;
 }
 

@@ -87,11 +87,22 @@ class ImageController extends Controller
 
     public function delete($nick, $imageId)
     {
+        $likesComments = Db::Table('comments')
+            ->join('likes_comments', 'likes_comments.comment_id')
+            ->where('comments.image_id', $imageId)
+            ->delete();
+
+        $comments = Db::Table('comments')
+            ->where('image_id', $imageId)
+            ->delete();
+
+        $likes = Db::Table('likes')
+            ->where('image_id', $imageId)
+            ->delete();
+
         $delete = Db::Table('images')
             ->where('id', $imageId)
             ->delete();
-
-        log::info($imageId);
 
         if ($delete) {
             return redirect()
