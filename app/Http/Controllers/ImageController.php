@@ -87,28 +87,34 @@ class ImageController extends Controller
 
     public function delete($nick, $imageId)
     {
-        $likesComments = Db::Table('comments')
-            ->join('likes_comments', 'likes_comments.comment_id')
-            ->where('comments.image_id', $imageId)
+        $likesComments = Db::Table('likes_comments')
+            ->join('comments', 'comments.id', '=', 'likes_comments.comment_id')
+            ->where('comments.image_id', '=', $imageId)
             ->delete();
 
-        $comments = Db::Table('comments')
-            ->where('image_id', $imageId)
-            ->delete();
-
-        $likes = Db::Table('likes')
-            ->where('image_id', $imageId)
-            ->delete();
-
-        $delete = Db::Table('images')
-            ->where('id', $imageId)
-            ->delete();
-
-        if ($delete) {
-            return redirect()
-                ->back()
-                ->withSuccess("La imagen se ha eliminado correctamente");
+        if ($likesComments >= 0) {
+            $comments = Db::Table('comments')
+                ->where('image_id', $imageId)
+                ->delete();
+            if ($comments >= 0) {
+                $likes = Db::Table('likes')
+                    ->where('image_id', $imageId)
+                    ->delete();
+                if ($likes >= 0) {
+                    $delete = Db::Table('images')
+                        ->where('id', $imageId)
+                        ->delete();
+                    if ($delete >= 0) {
+                        return redirect()
+                            ->route('user.publications', $nick)
+                            ->withSuccess("La imagen se ha eliminado correctamente");
+                    }
+                }
+            }
         }
+        return redirect()
+            ->back()
+            ->withErrors("Ha habido un error al intentar eliminar la imagen.");
     }
 
     public function liked($nick, $dataId)

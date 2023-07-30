@@ -59,7 +59,7 @@ header,
 footer {
     position: fixed;
     background-color: black;
-    height: 3em;
+    height: 7vh;
 }
 
 header {
@@ -89,6 +89,10 @@ header .navbarMaster .likesAndMsg {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+header .navbarMaster .likesAndMsg div a i {
+    font-size: 1.2em;
 }
 
 #messageIcon {
@@ -146,8 +150,8 @@ header .navbarSlave .newMsg {
 /**/
 
 main .home {
-    margin-top: 5em;
-    margin-bottom: 5em;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
 }
 
 .headerExplore nav ul {
@@ -164,7 +168,8 @@ main .home {
 
 main .home .innerHome .top,
 main .explore .innerExplore .top {
-    margin-bottom: .5em;
+    margin-bottom: .5vh;
+    height: 13vh;
 }
 
 main .home .innerHome .top .innerTop {
@@ -185,7 +190,7 @@ main .home .innerHome .top .innerTop .story {
 }
 
 main .home .innerHome .top .innerTop .addStory {
-    position: relative
+    position: relative;
 }
 
 main .home .innerHome .top .innerTop .addStoryPlus {
@@ -206,8 +211,8 @@ main .home .innerHome .top .innerTop .addStoryPlus p {
 
 main .home .innerHome .top .innerTop .addStory .addStoryImg,
 main .home .innerHome .top .innerTop .story .storyImg {
-    width: 4em;
-    height: 4em;
+    width: 5em;
+    height: 5em;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -228,10 +233,25 @@ main .home .innerHome .top .innerTop .story img {
     height: auto;
 }
 
-main .home .innerHome .bottom .innerBottom .post .image,
+main .home .innerHome .bottom .innerBottom .post .image .top,
+main .explore .innerExplore .post .image .top {
+    height: 6vh;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .pic,
+main .explore .innerExplore .post .image .pic {
+    height: 47vh;
+}
+
+main .home .innerHome .bottom .innerBottom .post .image .bottom,
+main .explore .innerExplore .post .image .bottom {
+    height: 20vh;
+}
+
+/* main .home .innerHome .bottom .innerBottom .post .image,
 main .explore .innerExplore .post .image {
     margin-bottom: 2em;
-}
+} */
 
 main .home .innerHome .bottom .innerBottom .post .image .top {
     display: flex;
@@ -286,8 +306,8 @@ main .home .innerHome .bottom .innerBottom .post .image .top {
 
 main .home .innerHome .bottom .innerBottom .post .image .top .icon,
 .explore .innerExplore .post .image .top .icon {
-    width: 2.3em;
-    height: 2.3em;
+    width: 2.5em;
+    height: 2.5em;
     overflow: hidden;
     border: 2px solid red;
     border-radius: 50%;
@@ -315,7 +335,6 @@ main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like,
 main .home .innerHome .bottom .innerBottom .post .image .pic,
 .explore .innerExplore .post .image .pic {
     width: auto;
-    height: 60vh;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -375,6 +394,11 @@ footer nav {
     align-items: center;
     width: 100%;
 }
+
+footer nav div a i {
+    font-size: 1.5em;
+}
+
 
 footer nav h5 {
     font-size: .6em;
@@ -918,10 +942,6 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 .myProfile nav ul {
     display: flex;
     justify-content: space-between;
-}
-
-main {
-    margin-top: 3em;
 }
 
 .myProfile .innerMyProfile .top {

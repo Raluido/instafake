@@ -81,7 +81,7 @@ class UserController extends Controller
         return view('user.explore', ['nick' => $nick, 'images' => $images]);
     }
 
-    public function publications($nick, $imageId)
+    public function publications($nick, $imageId = null)
     {
         $images = Image::where('user_id', auth()->id())
             ->get();

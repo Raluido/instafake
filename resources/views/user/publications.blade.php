@@ -3,6 +3,9 @@
 @section('main')
 
 <section class="explore">
+    <div class="">
+        @include('layouts.partials.messages')
+    </div>
     <div class="innerExplore">
         @foreach($images as $image)
         <div class="post">
