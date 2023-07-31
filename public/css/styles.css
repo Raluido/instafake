@@ -334,7 +334,7 @@ main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like,
 
 main .home .innerHome .bottom .innerBottom .post .image .pic,
 .explore .innerExplore .post .image .pic {
-    width: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -344,8 +344,8 @@ main .home .innerHome .bottom .innerBottom .post .image .pic,
 
 main .home .innerHome .bottom .innerBottom .post .image .pic img,
 .explore .innerExplore .post .image .pic img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .icons,
@@ -486,6 +486,7 @@ main .message {
     display: flex;
     flex-direction: column;
     height: 85vh;
+    margin-top: 7vh;
 }
 
 main .innerMessage .top h4 {
@@ -514,21 +515,23 @@ main .innerMessage .bottom .chat {
 
 main .innerMessage .bottom form {
     position: fixed;
-    bottom: 2.9em;
+    bottom: .5em;
     left: 1em;
     right: 1em;
 }
 
-main .message .innerMessage .bottom .chat .innerUserMessage {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage {
     flex-grow: 1;
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender {
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage {
+    flex-grow: 1;
     display: flex;
     justify-content: end;
 }
+
 
 main section.message div.innerMessage div.bottom div.chat div h5 {
     text-align: center;
@@ -554,6 +557,14 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link {
+    background-color: black;
+    border: 1px solid #262626;
+    padding: .5px;
+    border-radius: 5%;
+    width: fit-content;
+}
+
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link {
     background-color: #262626;
     padding: .5px;
     border-radius: 5%;
@@ -561,9 +572,17 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .text {
+    background-color: black;
+    border: 1px solid #262626;
+    padding: .5px;
+    border-radius: 5%;
+    width: fit-content;
+}
+
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .text {
     background-color: #262626;
     padding: .5px;
-    border-radius: 40%;
+    border-radius: 5%;
     width: fit-content;
 }
 
@@ -603,13 +622,6 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom h3:nth-child(1) {
     margin-right: 1em;
-}
-
-main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage>div {
-    background-color: #262626;
-    padding: .5px;
-    border-radius: 500px;
-    width: fit-content;
 }
 
 main .message .innerMessage .bottom .chat .innerUserMessage p {
@@ -1165,8 +1177,11 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 
 /* searchForm */
 
-.searchForm .innerSearchForm .top {
-    margin-bottom: 1em;
+.searchForm {
+    margin-top: 7vh;
+}
+
+.searchForm .top {
     padding: 0 1em;
 }
 
