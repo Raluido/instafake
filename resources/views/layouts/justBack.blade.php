@@ -19,7 +19,6 @@
             <ul class="">
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
                 <li class=""></li>
-                <li class=""><a href="{{ route('logout.perform') }}" class=""><i class="fa-regular fa-gear"></i></a></li>
             </ul>
         </nav>
     </header>
