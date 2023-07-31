@@ -3,6 +3,9 @@
 @section('main')
 
 <section class="explore">
+    <div class="">
+        @include('layouts.partials.messages')
+    </div>
     <div class="innerExplore">
         @foreach($images as $image)
         <div class="post">
@@ -25,6 +28,20 @@
                             <p class="">
                                 {{ $image->location }}
                             </p>
+                        </div>
+                    </div>
+                    <div class="imageOptions">
+                        <div class="innerImageOptions" id="id{{ $image->id }}">
+                            <div class="menuImage">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                            <div class="links d-none" id="id{{ $image->id }}">
+                                <a href="{{ route('images.editForm', ['nick' => $nick, 'imageId' => $image->id]) }}" class="">Editar</a>
+                                <form action="{{ route('images.delete', ['nick' => $nick, 'imageId' => $image->id]) }}" method="post" class="">
+                                    @csrf
+                                    <input type="submit" class="" value="Eliminar">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,4 +96,5 @@
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/imageOptionsMenu.js') }}" defer></script>
 @endsection

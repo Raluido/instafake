@@ -81,13 +81,12 @@ class UserController extends Controller
         return view('user.explore', ['nick' => $nick, 'images' => $images]);
     }
 
-    public function publications($nick, $imageId, $userId)
+    public function publications($nick, $imageId = null)
     {
-        $images = Image::where('user_id', $userId)
-            ->where('id', '>=', $imageId)
+        $images = Image::where('user_id', auth()->id())
             ->get();
 
-        return view('user.publications', ['nick' => $nick, 'images' => $images, 'userId' => $userId]);
+        return view('user.publications', ['nick' => $nick, 'images' => $images, 'imageId' => $imageId]);
     }
 
     public function search($nick, $inputSearch)

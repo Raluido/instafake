@@ -67,7 +67,7 @@ class ImageController extends Controller
 
             if (Storage::exists($path)) {
             } else {
-                Storage::makeDirectory($path, 0777, true, true);
+                Storage::makeDirectory($path);
             }
 
             rename(public_path('images/tmp/' . $fileName), public_path('images/' . $id . '/' . $fileName));
@@ -80,17 +80,41 @@ class ImageController extends Controller
         }
     }
 
-    public function delete($nick, Image $image)
+    public function editForm($nick, $imageId)
     {
-        $delete = Db::Table('image')
-            ->where('id', $image->id)
+        return view('images.edit', ['nick' => $nick, 'imageId' => $imageId]);
+    }
+
+    public function delete($nick, $imageId)
+    {
+        $likesComments = Db::Table('likes_comments')
+            ->join('comments', 'comments.id', '=', 'likes_comments.comment_id')
+            ->where('comments.image_id', '=', $imageId)
             ->delete();
 
-        if ($delete) {
-            return redirect()
-                ->back()
-                ->withSuccess("La imagen se ha eliminado correctamente");
+        if ($likesComments >= 0) {
+            $comments = Db::Table('comments')
+                ->where('image_id', $imageId)
+                ->delete();
+            if ($comments >= 0) {
+                $likes = Db::Table('likes')
+                    ->where('image_id', $imageId)
+                    ->delete();
+                if ($likes >= 0) {
+                    $delete = Db::Table('images')
+                        ->where('id', $imageId)
+                        ->delete();
+                    if ($delete >= 0) {
+                        return redirect()
+                            ->route('user.publications', $nick)
+                            ->withSuccess("La imagen se ha eliminado correctamente");
+                    }
+                }
+            }
         }
+        return redirect()
+            ->back()
+            ->withErrors("Ha habido un error al intentar eliminar la imagen.");
     }
 
     public function liked($nick, $dataId)
