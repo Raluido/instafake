@@ -18,7 +18,9 @@
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('user.profile', ['nick' => $nick, 'userId' => auth()->id()]) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
-                <li class="">Publicaciones</li>
+                <li class="">
+                    <h4 class="">Publicaciones</h4>
+                </li>
             </ul>
         </nav>
     </header>
