@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header class="myProfile">
+    <header class="profileNav">
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>

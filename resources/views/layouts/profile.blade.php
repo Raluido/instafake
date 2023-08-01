@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header class="myProfile">
+    <header class="myProfileNav">
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('user.searchForm', $nick) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
