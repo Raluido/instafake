@@ -7,9 +7,9 @@
         <div class="top">
             <div class="innerTop">
                 <div class="followCount">
-                    @if(auth()->user()->image)
+                    @if($user->image)
                     <div class="avatar">
-                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => auth()->user()->image]) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image]) }}" alt="" class="">
                     </div>
                     @else
                     <div class="avatar">

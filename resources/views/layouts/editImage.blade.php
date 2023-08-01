@@ -14,13 +14,14 @@
 </head>
 
 <body>
-    <header class="exploreNav">
+    <header class="editImageNav">
         <nav class="">
             <ul class="">
-                <li class=""><a href="{{ route('user.searchForm', $nick) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
+                <li class=""><a href="{{ route('user.publications', $nick) }}" class=""><i class="fa-solid fa-x"></i></a></li>
                 <li class="">
-                    <h4 class="">Explorar</h4>
+                    <h4 class="">Editar</h4>
                 </li>
+                <li class="sendUpdates"><i class="fa-solid fa-check"></i></li>
             </ul>
         </nav>
     </header>

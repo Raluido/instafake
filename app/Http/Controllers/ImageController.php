@@ -82,7 +82,23 @@ class ImageController extends Controller
 
     public function editForm($nick, $imageId)
     {
-        return view('images.edit', ['nick' => $nick, 'imageId' => $imageId]);
+        $image = Image::where('id', $imageId)
+            ->get();
+        $image = $image[0];
+
+        return view('images.edit', ['nick' => $nick, 'image' => $image]);
+    }
+
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'location' => 'required',
+            'name' => 'required'
+        ]);
+
+        $image = Image::where('id', $request->imageId);
+
+
     }
 
     public function delete($nick, $imageId)
