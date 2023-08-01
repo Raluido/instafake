@@ -383,17 +383,18 @@ main .home .innerHome .bottom .innerBottom .post .image .bottom .icons .like,
 main .home .innerHome .bottom .innerBottom .post .image .pic,
 .explore .innerExplore .post .image .pic {
     width: 100%;
-    display: flex;
+    height: auto;
+    /* display: flex;
     justify-content: center;
     overflow: hidden;
-    align-items: center;
+    align-items: center; */
     background-color: antiquewhite;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .pic img,
 .explore .innerExplore .post .image .pic img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 main .home .innerHome .bottom .innerBottom .post .image .icons,
