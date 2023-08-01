@@ -21,7 +21,7 @@ function searchUsersLinks() {
                     if (data[0].nick !== "") {
                         data.forEach(element => {
                             document.getElementById("resultsId").innerHTML +=
-                                "<div class='links' onclick='callAjax()' data-receiverId=" + element.id + " data-imageId=" + imageId + " style='display:block; margin-bottom:.5em;'>" + element.nick + "</div>"
+                                "<div class='links' onclick='callAjax()' data-receiverId=" + element.id + " data-imageId=" + imageId + " style='display:block; margin-bottom:.5em;'>" + element.nick + "</div></div>"
                         });
                         document.getElementById("resultsId").classList.remove("d-none");
                         document.getElementById("resultsId").classList.add("d-block");

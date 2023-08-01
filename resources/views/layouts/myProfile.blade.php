@@ -20,11 +20,11 @@
                 <li class="">{{ $nick }}</li>
                 <li class="dropDownMenu" onclick="openMenu()"><i class="fa-regular fa-gear"></i></a></li>
             </ul>
-            <div class="dropDown d-none">
-                <a href="{{ route('user.showData', ['nick' => $nick]) }}" class="">Datos de usuario</a>
-                <a href="{{ route('logout.perform') }}" class="">Logout</a>
-            </div>
         </nav>
+        <div class="dropDown d-none">
+            <a href="{{ route('user.showData', ['nick' => $nick]) }}" class="">Datos de usuario</a>
+            <a href="{{ route('logout.perform') }}" class="">Logout</a>
+        </div>
     </header>
     <main class="">
         @yield('main')

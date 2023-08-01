@@ -81,6 +81,12 @@ header nav ul li i {
     font-size: 1.3em;
 }
 
+.comments .innerComments form textarea {
+    background-color: black;
+    border: unset;
+    font-size: 0.8em;
+}
+
 /* end */
 
 
@@ -199,7 +205,7 @@ main .explore {
 
 main .home .innerHome .top,
 main .explore .innerExplore .top {
-    margin-bottom: .5vh;
+    margin-bottom: 1.5vh;
     height: 13vh;
 }
 
@@ -207,7 +213,7 @@ main .home .innerHome .top .innerTop {
     overflow-x: auto;
     white-space: nowrap;
     max-width: 120em;
-    padding: 0 .5em;
+    padding: 0 1em;
 }
 
 main .home .innerHome .top .innerTop .addStory,
@@ -242,8 +248,8 @@ main .home .innerHome .top .innerTop .addStoryPlus p {
 
 main .home .innerHome .top .innerTop .addStory .addStoryImg,
 main .home .innerHome .top .innerTop .story .storyImg {
-    width: 5em;
-    height: 5em;
+    width: 5.5em;
+    height: 5.5em;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -346,7 +352,7 @@ main .home .innerHome .bottom .innerBottom .post .image .top .icon,
     width: 2.5em;
     height: 2.5em;
     overflow: hidden;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     border-radius: 50%;
     margin-right: 1em;
     display: flex;
@@ -637,23 +643,28 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
     width: fit-content;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .middle {
     width: 15em;
     height: auto;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle>img {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle>img,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .middle>img {
     width: 100%;
     height: auto;
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top,
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom div {
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .top,
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom div,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .bottom div {
     display: flex;
     align-items: center;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .top>div {
     width: 2em;
     height: 2em;
     overflow: hidden;
@@ -661,17 +672,20 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
     margin-right: .5em;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div>img {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div>img,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .top>div>img {
     width: 100%;
     height: auto;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom,
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .bottom {
     display: flex;
     flex-direction: row;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom h3:nth-child(1) {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .bottom h3:nth-child(1),
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .bottom h3:nth-child(1) {
     margin-right: 1em;
 }
 
@@ -1003,9 +1017,22 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
     align-items: center;
 }
 
+.myProfileNav .dropDown {
+    position: absolute;
+    right: .5em;
+    top: 3em;
+    background-color: black;
+    padding: .5em;
+}
+
+.myProfileNav .dropDown a {
+    display: block;
+}
+
 .myProfileNav nav {
     margin: .5em 0;
     width: 100%;
+    position: relative;
 }
 
 .myProfileNav nav ul {
@@ -1074,7 +1101,6 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 .myProfile .innerMyProfile .top .innerTop .avatar img {
     width: 100%;
     height: auto;
-    border: 1px solid chartreuse;
     position: absolute;
 }
 
