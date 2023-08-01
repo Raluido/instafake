@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="headerExplore">
+    <header class="exploreNav">
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('user.searchForm', $nick) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>

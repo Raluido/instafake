@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="headerExplore">
+    <header class="exploreNav">
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('user.profile', ['nick' => $nick, 'userId' => auth()->id()]) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>

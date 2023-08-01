@@ -114,6 +114,13 @@
                                     <a href="{{ route('comments.showAll', [$nick, $image->id]) }}" class="">
                                         <p class="">Ver los {{ count($image->comments) }} comentarios</p>
                                     </a>
+                                    @else
+                                    <form action="{{ route('comments.store', $nick) }}" method="post" class="">
+                                        @csrf
+                                        <textarea placeholder="Añade un comentario..." name="content" id="textarea" rows="1" style="width: 100%;"></textarea>
+                                        <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
+                                        <input type="submit" id="sendMessageId" value="enviar" class="d-none">
+                                    </form>
                                     @endif
                                 </div>
                             </div>
@@ -131,4 +138,5 @@
 <script type="text/javascript" src="{{ asset('js/playStories.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/planeMessages.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/sendComment.js') }}" defer></script>
 @endsection
