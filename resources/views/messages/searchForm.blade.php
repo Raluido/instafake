@@ -8,6 +8,7 @@
             <div class="innerTop">
                 <input type="hidden" id="nickId" value="{{ $nick }}">
                 <input type="hidden" id="imageId" value="{{ $imageId }}">
+                <input type="hidden" id="url" value="{{ env('APP_URL') }}">
                 <input type="text" id="searchId" class="" placeholder="Buscar" oninput="searchUsersLinks()">
                 <div class="resultsClass d-none" id="resultsId"></div>
             </div>
