@@ -10,7 +10,7 @@
         @foreach($images as $image)
         <div class="post">
             <div class="image">
-                <div class="top">
+                <div class="top publications">
                     <div class="icon">
                         @if($image->user->image != null && file_exists('profiles/' . $image->user->id . '/' . $image->user->image))
                         <img src="{{ Storage::disk('profiles')->url($image->user->id . '/' . $image->user->image) }}" alt="" class="">
