@@ -135,7 +135,7 @@ class MessageController extends Controller
         $message->sender = auth()->id();
         $message->receiver = $receiverId;
         $message->read = false;
-        $message->content = "<div class='link'><div class='top'><div class=''><img src='" . env('APP_URL') . $avatar . "'></div><h4>" . $nick . "</h4></div><div class='middle'><img src='" . env('APP_URL') . "/images/" . $userId . "/" . $fileName . "'></div><div class='bottom'><div class=''><h4>" . $nick . "</h4></div><div class=''><p>" . $name . "</p></div></div>";
+        $message->content = "<div class='link'><div class='top'><div class=''><img src='" . env('APP_URL') . $avatar . "'></div><h4>" . $nick . "</h4></div><div class='middle'><img src='" . env('APP_URL') . "/images/" . $userId . "/" . $fileName . "'></div><div class='bottom'><div class=''><h4>" . $nick . "</h4></div><div class=''><p>" . $name . "</p></div></div></div>";
         $pass = $message->save();
 
         return $pass;

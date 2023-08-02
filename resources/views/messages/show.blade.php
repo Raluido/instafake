@@ -11,67 +11,67 @@ use App\Models\User;
         </div>
         <div class="bottom">
             <div class="chat">
-                <?php
-                foreach ($messages as $message) :
-                    if (auth()->id() == $message->sender) :
-                ?>
-                        <div class="userMessageSender">
-                            <div class="innerUserMessage">
-                                <div class="content">
-                                    @if(substr($message->content, 0, 4) == "<" . "div" ) <div class="">{!! $message->content !!}</div>
-                                @else
-                                <div class="text">
-                                    <p class="">{{ $message->content }}</p>
-                                </div>
-                                @endif
-                                <div class="">
-                                    <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
-                                </div>
+                @foreach ($messages as $message)
+                @if (auth()->id() == $message->sender)
+                <div class="userMessageSender">
+                    <div class="innerUserMessage">
+                        @if(substr($message->content, 0, 4) == "<" . "div" ) 
+                        <div class="content">
+                            <div class="">{!! $message->content !!}</div>
+                        </div>
+                        @else
+                        <div class="content">
+                            <div class="text">
+                                <p class="">{{ $message->content }}</p>
                             </div>
                         </div>
-            </div>
-        <?php
-                    elseif (auth()->id() == $message->receiver) :
-        ?>
-            <div class="userMessageReceiver">
-                <div class="innerUserMessage">
-                    @php
-                    $user = User::find($message->receiver);
-                    @endphp
-                    @if($user->avatar)
-                    <div class="profile">
-                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
+                        @endif
                     </div>
-                    @else
-                    <div class="profile">
-                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                    </div>
-                    @endif
-                    <div class="content">
-                        @if(substr($message->content, 0, 4) == "<" . "div" ) <div class="">{!! $message->content !!}</div>
-                    @else
-                    <div class="text">
-                        <p class="">{{ $message->content }}</p>
-                    </div>
-                    @endif
-                    <div class="">
+                    <div class="createdAt">
                         <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
                     </div>
                 </div>
+                @elseif (auth()->id() == $message->receiver)
+                <div class="userMessageReceiver">
+                    <div class="innerUserMessage">
+                        @php
+                        $user = User::find($message->receiver);
+                        @endphp
+                        @if($user->avatar)
+                        <div class="profile">
+                            <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
+                        </div>
+                        @else
+                        <div class="profile">
+                            <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
+                        </div>
+                        @endif
+                        @if(substr($message->content, 0, 4) == "<" . "div" ) 
+                        <div class="content">
+                            <div class="">{!! $message->content !!}</div>
+                        </div>
+                        @else
+                        <div class="content">
+                            <div class="text">
+                                <p class="">{{ $message->content }}</p>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="createdAt">
+                    <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
+                </div>
+                @endif
+                @endforeach
             </div>
         </div>
-<?php
-                    endif;
-                endforeach;
-?>
-<form action="{{ route('messages.send', $nick) }}" method=POST class="">
-    @csrf
-    <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
-    <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
-    <input type="submit" id="sendMessageId" value="enviar" class="d-none">
-</form>
-    </div>
-    </div>
+        <form action="{{ route('messages.send', $nick) }}" method=POST class="">
+            @csrf
+            <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
+            <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
+            <input type="submit" id="sendMessageId" value="enviar" class="d-none">
+        </form>
     </div>
 </section>
 @endsection
