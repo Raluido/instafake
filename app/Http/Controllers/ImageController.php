@@ -89,16 +89,20 @@ class ImageController extends Controller
         return view('images.edit', ['nick' => $nick, 'image' => $image]);
     }
 
-    public function edit(Request $request)
+    public function edit($nick, Request $request)
     {
-        $request->validate([
-            'location' => 'required',
-            'name' => 'required'
+        $validated = $request->validate([
+            'name' => 'required',
+            'location' => 'required'
         ]);
 
-        $image = Image::where('id', $request->imageId);
+        $image = Image::find($request->imageId);
+        $image->name = $request->input('name');
+        $image->location = $request->input('location');
+        $image->update();
 
-
+        return redirect()
+            ->route('user.publications', $nick);
     }
 
     public function delete($nick, $imageId)
