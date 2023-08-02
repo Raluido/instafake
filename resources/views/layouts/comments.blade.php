@@ -17,7 +17,9 @@
         <nav class="">
             <ul class="">
                 <li class="backHome"><a href="{{ route('home', $nick) }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
-                <li class="comments">Comentarios</li>
+                <li class="comments">
+                    <h4 class="">Comentarios</h4>
+                </li>
             </ul>
         </nav>
     </header>

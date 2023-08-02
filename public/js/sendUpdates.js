@@ -1,3 +1,3 @@
 $(".sendUpdates").on('click', function () {
-    $(".sendImageEdited").submit();
+    document.getElementById("sendImageEdited").submit();
 });

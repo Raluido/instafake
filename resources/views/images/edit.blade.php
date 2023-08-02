@@ -18,9 +18,11 @@
                     </h5>
                 </div>
                 <div class="place">
-                    <form action="{{ route('images.edit', $nick) }}" id="sendImageEdited" class="">
-                        <input type="hidden" value="{{ $image->id }}" class="">
+                    <form action="{{ route('images.edit', $nick) }}" id="sendImageEdited" method="post" class="">
+                        @csrf
+                        <input type="hidden" value="{{ $image->id }}" name="imageId" class="">
                         <input type="text" value="{{ $image->location }}" name="location" class="">
+                        <input type="submit" class="d-none">
                 </div>
             </div>
         </div>

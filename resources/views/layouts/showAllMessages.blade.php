@@ -17,7 +17,9 @@
         <nav class="">
             <ul class="">
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-solid fa-arrow-left"></i></a></li>
-                <li class="">{{ $nick }}</li>
+                <li class="">
+                    <h4 class="">{{ $nick }}</h4>
+                </li>
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-regular fa-pen-to-square"></i></a></li>
             </ul>
         </nav>

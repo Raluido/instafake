@@ -25,7 +25,9 @@
                         <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
                         @endif
                     </div>
-                    <div class="">{{ $receiverNick }}</div>
+                    <div class="">
+                        <h4 class="">{{ $receiverNick }}</h4>
+                    </div>
                 </li>
                 <li class=""><a href="{{ route('home') }}" class=""><i class="fa-regular fa-pen-to-square"></i></a></li>
             </ul>
