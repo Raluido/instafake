@@ -60,6 +60,7 @@ footer {
     position: fixed;
     background-color: black;
     height: 7vh;
+    z-index: 999;
 }
 
 header {
@@ -582,21 +583,25 @@ main .innerMessage .bottom form {
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage {
     flex-grow: 1;
     display: flex;
-    justify-content: start;
+    flex-direction: column;
+    align-items: end;
 }
 
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage {
     flex-grow: 1;
     display: flex;
-    justify-content: end;
+    align-items: start;
 }
 
-
-main section.message div.innerMessage div.bottom div.chat div h5 {
+main .message .innerMessage .bottom .chat .createdAt h5 {
     text-align: center;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .profile,
+
+main section .message .innerMessage .bottom .chat h5 {
+    text-align: center;
+}
+
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .profile {
     position: relative;
     width: 4em;
@@ -608,14 +613,13 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
     border-radius: 50%;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .profile img,
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .profile img {
     position: absolute;
     width: 4em;
     height: auto;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link {
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link {
     background-color: black;
     border: 1px solid #262626;
     padding: .5px;
@@ -623,14 +627,14 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
     width: fit-content;
 }
 
-main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link {
     background-color: #262626;
     padding: .5px;
     border-radius: 5%;
     width: fit-content;
 }
 
-main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .text {
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .text {
     background-color: black;
     border: 1px solid #262626;
     padding: .5px;
@@ -638,7 +642,7 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
     width: fit-content;
 }
 
-main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .text {
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .text {
     background-color: #262626;
     padding: .5px;
     border-radius: 5%;
@@ -663,6 +667,7 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link .bottom div {
     display: flex;
     align-items: center;
+    padding: 0 .5em;
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .top>div,
@@ -694,6 +699,10 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 main .message .innerMessage .bottom .chat .innerUserMessage p {
     display: inline-block;
     margin: 0.6em .8em;
+}
+
+main .message .innerMessage form {
+    margin-bottom: .5em;
 }
 
 .showAllMessagesNav nav ul .avatarNick {
@@ -1029,6 +1038,10 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 
 .myProfileNav .dropDown a {
     display: block;
+}
+
+.myProfileNav .dropDown a:nth-child(1) {
+    margin-bottom: .5em;
 }
 
 .myProfileNav nav {
