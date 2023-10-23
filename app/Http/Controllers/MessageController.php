@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewChatMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -77,6 +78,12 @@ class MessageController extends Controller
 
     public function send(Request $request)
     {
+        if (!$request->filled('content')) {
+            return response()->json([
+                'message' => 'Mensaje no enviado!'
+            ], 422);
+        }
+
         $id = auth()->id();
 
         $message = new Message();
@@ -85,6 +92,8 @@ class MessageController extends Controller
         $message->read = false;
         $message->content = $request->content;
         $message->save();
+
+        event(new NewChatMessage($request->receiver, $request->content));
 
         return back();
     }
