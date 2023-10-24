@@ -78,9 +78,9 @@ use App\Models\User;
 <script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 <script class="">
-    Echo.private(`chat.${receiver}`)
+    Echo.private(`chat.${sender}.${receiver}`)
         .listen('NewChatMessage', (e) => {
-            console.log(e.message);
+            console.log(e.content);
         });
 </script>
 @endsection
