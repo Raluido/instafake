@@ -12,6 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class NewChatMessage implements ShouldBroadcast
 {
@@ -28,9 +29,9 @@ class NewChatMessage implements ShouldBroadcast
      */
     public function __construct($sender, $receiver, $content)
     {
-        $this->$sender = $sender;
-        $this->$receiver = $receiver;
-        $this->$content = $content;
+        $this->sender = $sender;
+        $this->receiver = $receiver;
+        $this->content = $content;
     }
 
     /**

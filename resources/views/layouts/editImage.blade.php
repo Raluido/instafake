@@ -11,6 +11,7 @@
     <link href="{{ asset('fontawesome/css/brands.css'); }}" rel="stylesheet">
     <link href="{{ asset('fontawesome/css/solid.css'); }}" rel="stylesheet">
     <title>Document</title>
+    @vite('resources/js/app.js')
 </head>
 
 <body>

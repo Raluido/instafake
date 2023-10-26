@@ -66,7 +66,8 @@ use App\Models\User;
     </div>
     <form action="{{ route('messages.send', $nick) }}" method=POST class="">
         @csrf
-        <input type="hidden" name="receiver" value="{{ $receiver }}" class="">
+        <input type="hidden" name="receiver" id="receiver" value="{{ $receiver }}" class="">
+        <input type="hidden" name="sender" id="sender" value="{{ auth()->id() }}" class="">
         <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
         <input type="submit" id="sendMessageId" value="enviar" class="d-none">
     </form>
@@ -78,9 +79,13 @@ use App\Models\User;
 <script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 <script type="module">
-    Echo.private(`chat.${sender}.${receiver}`)
-        .listen('NewChatMessage', (e) => {
-            console.log(e.content);
-        });
+    window.onload = function() {
+        var sender = document.getElementById('receiver').value;
+        var receiver = document.getElementById('sender').value;
+        Echo.private(`chat.${sender}.${receiver}`)
+            .listen('NewChatMessage', (e) => {
+                console.log(e.content);
+            });
+    }
 </script>
 @endsection

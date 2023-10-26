@@ -93,7 +93,7 @@ class MessageController extends Controller
         $message->content = $request->content;
         $message->save();
 
-        event(new NewChatMessage($request->sender, $request->receiver, $request->content));
+        NewChatMessage::dispatch($request->sender, $request->receiver, $request->content);
 
         return back();
     }
