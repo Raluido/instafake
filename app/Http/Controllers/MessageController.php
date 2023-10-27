@@ -18,6 +18,8 @@ class MessageController extends Controller
         $id = auth()->id();
 
         $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender + receiver ORDER BY created_at DESC) AS total FROM messages) t WHERE t.total = 1 AND (t.sender = $id OR t.receiver = $id)");
+        $messages = Message::all();
+        log::info($messages[0]->sender->image);
 
         return view('messages.showAll', compact('nick', 'messages', 'id'));
     }
@@ -120,17 +122,9 @@ class MessageController extends Controller
     public function sendLinks($nick, $receiverId, $imageId)
     {
         $image = Image::find($imageId);
-        if ($image->user->nick != null) {
-            $nick = $image->user->nick;
-        }
-        if ($image->user->id != null) {
-            $userId = $image->user->id;
-        }
-        if ($image->user->image != null) {
-            $avatar = '/profiles/' . $userId . '/' . $image->user->image;
-        } else {
-            $avatar = '/profiles/default/avatar.png';
-        }
+        $userId = $image->user->id;
+        $avatar = '/profiles/' . $userId . '/' . $image->user->image;
+
         if ($image->user->name != null) {
             $name = $image->name;
         } else {

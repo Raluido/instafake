@@ -10,7 +10,7 @@ use App\Models\User;
         <div class="top">
         </div>
         <div class="bottom">
-            <div class="chat">
+            <div class="chat" id="chatContainer">
                 @foreach ($messages as $message)
                 @if (auth()->id() == $message->sender)
                 <div class="userMessageSender">
@@ -34,17 +34,11 @@ use App\Models\User;
             <div class="userMessageReceiver">
                 <div class="innerUserMessage">
                     @php
-                    $user = User::find($message->receiver);
+                    $user = User::find($message->sender);
                     @endphp
-                    @if($user->avatar)
                     <div class="profile">
                         <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
-                    @else
-                    <div class="profile">
-                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                    </div>
-                    @endif
                     @if(substr($message->content, 0, 4) == "<" . "div" ) <div class="content">
                         <div class="">{!! $message->content !!}</div>
                 </div>
@@ -80,11 +74,33 @@ use App\Models\User;
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 <script type="module">
     window.onload = function() {
-        var sender = document.getElementById('receiver').value;
-        var receiver = document.getElementById('sender').value;
+        let url = <?php env('APP_URL') ?>
+        let sender = document.getElementById('receiver').value;
+        let receiver = document.getElementById('sender').value;
+        let chatContainer = document.getElementById('chatContainer');
         Echo.private(`chat.${sender}.${receiver}`)
             .listen('NewChatMessage', (e) => {
-                console.log(e.content);
+                let userMessageReceiverContainer = document.createElement('div');
+                userMessageReceiverContainer.setAttribute('class', 'userMessageReceiver');
+                let innerUserMessageContainer = document.createElement('div');
+                innerUserMessageContainer.setAttribute('class', 'innerUserMessage');
+                let profileContainer = document.createElement('div');
+                profileContainer.setAttribute('class', 'profile');
+                let contentContainer = document.createElement('div');
+                contentContainer.setAttribute('class', 'content');
+                let imgContainer = document.createElement('img');
+                imgContainer.setAttribute('src', url + '/show/' + e.filename + '/' + receiver);
+                let textContainer = document.createElement('div');
+                textContainer.setAttribute('class', 'text');
+                let paragraph = document.createElement('p');
+                chatContainer.appendChild(userMessageReceiverContainer);
+                userMessageReceiverContainer.appendChild(innerUserMessageContainer);
+                innerUserMessageContainer.appendChild(profileContainer);
+                profileContainer.appendChild(imgContainer);
+                innerUserMessageContainer.appendChild(contentContainer);
+                contentContainer.appendChild(textContainer);
+                textContainer.appendChild(paragraph);
+                paragraph.innerHTML = e.message;
             });
     }
 </script>

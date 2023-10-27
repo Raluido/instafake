@@ -21,17 +21,19 @@ class NewChatMessage implements ShouldBroadcast
     public $sender;
     public $receiver;
     public $content;
+    public $filename;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($sender, $receiver, $content)
+    public function __construct($sender, $receiver, $content, $filename)
     {
         $this->sender = $sender;
         $this->receiver = $receiver;
         $this->content = $content;
+        $this->filename = $filename;
     }
 
     /**

@@ -5,7 +5,6 @@
     <div class="innerHome">
         <div class="top">
             <div class="innerTop">
-                @if(auth()->user()->image)
                 <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
                     <div class="addStoryImg">
                         <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => auth()->user()->image]) }}" alt="" class="">
@@ -15,33 +14,13 @@
                         <p class="">+</p>
                     </div>
                 </a>
-                @else
-                <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
-                    <div class="addStoryImg">
-                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                    </div>
-                    <h5 class="">Tu historia</h5>
-                    <div class="addStoryPlus">
-                        <p class="">+</p>
-                    </div>
-                </a>
-                @endif
                 @foreach($stories as $story)
-                @if($story->image)
                 <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
                     <div class="storyImg">
                         <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $story->image, 'id' => $story->user_id]) }}" alt="" class="">
                     </div>
                     <h5 class="">{{ $story->nick }}</h5>
                 </a>
-                @else
-                <a class="story btn-play" data-story="{{ $story->id }}" data-user="{{ $story->user_id }}">
-                    <div class="storyImg">
-                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                    </div>
-                    <h5 class="">{{ $story->nick }}</h5>
-                </a>
-                @endif
                 @endforeach
             </div>
         </div>
@@ -57,11 +36,7 @@
                     <div class="image">
                         <div class="top">
                             <div class="icon">
-                                @if($image->user->image != null && file_exists('profiles/' . $image->user->id . '/' . $image->user->image))
                                 <img src="{{ Storage::disk('profiles')->url($image->user->id . '/' . $image->user->image) }}" alt="" class="">
-                                @else
-                                <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                                @endif
                             </div>
                             <div class="info">
                                 <div class="name">
