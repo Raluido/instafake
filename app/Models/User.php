@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -46,37 +47,37 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function images()
+    public function images(): HasMany
     {
         return $this->hasMany(Image::class);
     }
 
-    public function senders()
+    public function senders(): HasMany
     {
         return $this->hasMany(Message::class, 'sender');
     }
 
-    public function receivers()
+    public function receivers(): HasMany
     {
         return $this->hasMany(Message::class, 'receiver');
     }
 
-    public function followers()
+    public function followers(): HasMany
     {
         return $this->hasMany(Follower::class, 'follower');
     }
 
-    public function followings()
+    public function followings(): HasMany
     {
         return $this->hasMany(Follower::class, 'following');
     }
 
-    public function stories()
+    public function stories(): HasMany
     {
         return $this->hasMany(Story::class);
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'commentator');
     }
