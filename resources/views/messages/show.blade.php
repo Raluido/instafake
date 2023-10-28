@@ -62,6 +62,7 @@ use App\Models\User;
         @csrf
         <input type="hidden" name="receiver" id="receiver" value="{{ $receiver }}" class="">
         <input type="hidden" name="sender" id="sender" value="{{ auth()->id() }}" class="">
+        <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
         <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
         <input type="submit" id="sendMessageId" value="enviar" class="d-none">
     </form>
@@ -74,7 +75,7 @@ use App\Models\User;
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 <script type="module">
     window.onload = function() {
-        let url = <?php env('APP_URL') ?>
+        let url = document.getElementById('url').value;
         let sender = document.getElementById('receiver').value;
         let receiver = document.getElementById('sender').value;
         let chatContainer = document.getElementById('chatContainer');
@@ -82,6 +83,9 @@ use App\Models\User;
             .listen('NewChatMessage', (e) => {
                 let userMessageReceiverContainer = document.createElement('div');
                 userMessageReceiverContainer.setAttribute('class', 'userMessageReceiver');
+                let createdAtContainer = document.createElement('div');
+                createdAtContainer.setAttribute('class', 'createdAt');
+                let innerCreatedAtContainer = document.createElement('h5');
                 let innerUserMessageContainer = document.createElement('div');
                 innerUserMessageContainer.setAttribute('class', 'innerUserMessage');
                 let profileContainer = document.createElement('div');
@@ -94,13 +98,15 @@ use App\Models\User;
                 textContainer.setAttribute('class', 'text');
                 let paragraph = document.createElement('p');
                 chatContainer.appendChild(userMessageReceiverContainer);
+                createdAtContainer.appendChild(userMessageReceiverContainer);
+                innerCreatedAtContainer.appendChild(createdAtContainer);
                 userMessageReceiverContainer.appendChild(innerUserMessageContainer);
                 innerUserMessageContainer.appendChild(profileContainer);
                 profileContainer.appendChild(imgContainer);
                 innerUserMessageContainer.appendChild(contentContainer);
                 contentContainer.appendChild(textContainer);
                 textContainer.appendChild(paragraph);
-                paragraph.innerHTML = e.message;
+                paragraph.innerHTML = e.content;
             });
     }
 </script>

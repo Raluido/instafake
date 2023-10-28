@@ -9,17 +9,16 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Message;
 use App\Models\User;
 use App\Models\Image;
-use Mockery\Undefined;
+use App\Helpers\FormatTime;
 
 class MessageController extends Controller
 {
     public function showAll($nick)
     {
         $id = auth()->id();
-
         $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender + receiver ORDER BY created_at DESC) AS total FROM messages) t WHERE t.total = 1 AND (t.sender = $id OR t.receiver = $id)");
 
-        return view('messages.showAll', compact('nick', 'messages', 'id'));
+        return view('messages.showAll', compact('nick', 'messages'));
     }
 
     public function show($nick, $receiver)
@@ -84,16 +83,16 @@ class MessageController extends Controller
             ], 422);
         }
 
-        $id = auth()->id();
+        $user = auth()->user();
 
         $message = new Message();
-        $message->sender = $id;
+        $message->sender = $user->id;
         $message->receiver = $request->receiver;
         $message->read = false;
         $message->content = $request->content;
         $message->save();
 
-        NewChatMessage::dispatch($request->sender, $request->receiver, $request->content);
+        NewChatMessage::dispatch($request->sender, $request->receiver, $request->content, $user->image, FormatTime::LongTimeFilter(date("Y-m-d H:i:s")));
 
         return back();
     }

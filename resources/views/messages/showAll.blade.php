@@ -25,7 +25,7 @@ use App\Models\User;
                     $user = User::find($message->sender);
                     @endphp
                     <div class="profile">
-                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $message->userSender->image, 'id' => $user->id]) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>

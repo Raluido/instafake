@@ -17,16 +17,6 @@
                 @foreach($images as $image)
                 <div class="comments">
                     <div class="innerComments">
-                        <!-- if($i == 0)
-                        <div class="avatar">
-                            <div class="innerAvatar">
-                                <img src="{{ Storage::url('media/' . $image->user->id . '/' . $image->user->image) }}" alt="" class="">
-                            </div>
-                            <div class="content">
-                                <h4 class="">{{ $image->name }}</h4>
-                            </div>
-                        </div>
-                        endif -->
                         @foreach($image->comments as $comment)
                         @php $i++; @endphp
                         <div class="avatar">
