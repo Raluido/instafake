@@ -107,6 +107,7 @@ use App\Models\User;
                 contentContainer.appendChild(textContainer);
                 textContainer.appendChild(paragraph);
                 paragraph.innerHTML = e.content;
+                // cuando llegue un mensaje tambien tendria que hacer un ajax y cambiarlo a leido
             });
     }
 </script>
