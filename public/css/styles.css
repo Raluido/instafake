@@ -558,9 +558,9 @@ main .message .innerMessage {
     padding: 0 1em;
 }
 
-main .message .innerMessage .bottom .chat {
+/* main .message .innerMessage .bottom .chat {
     padding: 2em 0 5em 0;
-}
+} */
 
 main .innerMessage,
 main .innerMessage .bottom,
@@ -622,7 +622,6 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 
 main .message .innerMessage .bottom .chat .innerUserMessage .content {
     width: 75%;
-
 }
 
 main .message .innerMessage .bottom .chat .innerUserMessage .content>div {
@@ -665,7 +664,7 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
     background-color: #262626;
     padding: .5px;
     border-radius: 5%;
-    /* width: fit-content; */
+    width: fit-content;
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle,

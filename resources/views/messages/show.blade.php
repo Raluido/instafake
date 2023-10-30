@@ -73,7 +73,9 @@ use App\Models\User;
 
 @section('js')
 <script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
+<script type="text/javascript">
+    window.scrollTo(0, document.body.scrollHeight);
+</script>
 <script type="module">
     window.onload = function() {
         let url = document.getElementById('url').value;
@@ -119,6 +121,8 @@ use App\Models\User;
                     data: {},
                     success: function(data) {}
                 })
+
+                window.scrollTo(0, document.body.scrollHeight);
             });
     }
 </script>

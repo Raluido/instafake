@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
+use App\Events\NewStory;
 
 class StoryController extends Controller
 {
@@ -71,6 +72,8 @@ class StoryController extends Controller
             $filepath->storeAs('/' . auth()->id(), $fileName, 'stories');
             $story->path = $fileName;
             $story->save();
+
+            NewStory::dispatch($story);
 
             return redirect()
                 ->back()
