@@ -42,6 +42,13 @@ class MessageController extends Controller
         return view('messages.show', compact('nick', 'messages', 'receiver', 'receiverNick', 'receiverAvatar'));
     }
 
+    public function readedState($nick, $sender, $messageId)
+    {
+        Db::table('messages')
+            ->where('id', $messageId)
+            ->update(['read' => 1]);
+    }
+
     public function check()
     {
         $id = auth()->id();
@@ -92,7 +99,7 @@ class MessageController extends Controller
         $message->content = $request->content;
         $message->save();
 
-        NewChatMessage::dispatch($request->sender, $request->receiver, $request->content, $user->image, FormatTime::LongTimeFilter(date("Y-m-d H:i:s")));
+        NewChatMessage::dispatch($message->sender, $message->receiver, $message->content, $user->image, $message->id);
 
         return back();
     }

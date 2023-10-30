@@ -62,11 +62,12 @@ use App\Models\User;
         @csrf
         <input type="hidden" name="receiver" id="receiver" value="{{ $receiver }}" class="">
         <input type="hidden" name="sender" id="sender" value="{{ auth()->id() }}" class="">
-        <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
         <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
         <input type="submit" id="sendMessageId" value="enviar" class="d-none">
     </form>
     </div>
+    <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
+    <input type="hidden" name="nick" id="nick" value="{{ $nick }}" class="">
 </section>
 @endsection
 
@@ -79,6 +80,7 @@ use App\Models\User;
         let sender = document.getElementById('receiver').value;
         let receiver = document.getElementById('sender').value;
         let chatContainer = document.getElementById('chatContainer');
+        let nick = document.getElementById('nick').value;
         Echo.private(`chat.${sender}.${receiver}`)
             .listen('NewChatMessage', (e) => {
                 let userMessageReceiverContainer = document.createElement('div');
@@ -93,13 +95,11 @@ use App\Models\User;
                 let contentContainer = document.createElement('div');
                 contentContainer.setAttribute('class', 'content');
                 let imgContainer = document.createElement('img');
-                imgContainer.setAttribute('src', url + '/show/' + e.filename + '/' + receiver);
+                imgContainer.setAttribute('src', url + '/' + nick + '/user/show/' + e.filename + '/' + sender);
                 let textContainer = document.createElement('div');
                 textContainer.setAttribute('class', 'text');
                 let paragraph = document.createElement('p');
                 chatContainer.appendChild(userMessageReceiverContainer);
-                createdAtContainer.appendChild(userMessageReceiverContainer);
-                innerCreatedAtContainer.appendChild(createdAtContainer);
                 userMessageReceiverContainer.appendChild(innerUserMessageContainer);
                 innerUserMessageContainer.appendChild(profileContainer);
                 profileContainer.appendChild(imgContainer);
@@ -107,7 +107,18 @@ use App\Models\User;
                 contentContainer.appendChild(textContainer);
                 textContainer.appendChild(paragraph);
                 paragraph.innerHTML = e.content;
+                chatContainer.appendChild(createdAtContainer);
+                createdAtContainer.appendChild(innerCreatedAtContainer);
+                innerCreatedAtContainer.innerHTML = "Hace 0 segundos";
+
                 // cuando llegue un mensaje tambien tendria que hacer un ajax y cambiarlo a leido
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/' + nick + '/messages/show/' + sender + '/' + e.messageId,
+                    data: {},
+                    success: function(data) {}
+                })
             });
     }
 </script>

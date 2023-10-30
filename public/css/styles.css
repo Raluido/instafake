@@ -620,6 +620,24 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
     height: auto;
 }
 
+main .message .innerMessage .bottom .chat .innerUserMessage .content {
+    width: 75%;
+
+}
+
+main .message .innerMessage .bottom .chat .innerUserMessage .content>div {
+    width: inherit;
+}
+
+main .message .innerMessage .bottom .chat .innerUserMessage .content p {
+    width: inherit;
+    overflow-wrap: break-word;
+}
+
+main .message .innerMessage .bottom .chat .innerUserMessage .profile {
+    width: 25%;
+}
+
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link {
     background-color: black;
     border: 1px solid #262626;
@@ -647,7 +665,7 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .
     background-color: #262626;
     padding: .5px;
     border-radius: 5%;
-    width: fit-content;
+    /* width: fit-content; */
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle,

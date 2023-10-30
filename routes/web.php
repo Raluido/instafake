@@ -77,6 +77,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/check', [MessageController::class, 'check'])->name('messages.check');
                 Route::get('/{search}', [MessageController::class, 'search'])->name('messages.search');
                 Route::get('/show/{receiver}', [MessageController::class, 'show'])->name('messages.show');
+                Route::get('/show/{receiver}/{messageId}', [MessageController::class, 'readedState'])->name('messages.readedState');
                 Route::post('/send', [MessageController::class, 'send'])->name('messages.send');
                 Route::get('/sendLinks/searchForm/{imageId}', [MessageController::class, 'searchForm'])->name('messages.searchForm');
                 Route::get('/sendLinks/{search}', [MessageController::class, 'searchForLinks'])->name('messages.searchForLinks');
