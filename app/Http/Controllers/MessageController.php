@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewChatMessage;
+use App\Events\NewMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -100,6 +101,7 @@ class MessageController extends Controller
         $message->save();
 
         NewChatMessage::dispatch($message->sender, $message->receiver, $message->content, $user->image, $message->id);
+        NewMessage::dispatch($message->receiver);
 
         return back();
     }

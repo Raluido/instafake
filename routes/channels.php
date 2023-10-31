@@ -23,7 +23,10 @@ Broadcast::channel('chat.{sender}.{receiver}', function () {
     return true;
 });
 
-Broadcast::channel('stories.{userId}', function (User $user) {
-    $followers = $user->following->pluck('followers');
-    return $followers->contains($user->id);
+Broadcast::channel('stories', function () {
+    return true;
+});
+
+Broadcast::channel('messages.{receiver}', function () {
+    return true;
 });

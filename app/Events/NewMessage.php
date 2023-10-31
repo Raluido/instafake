@@ -10,24 +10,21 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
-use App\Models\Story;
 
-class NewStory implements ShouldBroadcast
+class NewMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $story;
-    public $user;
+    public $receiver;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Story $story, User $user)
+    public function __construct($receiver)
     {
-        $this->story = $story;
-        $this->user = $user;
+        $this->receiver = $receiver;
     }
 
     /**
@@ -37,6 +34,6 @@ class NewStory implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('stories');
+        return new PrivateChannel('messages.' . $this->receiver);
     }
 }

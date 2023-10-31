@@ -4,8 +4,8 @@
 <section class="home">
     <div class="innerHome">
         <div class="top">
-            <div class="innerTop">
-                <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory">
+            <div class="innerTop" id="storiesContainer">
+                <a href="{{ route('stories.uploadForm', $nick) }}" class="addStory" id="addStory">
                     <div class="addStoryImg">
                         <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => auth()->user()->image]) }}" alt="" class="">
                     </div>
@@ -106,16 +106,47 @@
                 @endforeach
             </div>
             <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
+            <input type="hidden" class="" id="followingId" value="{{ $followingId }}">
+            <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
+            <input type="hidden" name="userId" id="userId" value="{{ auth()->id() }}" class="">
         </div>
 </section>
 @endsection
 @section('js')
 <script class="">
     window.onload = function() {
-
-        Echo.private(`stories.${myId}`)
+        Echo.private(`stories`)
             .listen('NewStory', (e) => {
-
+                let followingId = document.getElementById('followingId').value;
+                if (followingId.includes(e.story.user_id)) {
+                    let url = document.getElementById('url').value;
+                    let storyContainer = document.createElement('a');
+                    let addStory = document.getElementById('addStory');
+                    storyContainer.setAttribute('class', 'story btn-play');
+                    storyContainer.setAttribute('data-story', e.story.id);
+                    storyContainer.setAttribute('data-user', e.story.user_id);
+                    addStory.insertAdjacentElement("afterend", storyContainer);
+                    let storyImgContainer = document.createElement('div');
+                    storyImgContainer.setAttribute('class', 'storyImg');
+                    storyContainer.appendChild(storyImgContainer);
+                    let imgContainer = document.createElement('img');
+                    imgContainer.setAttribute('src', url + '/' + e.user.nick + '/user/show/' + e.user.image);
+                    storyImgContainer.appendChild(imgContainer);
+                    let nickContainer = document.createElement('h5');
+                    nickContainer.innerHTML = e.user.nick;
+                    storyContainer.appendChild(nickContainer);
+                }
+            })
+        let userId = document.getElementById('userId').value;
+        Echo.private(`messages`)
+            .listen(`NewMessage.${userId}`, (e) => {
+                let countMsg = document.getElementById('innerCountMsg').value;
+                if (countMsg == "") {
+                    countMsg.innerHTML = 1;
+                } else {
+                    parseInt(countMsg);
+                    countMsg += 1;
+                }
             })
     }
 </script>

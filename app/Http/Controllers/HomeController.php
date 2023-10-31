@@ -18,11 +18,14 @@ class HomeController extends Controller
     public function index($nick)
     {
         $id = auth()->id();
-        $stories = "";
-        $likesComments = "";
 
         $followings = Follower::where('follower', $id)
             ->get();
+
+        $followingId = Follower::where('follower', $id)
+            ->value('following');
+
+        log::info($followingId);
 
         $stories = Db::table('followers')
             ->select('stories.user_id', 'stories.id', 'users.nick', 'users.image')
@@ -32,6 +35,6 @@ class HomeController extends Controller
             ->orderBy('stories.id', 'DESC')
             ->get();
 
-        return view('home.index', compact('followings', 'id', 'stories', 'nick'));
+        return view('home.index', compact('followings', 'followingId', 'stories', 'nick'));
     }
 }

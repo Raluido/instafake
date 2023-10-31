@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use App\Events\NewStory;
+use App\Models\User;
 
 class StoryController extends Controller
 {
@@ -73,7 +74,9 @@ class StoryController extends Controller
             $story->path = $fileName;
             $story->save();
 
-            NewStory::dispatch($story);
+            $user = auth()->user();
+
+            NewStory::dispatch($story, $user);
 
             return redirect()
                 ->back()
