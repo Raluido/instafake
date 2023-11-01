@@ -105,7 +105,7 @@ class UserController extends Controller
 
         $user = $user[0];
 
-        return view('user.profile', compact('user', 'nick'));
+        return view('user.profile', compact('user', 'nick', 'userId'));
     }
 
     public function getImage($nick, $fileName, $id = null)

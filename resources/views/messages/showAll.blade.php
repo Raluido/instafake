@@ -24,15 +24,9 @@ use App\Models\User;
                     @php
                     $user = User::find($message->sender);
                     @endphp
-                    @if($user->avatar)
                     <div class="profile">
-                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $message->sender->image, 'id' => $user->id]) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
-                    @else
-                    <div class="profile">
-                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                    </div>
-                    @endif
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
@@ -46,7 +40,7 @@ use App\Models\User;
                             else :
                             ?>
                                 <div class="">
-                                    <p>Has recibido una mensaje</p>
+                                    <p>Has recibido un mensaje</p>
                                 </div>
                             <?php
                             endif;
@@ -66,15 +60,9 @@ use App\Models\User;
                     @php
                     $user = User::find($message->receiver);
                     @endphp
-                    @if($user->avatar)
                     <div class="profile">
                         <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
-                    @else
-                    <div class="profile">
-                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                    </div>
-                    @endif
                     <div class="content">
                         <h4 class="">{{ $user->nick }}</h4>
                         <div class="innerContent">
@@ -88,7 +76,7 @@ use App\Models\User;
                             else :
                             ?>
                                 <div class="">
-                                    <p>Has enviado una mensaje</p>
+                                    <p>Has enviado un mensaje</p>
                                 </div>
                             <?php
                             endif;

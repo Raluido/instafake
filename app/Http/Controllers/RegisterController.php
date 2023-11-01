@@ -39,10 +39,14 @@ class RegisterController extends Controller
         $user = new User();
         $user->nick = $validated['nick'];
         $user->email = $validated['email'];
+        $defaultAvatar = true;
         if ($request->hasFile('avatar')) {
+            $defaultAvatar = false;
             $filePath = $request->file('avatar');
             $fileName = 'avatar_' . date('Y-m-d_H.i.s') . '.' . $filePath->getClientOriginalExtension();
             $user->image = $fileName;
+        } else {
+            $user->image = 'avatar.png';
         }
         $user->password = $validated['password'];
         $pass = $user->save();
@@ -66,8 +70,11 @@ class RegisterController extends Controller
                     Storage::deleteDirectory($path);
                     Storage::makeDirectory($path);
                 }
-
-                $filePath->storeAs($path, $fileName);
+                if ($defaultAvatar) {
+                    Storage::copy('profiles/default/avatar.png', $path . '/avatar.png');
+                } else {
+                    $filePath->storeAs($path, $fileName);
+                }
 
                 return redirect()->route('home', ['nick' => $nick]);
             } else {

@@ -235,14 +235,15 @@ main .home .innerHome .top .innerTop .addStory {
 
 main .home .innerHome .top .innerTop .addStoryPlus {
     position: absolute;
-    width: 1em;
-    height: 1em;
-    left: 80%;
-    top: 50%;
+    width: 1.1em;
+    height: 1.1em;
+    left: 70%;
+    top: 60%;
     border-radius: 50%;
     background-color: #0099ff;
     display: flex;
     justify-content: center;
+    line-height: 18px;
 }
 
 main .home .innerHome .top .innerTop .addStoryPlus p {
@@ -251,8 +252,8 @@ main .home .innerHome .top .innerTop .addStoryPlus p {
 
 main .home .innerHome .top .innerTop .addStory .addStoryImg,
 main .home .innerHome .top .innerTop .story .storyImg {
-    width: 5.5em;
-    height: 5.5em;
+    width: 5em;
+    height: 5em;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -558,9 +559,9 @@ main .message .innerMessage {
     padding: 0 1em;
 }
 
-main .message .innerMessage .bottom .chat {
+/* main .message .innerMessage .bottom .chat {
     padding: 2em 0 5em 0;
-}
+} */
 
 main .innerMessage,
 main .innerMessage .bottom,
@@ -620,6 +621,21 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
     height: auto;
 }
 
+
+main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content {
+    display: flex;
+    justify-content: end;
+}
+
+
+main .message .innerMessage .bottom .chat .innerUserMessage .content {
+    max-width: 75%;
+}
+
+main .message .innerMessage .bottom .chat .innerUserMessage .profile {
+    width: 25%;
+}
+
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content .link {
     background-color: black;
     border: 1px solid #262626;
@@ -640,14 +656,12 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
     border: 1px solid #262626;
     padding: .5px;
     border-radius: 5%;
-    width: fit-content;
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .text {
     background-color: #262626;
     padding: .5px;
     border-radius: 5%;
-    width: fit-content;
 }
 
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content .link .middle,
@@ -698,7 +712,6 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 }
 
 main .message .innerMessage .bottom .chat .innerUserMessage p {
-    display: inline-block;
     margin: 0.6em .8em;
 }
 

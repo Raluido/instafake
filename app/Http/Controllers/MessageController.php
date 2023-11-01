@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewChatMessage;
+use App\Events\NewMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Message;
 use App\Models\User;
 use App\Models\Image;
-use Mockery\Undefined;
+use App\Helpers\FormatTime;
 
 class MessageController extends Controller
 {
     public function showAll($nick)
     {
         $id = auth()->id();
-
         $messages = Db::select("SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY sender + receiver ORDER BY created_at DESC) AS total FROM messages) t WHERE t.total = 1 AND (t.sender = $id OR t.receiver = $id)");
 
-        return view('messages.showAll', compact('nick', 'messages', 'id'));
+        return view('messages.showAll', compact('nick', 'messages'));
     }
 
     public function show($nick, $receiver)
@@ -40,6 +41,13 @@ class MessageController extends Controller
         }
 
         return view('messages.show', compact('nick', 'messages', 'receiver', 'receiverNick', 'receiverAvatar'));
+    }
+
+    public function readedState($nick, $sender, $messageId)
+    {
+        Db::table('messages')
+            ->where('id', $messageId)
+            ->update(['read' => 1]);
     }
 
     public function check()
@@ -77,14 +85,23 @@ class MessageController extends Controller
 
     public function send(Request $request)
     {
-        $id = auth()->id();
+        if (!$request->filled('content')) {
+            return response()->json([
+                'message' => 'Mensaje no enviado!'
+            ], 422);
+        }
+
+        $user = auth()->user();
 
         $message = new Message();
-        $message->sender = $id;
+        $message->sender = $user->id;
         $message->receiver = $request->receiver;
         $message->read = false;
         $message->content = $request->content;
         $message->save();
+
+        NewChatMessage::dispatch($message->sender, $message->receiver, $message->content, $user->image, $message->id);
+        NewMessage::dispatch($message->receiver);
 
         return back();
     }
@@ -111,17 +128,9 @@ class MessageController extends Controller
     public function sendLinks($nick, $receiverId, $imageId)
     {
         $image = Image::find($imageId);
-        if ($image->user->nick != null) {
-            $nick = $image->user->nick;
-        }
-        if ($image->user->id != null) {
-            $userId = $image->user->id;
-        }
-        if ($image->user->image != null) {
-            $avatar = '/profiles/' . $userId . '/' . $image->user->image;
-        } else {
-            $avatar = '/profiles/default/avatar.png';
-        }
+        $userId = $image->user->id;
+        $avatar = '/profiles/' . $userId . '/' . $image->user->image;
+
         if ($image->user->name != null) {
             $name = $image->name;
         } else {
