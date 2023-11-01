@@ -138,14 +138,13 @@
                 }
             })
         let userId = document.getElementById('userId').value;
-        Echo.private(`messages`)
-            .listen(`NewMessage.${userId}`, (e) => {
-                let countMsg = document.getElementById('innerCountMsg').value;
-                if (countMsg == "") {
+        Echo.private(`messages.${userId}`)
+            .listen(`NewMessage`, (e) => {
+                let countMsg = document.getElementById('innerCountMsg');
+                if (countMsg.innerHTML == "") {
                     countMsg.innerHTML = 1;
                 } else {
-                    parseInt(countMsg);
-                    countMsg += 1;
+                    countMsg.innerHTML = parseInt(countMsg.innerHTML) + 1;
                 }
             })
     }
