@@ -99,4 +99,5 @@ use App\Models\User;
 @endsection
 @section('js')
 <script type="text/javascript" src="{{ asset('js/searchUsersMsj.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/planeMessages.js') }}" defer></script>
 @endsection
