@@ -150,6 +150,7 @@
     }
 </script>
 <script type="text/javascript" src="{{ asset('js/playStories.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/planeMessages.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/sendComment.js') }}" defer></script>
 @endsection

@@ -25,8 +25,6 @@ class HomeController extends Controller
         $followingId = Follower::where('follower', $id)
             ->value('following');
 
-        log::info($followingId);
-
         $stories = Db::table('followers')
             ->select('stories.user_id', 'stories.id', 'users.nick', 'users.image')
             ->join('stories', 'stories.user_id', '=', 'followers.following')
