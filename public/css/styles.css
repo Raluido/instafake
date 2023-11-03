@@ -575,9 +575,9 @@ main .innerMessage .bottom .chat {
     padding: 0 .5em;
 }
 
-main .innerMessage .bottom form {
+main .innerMessage .bottom .messageSendContainer {
     position: fixed;
-    bottom: .5em;
+    bottom: .3em;
     left: 1em;
     right: 1em;
 }
@@ -590,9 +590,7 @@ main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage {
 }
 
 main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage {
-    flex-grow: 1;
     display: flex;
-    align-items: start;
 }
 
 main .message .innerMessage .bottom .chat .createdAt h5 {
@@ -625,6 +623,11 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 main .message .innerMessage .bottom .chat .userMessageSender .innerUserMessage .content {
     display: flex;
     justify-content: end;
+}
+
+main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage .content {
+    display: flex;
+    align-items: center;
 }
 
 
@@ -713,10 +716,6 @@ main .message .innerMessage .bottom .chat .userMessageReceiver .innerUserMessage
 
 main .message .innerMessage .bottom .chat .innerUserMessage p {
     margin: 0.6em .8em;
-}
-
-main .message .innerMessage form {
-    margin-bottom: .5em;
 }
 
 .showAllMessagesNav nav ul .avatarNick {

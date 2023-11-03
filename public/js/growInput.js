@@ -1,57 +1,69 @@
-function getScrollHeight(elm){
-    var savedValue = elm.value
-    elm.value = ''
-    elm._baseScrollHeight = elm.scrollHeight
-    elm.value = savedValue
-  }
-  
-  function onExpandableTextareaInput({ target:elm }){
-    // make sure the input event originated from a textarea and it's desired to be auto-expandable
-    if( !elm.classList.contains('autoExpand') || !elm.nodeName == 'TEXTAREA' ) return
-    
-    var minRows = elm.getAttribute('data-min-rows')|0, rows;
-    !elm._baseScrollHeight && getScrollHeight(elm)
-  
-    elm.rows = minRows
-    rows = Math.ceil((elm.scrollHeight - elm._baseScrollHeight) / 16)
-    elm.rows = minRows + rows
-  }
-  
-  
-  // global delegated event listener
-  document.addEventListener('input', onExpandableTextareaInput)
+// autoexpand textarea
+function onExpandableTextareaInput({ target: elm }) {
+  if (!elm.classList.contains('autoExpand') || !elm.nodeName == 'TEXTAREA') return
+
+  var minRows = elm.getAttribute('data-min-rows') | 0, rows;
+  !elm._baseScrollHeight && getScrollHeight(elm)
+
+  elm.rows = minRows
+  rows = Math.ceil((elm.scrollHeight - elm._baseScrollHeight) / 16)
+  elm.rows = minRows + rows
+}
+
+function getScrollHeight(elm) {
+  var savedValue = elm.value
+  elm.value = ''
+  elm._baseScrollHeight = elm.scrollHeight
+  elm.value = savedValue
+}
+
+document.addEventListener('input', onExpandableTextareaInput)
 
 
 // Send with enter
-var input = document.getElementById("textarea");
-
-// Execute a function when the user presses a key on the keyboard
-input.addEventListener("keypress", function(event) {
-  // If the user presses the "Enter" key on the keyboard
+let input = document.getElementById("textarea");
+let sender = document.getElementById("sender").value;
+let receiver = document.getElementById("receiver").value;
+let nick = document.getElementById('nick').value;
+input.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
-    // Cancel the default action, if needed
-    event.preventDefault();
-    // Trigger the button element with a click
-    document.getElementById("sendMessageId").click();
+    $.ajaxSetup({
+      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    });
+    $.ajax({
+      url: '/' + nick + '/messages/send',
+      data: { 'sender': sender, 'receiver': receiver, 'content': input.value },
+      type: "POST",
+      success: function (result) {
+        let chatContainer = document.getElementById('chatContainer');
+        let userMessageSenderContainer = document.createElement('div');
+        userMessageSenderContainer.setAttribute('class', 'userMessageSender');
+        let createdAtContainer = document.createElement('div');
+        createdAtContainer.setAttribute('class', 'createdAt');
+        let innerCreatedAtContainer = document.createElement('h5');
+        let innerUserMessageContainer = document.createElement('div');
+        innerUserMessageContainer.setAttribute('class', 'innerUserMessage');
+        let contentContainer = document.createElement('div');
+        contentContainer.setAttribute('class', 'content');
+        let textContainer = document.createElement('div');
+        textContainer.setAttribute('class', 'text');
+        let paragraph = document.createElement('p');
+        chatContainer.appendChild(userMessageSenderContainer);
+        userMessageSenderContainer.appendChild(innerUserMessageContainer);
+        innerUserMessageContainer.appendChild(contentContainer);
+        contentContainer.appendChild(textContainer);
+        textContainer.appendChild(paragraph);
+        paragraph.innerHTML = result.content;
+        userMessageSenderContainer.appendChild(createdAtContainer);
+        createdAtContainer.appendChild(innerCreatedAtContainer);
+        innerCreatedAtContainer.innerHTML = "Hace 0 segundos";
+      },
+    })
+    input.setSelectionRange(0, 0);
+    input.value = "";
+    window.scrollTo(0, document.body.scrollHeight);
   }
-}); 
-  
-  
-  
-  
-  // OLD SOLUTION USING JQUERY:
-  // // Applied globally on all textareas with the "autoExpand" class
-  
-  // $(document)
-  //     .one('focus.autoExpand', 'textarea.autoExpand', function(){
-  //         var savedValue = this.value;
-  //         this.value = '';
-  //         this._baseScrollHeight = this.scrollHeight;
-  //         this.value = savedValue;
-  //     })
-  //     .on('input.autoExpand', 'textarea.autoExpand', function(){
-  //         var minRows = this.getAttribute('data-min-rows')|0, rows;
-  //         this.rows = minRows;
-  //         rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 16);
-  //         this.rows = minRows + rows;
-  //     });
+});
+
+
+

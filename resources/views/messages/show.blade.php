@@ -15,57 +15,57 @@ use App\Models\User;
                 @if (auth()->id() == $message->sender)
                 <div class="userMessageSender">
                     <div class="innerUserMessage">
-                        @if(substr($message->content, 0, 4) == "<" . "div" ) <div class="content">
+                        @if(substr($message->content, 0, 4) == "<" . "div" ) 
+                        <div class="content">
                             <div class="">{!! $message->content !!}</div>
-                    </div>
-                    @else
-                    <div class="content">
-                        <div class="text">
-                            <p class="">{{ $message->content }}</p>
                         </div>
+                        @else
+                        <div class="content">
+                            <div class="text">
+                                <p class="">{{ $message->content }}</p>
+                            </div>
+                        </div>
+                        @endif
                     </div>
-                    @endif
-                </div>
-                <div class="createdAt">
-                    <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
-                </div>
-            </div>
-            @elseif (auth()->id() == $message->receiver)
-            <div class="userMessageReceiver">
-                <div class="innerUserMessage">
-                    @php
-                    $user = User::find($message->sender);
-                    @endphp
-                    <div class="profile">
-                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
+                    <div class="createdAt">
+                        <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
                     </div>
-                    @if(substr($message->content, 0, 4) == "<" . "div" ) <div class="content">
-                        <div class="">{!! $message->content !!}</div>
                 </div>
-                @else
-                <div class="content">
-                    <div class="text">
-                        <p class="">{{ $message->content }}</p>
+                @elseif (auth()->id() == $message->receiver)
+                <div class="userMessageReceiver">
+                    <div class="innerUserMessage">
+                        @php
+                        $user = User::find($message->sender);
+                        @endphp
+                        <div class="profile">
+                            <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
+                        </div>
+                        @if(substr($message->content, 0, 4) == "<" . "div" ) 
+                        <div class="content">
+                            <div class="">{!! $message->content !!}</div>
+                        </div>
+                        @else
+                        <div class="content">
+                            <div class="text">
+                                <p class="">{{ $message->content }}</p>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="createdAt">
+                        <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
                     </div>
                 </div>
                 @endif
+                @endforeach
+            </div>
+            <div class="messageSendContainer">
+                <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
             </div>
         </div>
-        <div class="createdAt">
-            <h5 class="">{{ FormatTime::LongTimeFilter($message->created_at) }}</h5>
-        </div>
-        @endif
-        @endforeach
     </div>
-    </div>
-    <form action="{{ route('messages.send', $nick) }}" method=POST class="">
-        @csrf
-        <input type="hidden" name="receiver" id="receiver" value="{{ $receiver }}" class="">
-        <input type="hidden" name="sender" id="sender" value="{{ auth()->id() }}" class="">
-        <textarea name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
-        <input type="submit" id="sendMessageId" value="enviar" class="d-none">
-    </form>
-    </div>
+    <input type="hidden" name="receiver" id="receiver" value="{{ $receiver }}" class="">
+    <input type="hidden" name="sender" id="sender" value="{{ auth()->id() }}" class="">
     <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
     <input type="hidden" name="nick" id="nick" value="{{ $nick }}" class="">
 </section>
@@ -109,7 +109,7 @@ use App\Models\User;
                 contentContainer.appendChild(textContainer);
                 textContainer.appendChild(paragraph);
                 paragraph.innerHTML = e.content;
-                chatContainer.appendChild(createdAtContainer);
+                userMessageReceiverContainer.appendChild(createdAtContainer);
                 createdAtContainer.appendChild(innerCreatedAtContainer);
                 innerCreatedAtContainer.innerHTML = "Hace 0 segundos";
 

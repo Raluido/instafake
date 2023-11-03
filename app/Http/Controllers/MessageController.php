@@ -103,7 +103,7 @@ class MessageController extends Controller
         NewChatMessage::dispatch($message->sender, $message->receiver, $message->content, $user->image, $message->id);
         NewMessage::dispatch($message->receiver);
 
-        return back();
+        return $message;
     }
 
     public function searchForm($nick, $imageId)
