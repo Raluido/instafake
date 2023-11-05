@@ -69,7 +69,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::post('/published', [ImageController::class, 'published'])->name('images.published');
                 Route::get('/edit/{imageId}', [ImageController::class, 'editForm'])->name('images.editForm');
                 Route::post('/edit', [ImageController::class, 'edit'])->name('images.edit');
-                Route::post('/delete/{imageId}', [ImageController::class, 'delete'])->name('images.delete');
+                Route::delete('/delete/{imageId}', [ImageController::class, 'delete'])->name('images.delete');
                 Route::get('/show/{filename}', [ImageController::class, 'getImage'])->name('images.show');
             });
             Route::group(['prefix' => 'messages'], function () {

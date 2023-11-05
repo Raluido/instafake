@@ -18,6 +18,12 @@ let rotate = 0, flipHorizontal = 1, flipVertical = 1;
 const loadImage = () => {
     let file = fileInput.files[0];
     if (!file) return;
+    let allowFormats = [
+        'image/jpg', 'image/jpeg', 'image/png'
+    ];
+    if (!allowFormats.includes(file.type)) {
+        return alert("El archivo que intentas añadir no tiene un formato permitido");
+    }
     previewImg.src = URL.createObjectURL(file);
     previewImg.addEventListener("load", () => {
         resetFilterBtn.click();
@@ -134,13 +140,9 @@ const saveImage = () => {
 
     var jpegFile64 = jpegFile.replace(/^data:image\/(jpeg);base64,/, "");
     var jpegBlob = base64ToBlob(jpegFile64, 'image/jpeg');
-    // console.log(jpegBlob);
-    // throw new error();
-
+    
     var formdata = new FormData();
     formdata.append('picture', jpegBlob);
-    // console.log(formdata.get('picture'));
-    // throw new error();
 
     $.ajaxSetup({
         headers: {

@@ -22,18 +22,9 @@ class ImageController extends Controller
 
     public function store(Request $request, $nick)
     {
-        $id = auth()->id();
-
-        // $img = $request->all();
-        // $img = ($img['imgBase64']);
-        // $img = str_replace('data:image/jpeg;base64,', '', $img);
-        // $img = str_replace(' ', '+', $img);
-        // $fileData = base64_decode($img);
-
         $img = $request->file('picture');
         $img = file_get_contents($img);
-
-        $pathName = public_path('images/tmp/' . $id . '_' . time() . '.jpeg');
+        $pathName = public_path('images/tmp/' . auth()->id() . '_' . time() . '.jpeg');
         file_put_contents($pathName, $img);
         $fileName = pathinfo($pathName)['basename'];
         DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
@@ -121,6 +112,10 @@ class ImageController extends Controller
                     ->where('image_id', $imageId)
                     ->delete();
                 if ($likes >= 0) {
+                    $fileName = Image::find($imageId);
+                    if (Storage::fileExists('images/' . auth()->id() . '/' . $fileName->name)) {
+                        Storage::delete('images/' . auth()->id() . '/' . $fileName->name);
+                    }
                     $delete = Db::Table('images')
                         ->where('id', $imageId)
                         ->delete();

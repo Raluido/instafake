@@ -39,7 +39,7 @@
         @yield('main')
     </main>
 </body>
-<script class="" type="text/javascript" src="{{ asset('js/jquery-3.6.4.js') }}"></script>
+
 @yield('js')
 
 </html>

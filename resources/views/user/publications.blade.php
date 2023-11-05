@@ -39,6 +39,7 @@
                                 <a href="{{ route('images.editForm', ['nick' => $nick, 'imageId' => $image->id]) }}" class="">Editar</a>
                                 <form action="{{ route('images.delete', ['nick' => $nick, 'imageId' => $image->id]) }}" method="post" class="">
                                     @csrf
+                                    @method('DELETE')
                                     <input type="submit" class="" value="Eliminar">
                                 </form>
                             </div>
