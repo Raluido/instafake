@@ -72,7 +72,7 @@ use App\Models\User;
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/autoExpand&Ajax.js') }}" defer></script>
 <script type="text/javascript">
     window.scrollTo(0, document.body.scrollHeight);
 </script>

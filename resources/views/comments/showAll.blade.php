@@ -76,11 +76,10 @@
                 @endforeach
                 @endif
                 <div class="addNewComment">
-                    <form action="{{ route('comments.store', $nick) }}" method="POST" class="">
+                    <form action="{{ route('comments.store', $nick) }}" method="POST" class="" id="submitForm">
                         @csrf
                         <textarea placeholder="Añade un comentario..." name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
                         <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
-                        <input type="submit" id="sendMessageId" value="enviar" class="d-none">
                     </form>
                 </div>
                 @if(count($errors) > 0)
@@ -94,7 +93,7 @@
 </section>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ asset('js/growInput.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/autoExpand.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
 @endsection
