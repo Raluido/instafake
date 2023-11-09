@@ -102,10 +102,14 @@ class UserController extends Controller
     {
         $user = User::where('id', $userId)
             ->get();
-
         $user = $user[0];
 
-        return view('user.profile', compact('user', 'nick', 'userId'));
+        $followers = $user
+            ->followings
+            ->pluck('follower')
+            ->toArray();
+
+        return view('user.profile', compact('user', 'nick', 'followers'));
     }
 
     public function getImage($nick, $fileName, $id = null)
@@ -117,39 +121,38 @@ class UserController extends Controller
         return response()->file('profiles/' . $id . '/' . $fileName);
     }
 
-    public function follow(Request $request)
+    public function follow($nick, Request $request)
     {
-        $following = Follower::create([
-            'following' => $request->following,
+        $result = Follower::create([
+            'following' => $request->userId,
             'follower' => auth()->id()
         ]);
 
-        $user = User::find($request->following);
-
-        return redirect()->back();
-    }
-
-    public function check($nick, $userId)
-    {
-        $following = Follower::where('following', $userId)
-            ->where('follower', auth()->id())
-            ->get();
-
-        if (count($following) == 0) {
-            $following = false;
-        } else {
-            $following = true;
+        if ($result) {
+            $follower = Follower::where('following', $request->userId)
+                ->count();
+            return $follower;
         }
 
-        return $following;
+        $result = false;
+
+        return $result;
     }
 
     public function remove($nick, Request $request)
     {
-        $delete = Follower::where('follower', auth()->id())
-            ->where('following', $request['following'])
+        $result = Follower::where('follower', auth()->id())
+            ->where('following', $request->userId)
             ->delete();
 
-        return redirect()->back();
+        if ($result) {
+            $follower = Follower::where('following', $request->userId)
+                ->count();
+            return $follower;
+        }
+
+        $result = false;
+
+        return $result;
     }
 }

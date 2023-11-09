@@ -8,12 +8,12 @@
             <div class="innerTop">
                 <div class="followCount">
                     <div class="avatar">
-                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $userId]) }}" alt="" class="">
+                        <img src="{{ route('user.avatar', ['nick' => $nick, 'filename' => $user->image, 'id' => $user->id]) }}" alt="" class="">
                     </div>
                     <div class="publishedAndFollows">
                         <a href="" class="">{{ count($user->images) }} <br> Publicaciones</a>
-                        <a href="" class="">{{ count($user->followers) }} <br> Seguidores</a>
-                        <a href="" class="">{{ count($user->followings) }} <br> Siguiendo</a>
+                        <a href="" class="followers">{{ count($user->followings) }} <br> Seguidores</a>
+                        <a href="" class="followings">{{ count($user->followers) }} <br> Siguiendo</a>
                     </div>
                 </div>
                 <h4>{{ $user->name . " " . $user->surname}}</h4>
@@ -22,18 +22,13 @@
                 <h3 class=""></h3>
                 @if(auth()->id() != $user->id)
                 <div class="followBtns">
-                    <form action="{{ route('user.follow', $nick) }}" method="post" class="follow">
-                        @csrf
-                        <input type="hidden" name="following" id="followingId" value="{{ $user->id }}" class="">
-                        <input type="hidden" name="nick" id="nickName" value="{{ $nick }}" class="">
-                        <input type="submit" value="Seguir" class="inputSubmit">
-                    </form>
-                    <form action="{{ route('user.unfollow', [$nick, $user->id]) }}" method="post" class="unFollow">
-                        @csrf
-                        @method('delete')
-                        <input type="hidden" name="following" id="followingId" value="{{ $user->id }}" class="">
-                        <input type="submit" value="Dejar de seguir" class="inputSubmit">
-                    </form>
+                    <input type="hidden" name="following" id="followingId" value="{{ $user->id }}" class="">
+                    <input type="hidden" name="nick" id="nickName" value="{{ $nick }}" class="">
+                    @if(!in_array(auth()->id(), $followers))
+                    <button id="follow">Seguir</button>
+                    @else
+                    <button id="unfollow" class="">Dejar de seguir</button>
+                    @endif
                     <button class="sendMsj"><a href="{{ route('messages.show', [$nick,$user->id]) }}" class="">Enviar mensaje</a></button>
                 </div>
                 @endif
@@ -50,5 +45,5 @@
 </section>
 @endsection
 @section('js')
-<script class="" type="text/javascript" src="{{ asset('js/checkFollows.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/followUnfollow.js') }}" defer></script>
 endsection
