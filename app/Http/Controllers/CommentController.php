@@ -77,10 +77,10 @@ class CommentController extends Controller
             ]
         );
 
+        $countComments = Comment::where('image_id', $request['imageId'])->count();
+
         if ($comment) {
-            return redirect()->back();
-        } else {
-            return redirect()->back()->withErrors(__('Ha habido un error al enviar el comentario, disculpe las molestias.'));
+            return ['countComments' => $countComments, 'content' => $validated['content'], 'commentator' => auth()->id(), 'commentId' => $comment->id];
         }
     }
 }

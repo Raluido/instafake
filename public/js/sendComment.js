@@ -1,13 +1,26 @@
-// Send with enter
-var input = document.getElementById("textarea");
+window.onload = () => {
+    let innerBottomContainer = document.querySelector('.innerBottom');
+    if (!innerBottomContainer.children[0] === 'undefined') {
+        let input = document.getElementById("textarea");
+        let nick = document.getElementById("nick");
+        let imageId = document.getElementById("imageId").value;
+        let userId = document.getElementById("userId").value;
 
-// Execute a function when the user presses a key on the keyboard
-input.addEventListener("keypress", function (event) {
-    // If the user presses the "Enter" key on the keyboard
-    if (event.key === "Enter") {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("sendMessageId").click();
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                $ajax({
+                    type: 'get',
+                    url: '/' + nick + '/comments/store',
+                    data: {
+                        'imageId': imageId,
+                        'commentator': userId,
+                        'content': input.value,
+                    },
+                    success: function (data) {
+                        this.parentNode.previousElementSibling.children[0].innerHTML = data['countComments'];
+                    }
+                })
+            }
+        });
     }
-}); 
+}

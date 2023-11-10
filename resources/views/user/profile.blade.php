@@ -26,8 +26,10 @@
                     <input type="hidden" name="nick" id="nickName" value="{{ $nick }}" class="">
                     @if(!in_array(auth()->id(), $followers))
                     <button id="follow">Seguir</button>
+                    <button id="unfollow" class="d-none">Dejar de seguir</button>
                     @else
                     <button id="unfollow" class="">Dejar de seguir</button>
+                    <button id="follow" class="d-none">Seguir</button>
                     @endif
                     <button class="sendMsj"><a href="{{ route('messages.show', [$nick,$user->id]) }}" class="">Enviar mensaje</a></button>
                 </div>

@@ -76,11 +76,8 @@
                 @endforeach
                 @endif
                 <div class="addNewComment">
-                    <form action="{{ route('comments.store', $nick) }}" method="POST" class="" id="submitForm">
-                        @csrf
-                        <textarea placeholder="Añade un comentario..." name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
-                        <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
-                    </form>
+                    <textarea placeholder="Añade un comentario..." name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
+                    <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
                 </div>
                 @if(count($errors) > 0)
                 @foreach ($errors->all() as $error)
@@ -89,6 +86,7 @@
                 @endif
             </div>
             <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
+            <input type="hidden" class="" id="userId" value="{{ auth()->id() }}">
         </div>
 </section>
 @endsection

@@ -90,12 +90,10 @@
                                         <p class="">Ver los {{ count($image->comments) }} comentarios</p>
                                     </a>
                                     @else
-                                    <form action="{{ route('comments.store', $nick) }}" method="post" class="">
-                                        @csrf
+                                    <div class="">
                                         <textarea placeholder="Añade un comentario..." name="content" id="textarea" rows="1" style="width: 100%;"></textarea>
-                                        <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
-                                        <input type="submit" id="sendMessageId" value="enviar" class="d-none">
-                                    </form>
+                                        <input type="hidden" name="imageId" value="{{ $image->id }}" id="imageId">
+                                    </div>
                                     @endif
                                 </div>
                             </div>

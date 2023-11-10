@@ -3,7 +3,7 @@ window.onload = function () {
     let nick = document.getElementById("nickName").value;
     let follow = document.getElementById('follow');
     let unfollow = document.getElementById('unfollow');
-    follow.addEventListener('click', function () {
+    follow.onclick = function () {
         let unfollowContainer = document.createElement("button");
         unfollowContainer.innerHTML = "Dejar de seguir";
         unfollowContainer.setAttribute('id', "unfollow");
@@ -15,15 +15,17 @@ window.onload = function () {
             },
             success: function (data) {
                 if (data) {
-                    unfollowContainer.after(follow);
                     follow.classList.add('d-none')
-                    $('#followers').html(data + '<br> Seguidores')
+                    follow.classList.remove('d-block')
+                    unfollow.classList.add('d-block')
+                    unfollow.classList.remove('d-none')
+                    $('.followers').html(data + '<br> Seguidores')
                 }
             }
         })
-    })
+    }
 
-    unfollow.addEventListener('click', function () {
+    unfollow.onclick = function () {
         let unfollow = document.getElementById('unfollow');
         let followContainer = document.createElement("button");
         followContainer.innerHTML = "Seguir";
@@ -36,11 +38,13 @@ window.onload = function () {
             },
             success: function (data) {
                 if (data) {
-                    followContainer.after(unfollow);
                     unfollow.classList.add('d-none')
+                    unfollow.classList.remove('d-block')
+                    follow.classList.add('d-block')
+                    follow.classList.remove('d-none')
                     $('.followers').html(data + '<br> Seguidores')
                 }
             }
         })
-    })
+    }
 }
