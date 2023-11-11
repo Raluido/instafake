@@ -27,7 +27,7 @@ class ImageController extends Controller
         $pathName = public_path('images/tmp/' . auth()->id() . '_' . time() . '.jpeg');
         file_put_contents($pathName, $img);
         $fileName = pathinfo($pathName)['basename'];
-        // DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
+        DeleteTmpImg::dispatch($fileName)->delay(now()->addMinutes(5));
 
         return $fileName;
     }
