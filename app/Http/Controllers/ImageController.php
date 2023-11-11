@@ -17,7 +17,7 @@ class ImageController extends Controller
 {
     public function uploadForm($nick)
     {
-        return view('images.uploadForm')->with('nick', $nick);
+        return view('images.uploadForm', ['nick' => $nick]);
     }
 
     public function store(Request $request, $nick)
@@ -51,17 +51,15 @@ class ImageController extends Controller
             $image->fileName = $request->input('fileName');
             $image->name = $request->input('name');
             $image->location = $request->input('location');
-            // $image->labels = $request->input('labels');
             $image->save();
 
             $path = 'images/' . $id;
 
-            if (Storage::exists($path)) {
-            } else {
-                Storage::makeDirectory($path);
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path, 0775, true);
             }
 
-            rename(public_path('images/tmp/' . $fileName), public_path('images/' . $id . '/' . $fileName));
+            Storage::move('images/tmp/' . $fileName, 'images/' . $id . '/' . $fileName);
 
             return redirect()->route('home', ['nick' => $nick]);
         } else {

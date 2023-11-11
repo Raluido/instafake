@@ -26,7 +26,7 @@
         </div>
         <video class="d-none storyPlayer" width="100%" height="auto" id="storyPlay">
             <source src="" id="mp4Source" type="video/mp4">
-            Your browser does not support the video tag.
+            Tu navegador no soporta éste formato de video.
         </video>
         <div class="bottom">
             <div class="innerBottom">
@@ -57,18 +57,11 @@
                         <div class="bottom">
                             <div class="icons">
                                 @if(count($image->likes) > 0)
-                                @foreach($image->likes as $like)
-                                @php $i = 0; @endphp
-                                @if($following->follower != $like->giver)
-                                @php $i++; @endphp
-                                @endif
-                                @endforeach
-                                @if(count($image->likes) == $i)
+                                @if(!in_array(auth()->id(), $image->likes->pluck('giver')->toArray()))
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like like"></i></a>
                                 @endif
-
                                 @else
                                 <a href="" class=""><i data-id="{{ $image->id }}" class="fa-regular fa-heart btn-like"></i></a>
                                 @endif
@@ -103,7 +96,7 @@
                 @endforeach
                 @endforeach
             </div>
-            <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
+            <input type="hidden" class="" id="nick" value="{{ $nick }}">
             <input type="hidden" class="" id="followingId" value="{{ $followingId }}">
             <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
             <input type="hidden" name="userId" id="userId" value="{{ auth()->id() }}" class="">

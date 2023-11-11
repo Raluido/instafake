@@ -1,6 +1,6 @@
 window.onload = () => {
     let innerBottomContainer = document.querySelector('.innerBottom');
-    if (!innerBottomContainer.children[0] === 'undefined') {
+    if (innerBottomContainer.childElementCount > 0) {
         let input = document.getElementById("textarea");
         let nick = document.getElementById("nick");
         let imageId = document.getElementById("imageId").value;

@@ -1,1 +1,0 @@
-let content = document.getElementById('textarea').value;

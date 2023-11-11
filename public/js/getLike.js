@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-    var nick = document.getElementById('inputNick').value;
+    var nick = document.getElementById('nick').value;
     $('.btn-like').unbind('click').on("click", function (event) {
         var temp = $(this);
         var tempId = $(this).data('id');

@@ -1,3 +1,3 @@
-jQuery(document).ready(function () {
-    jQuery('body, html').animate({ scrollTop: 9999 }, 800);
+$(document).ready(function () {
+    $('body, html').animate({ scrollTop: 9999 }, 800);
 })

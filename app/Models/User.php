@@ -64,12 +64,12 @@ class User extends Authenticatable
 
     public function followers(): HasMany
     {
-        return $this->hasMany(Follower::class, 'follower');
+        return $this->hasMany(Follower::class, 'following');
     }
 
     public function followings(): HasMany
     {
-        return $this->hasMany(Follower::class, 'following');
+        return $this->hasMany(Follower::class, 'follower');
     }
 
     public function stories(): HasMany

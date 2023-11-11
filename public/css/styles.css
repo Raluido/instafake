@@ -81,7 +81,7 @@ header nav ul li i {
     font-size: 1.3em;
 }
 
-.comments .innerComments form textarea {
+.comments .innerComments textarea {
     background-color: black;
     border: unset;
     font-size: 0.8em;
@@ -1268,15 +1268,21 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
     justify-content: space-between;
 }
 
+
+.allComments .bottom .innerBottom .comments .avatar .content p {
+    word-break: break-all;
+    width: 90%;
+}
+
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments p {
-    margin: 0;
+    margin-top: 0.5em;
 }
 
 .allComments .bottom .innerBottom .comments .avatar .content .innerLikesComments .likeComment {
@@ -1298,6 +1304,7 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 
 .allComments .bottom .innerBottom .addNewComment {
     margin-top: 2em;
+    margin-bottom: 0.3em;
 }
 
 .allComments .bottom .innerBottom .addNewComment form textarea {

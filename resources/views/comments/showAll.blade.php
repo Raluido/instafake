@@ -21,19 +21,11 @@
                         @php $i++; @endphp
                         <div class="avatar">
                             <div class="innerAvatar">
-                                @if(auth()->user()->image)
                                 <a href="{{ route('user.myProfile', $nick) }}" class="">
                                     <div class="">
                                         <img src="{{ Storage::disk('profiles')->url($comment->user->id . '/' . $comment->user->image) }}" alt="" class="">
                                     </div>
                                 </a>
-                                @else
-                                <a href="{{ route('user.myProfile', $nick) }}" class="">
-                                    <div class="">
-                                        <img src="{{ Storage::disk('profiles')->url('default/avatar.png') }}" alt="" class="">
-                                    </div>
-                                </a>
-                                @endif
                             </div>
                             <div class="content">
                                 <p class="">{{ $comment->content }}</p>
@@ -51,20 +43,26 @@
 
                                 @if(count($comment->likesComments) == $i)
                                 <div class="innerLikesComments" data-id="{{ $comment->id }}">
-                                    <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
-                                    <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                    <i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i>
+                                    <div class="">
+                                        <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                    </div>
                                 </div>
                                 @else
                                 <div class="innerLikesComments" data-id="{{ $comment->id }}">
-                                    <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment likeComment"></i></a>
-                                    <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                    <i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment likeComment"></i>
+                                    <div class="">
+                                        <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                    </div>
                                 </div>
                                 @endif
 
                                 @else
                                 <div class="innerLikesComments" data-id="{{ $comment->id }}">
-                                    <a href="" class=""><i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i></a>
-                                    <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                    <i data-id="{{ $comment->id }}" class="fa-regular fa-heart btn-likeComment"></i>
+                                    <div class="">
+                                        <p class="countLikesComments" data-id="{{ $comment->id }}">{{ count($comment->likesComments) }}</p>
+                                    </div>
                                 </div>
                                 @endif
 
@@ -77,7 +75,7 @@
                 @endif
                 <div class="addNewComment">
                     <textarea placeholder="Añade un comentario..." name="content" id="textarea" wrap="hard" data-min-rows='2' class="replyInput textarea autoExpand"></textarea>
-                    <input type="hidden" name="imageId" value="{{ $image->id }}" class="">
+                    <input type="hidden" name="imageId" value="{{ $image->id }}" class="" id="imageId">
                 </div>
                 @if(count($errors) > 0)
                 @foreach ($errors->all() as $error)
@@ -85,13 +83,15 @@
                 @endforeach
                 @endif
             </div>
-            <input type="hidden" class="" id="inputNick" value="{{ $nick }}">
+            <input type="hidden" class="" id="nick" value="{{ $nick }}">
             <input type="hidden" class="" id="userId" value="{{ auth()->id() }}">
+            <input type="hidden" class="" id="avatar" value="{{ auth()->user()->image }}">
+            <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
         </div>
 </section>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{ asset('js/autoExpand.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/sendComment2.js') }}" defer></script>
 @endsection

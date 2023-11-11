@@ -43,7 +43,7 @@ return [
                     'private' => 0700,
                 ],
             ],
-            'throw' => false,
+            'throw' => true,
         ],
 
         'public' => [
@@ -51,7 +51,7 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
-            'throw' => false,
+            'throw' => true,
         ],
 
         'images' => [
@@ -59,7 +59,7 @@ return [
             'root' => storage_path('app/images'),
             'url' => env('APP_URL') . '/images',
             'visibility' => 'public',
-            'throw' => false,
+            'throw' => true,
         ],
 
         'stories' => [
@@ -67,7 +67,7 @@ return [
             'root' => storage_path('app/stories'),
             'url' => env('APP_URL') . '/stories',
             'visibility' => 'public',
-            'throw' => false,
+            'throw' => true,
         ],
 
         'profiles' => [
@@ -75,7 +75,7 @@ return [
             'root' => storage_path('app/profiles'),
             'url' => env('APP_URL') . '/profiles',
             'visibility' => 'public',
-            'throw' => false,
+            'throw' => true,
         ],
 
         's3' => [

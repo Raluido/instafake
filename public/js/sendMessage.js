@@ -2,14 +2,15 @@
 function onExpandableTextareaInput({ target: elm }) {
   if (!elm.classList.contains('autoExpand') || !elm.nodeName == 'TEXTAREA') return
 
-  var minRows = elm.getAttribute('data-min-rows') | 0, rows;
+  let minRows = elm.getAttribute('data-min-rows') | 0, rows;
   !elm._baseScrollHeight && getScrollHeight(elm)
 
   elm.rows = minRows
   rows = Math.ceil((elm.scrollHeight - elm._baseScrollHeight) / 16)
   elm.rows = minRows + rows
-}
 
+  window.scrollTo(0, document.body.scrollHeight);
+}
 function getScrollHeight(elm) {
   var savedValue = elm.value
   elm.value = ''
@@ -56,11 +57,12 @@ input.addEventListener("keypress", function (event) {
         paragraph.innerHTML = result.content;
         userMessageSenderContainer.appendChild(createdAtContainer);
         createdAtContainer.appendChild(innerCreatedAtContainer);
-        innerCreatedAtContainer.innerHTML = "Hace 0 segundos";
+        innerCreatedAtContainer.innerHTML = "Ahora";
       },
     })
     input.setSelectionRange(0, 0);
     input.value = "";
+    input.setAttribute('rows', '0');
     window.scrollTo(0, document.body.scrollHeight);
   }
 });
