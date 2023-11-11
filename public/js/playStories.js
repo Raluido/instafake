@@ -4,7 +4,7 @@ window.addEventListener("load", function () {
     var player = document.getElementById('storyPlay');
     var mp4Vid = document.getElementById('mp4Source');
     var arr_video = new Array();
-    var nick = this.document.getElementById('inputNick');
+    var nick = this.document.getElementById('nick');
 
     $('.btn-play').on("click", function (event) {
         player.classList.remove('d-none');
@@ -41,7 +41,3 @@ window.addEventListener("load", function () {
         }
     })
 })
-
-// window.setInterval(function () {
-//     $(".innerTop").load(window.location.href + " .innerTop");
-// }, 5000);

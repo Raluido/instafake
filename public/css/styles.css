@@ -1083,6 +1083,7 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 
 .myProfile .innerMyProfile .top .innerTop .followBtns {
     display: flex;
+    justify-content: space-between;
     margin: 1em 0;
 }
 
@@ -1092,10 +1093,11 @@ main .addStoryForm .addStoryFormInner .submitDiv>input {
 
 .myProfile .innerMyProfile .top .innerTop .followBtns form,
 .myProfile .innerMyProfile .top .innerTop .followBtns button {
-    width: 50%;
+    width: 49%;
 }
 
-.myProfile .innerMyProfile .top .innerTop .followBtns .inputSubmit,
+.myProfile .innerMyProfile .top .innerTop .followBtns #follow,
+.myProfile .innerMyProfile .top .innerTop .followBtns #unfollow,
 .myProfile .innerMyProfile .top .innerTop .followBtns .sendMsj {
     background-color: #0099ff;
     border-radius: 10%;

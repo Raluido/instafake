@@ -1,4 +1,4 @@
-var nick = document.getElementById("inputNick").value;
+var nick = document.getElementById("nick").value;
 $.ajax({
     type: 'GET',
     url: "/" + nick + "/messages/check",
