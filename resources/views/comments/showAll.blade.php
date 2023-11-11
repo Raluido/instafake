@@ -1,6 +1,5 @@
 @extends('layouts.comments')
 
-
 @section('main')
 <section class="allComments">
     <div class="innerAllComments">
@@ -28,7 +27,7 @@
                                 </a>
                             </div>
                             <div class="content">
-                                <p class="">{{ $comment->content }}</p>
+                                <p class="" id="testing">{{ $comment->content }}</p>
 
                                 @if(count($comment->likesComments) > 0)
 
@@ -89,9 +88,7 @@
             <input type="hidden" name="url" id="url" value="{{ env('APP_URL') }}" class="">
         </div>
 </section>
-@endsection
-@section('js')
 <script type="text/javascript" src="{{ asset('js/scrollDown.js') }}" defer></script>
-<script type="text/javascript" src="{{ asset('js/getLike.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/getLikeComment.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/sendComment2.js') }}" defer></script>
 @endsection

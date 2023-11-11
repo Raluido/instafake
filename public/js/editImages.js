@@ -1,5 +1,5 @@
-var nick = document.getElementById('nick').value;
-var url = document.getElementById('url').value;
+let nick = document.getElementById('nick').value;
+let url = document.getElementById('url').value;
 
 const fileInput = document.querySelector(".file-input"),
     filterOptions = document.querySelectorAll(".filter button"),
