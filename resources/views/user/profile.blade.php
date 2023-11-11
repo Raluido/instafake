@@ -12,8 +12,8 @@
                     </div>
                     <div class="publishedAndFollows">
                         <a href="" class="">{{ count($user->images) }} <br> Publicaciones</a>
-                        <a href="" class="followers">{{ count($user->followings) }} <br> Seguidores</a>
-                        <a href="" class="followings">{{ count($user->followers) }} <br> Siguiendo</a>
+                        <a href="" class="followers">{{ count($user->followers) }} <br> Seguidores</a>
+                        <a href="" class="followings">{{ count($user->followings) }} <br> Siguiendo</a>
                     </div>
                 </div>
                 <h4>{{ $user->name . " " . $user->surname}}</h4>
