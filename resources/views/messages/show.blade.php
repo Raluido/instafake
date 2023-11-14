@@ -109,7 +109,7 @@ use App\Models\User;
                 paragraph.innerHTML = e.content;
                 userMessageReceiverContainer.appendChild(createdAtContainer);
                 createdAtContainer.appendChild(innerCreatedAtContainer);
-                innerCreatedAtContainer.innerHTML = "Hace 0 segundos";
+                innerCreatedAtContainer.innerHTML = "Ahora";
 
                 // cuando llegue un mensaje tambien tendria que hacer un ajax y cambiarlo a leido
 
